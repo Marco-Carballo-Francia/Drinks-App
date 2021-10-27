@@ -1,14 +1,13 @@
 import { Router } from "express";
-import { getItems, createItem, getItemById } from "./user.controller.js";
+import { getItems, createItem, getItemById, getCategories, filterByCategory } from "./user.controller.js";
 
 const router = Router();
 
 //    /admin/items
-router.get("/items", getItems);
+router.get("/items", getItems); // acá podría llegar /user/items?category=vodka por ejemplo
+router.get("/items/categories", getCategories);
+router.get("/items/filter/:category", filterByCategory);
 router.post("/items", createItem);
 router.get("/items/:id", getItemById);
-
-// router.get("/item/:id", getItemById);
-// router.put("/items", updateItem);
 
 export default router;

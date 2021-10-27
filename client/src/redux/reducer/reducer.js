@@ -1,13 +1,12 @@
-import { GET_PRODUCTS } from "../actions/const";
+import { GET_PRODUCTS, GET_CATEGORIES, FILTER_BY_CATEGORY } from "../actions/const";
 
 const initialState={
     products: [],
     cart: [],
     product: {},
-    user: {}
+    user: {},
+    categories: [],
 }
-
-
 
 function reducer(state= initialState, action){
     switch(action.type){
@@ -15,11 +14,19 @@ function reducer(state= initialState, action){
             return {
                 ...state,
                 products: action.payload
-            };
-        
+            }
+        case GET_CATEGORIES:
+            return {
+                ...state,
+                categories: action.payload
+            }
+        case FILTER_BY_CATEGORY:
+            return {
+                ...state,
+                products: action.payload
+            }
         default:
             return state
-
         }         
 }
 
