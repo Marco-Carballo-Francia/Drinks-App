@@ -121,7 +121,8 @@ export const loginGoogle = (data) => async (dispatch) => {
     try {
         const res = await axios.post("/users/user/google", data)
         return dispatch({
-            type: "GOOGLE"
+            type: "GOOGLE",
+            payload: res.data
         })
     }
     catch (err) {
@@ -139,5 +140,17 @@ export const registerLocal = (values) => async (dispatch) => {
     }
     catch (err) {
         console.log(err);
+    }
+}
+
+export const createTicket = (value) => async (dispatch) => {
+    try {
+        const res = await axios.post("/ticket/checkout", value)
+        return dispatch({
+            type: "CREATE_TICKET",
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error)
     }
 }

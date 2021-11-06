@@ -45,4 +45,4 @@ const TicketSchema = new Schema({
     }
 });
 
-module.exports =  model('Ticket', ticketSchema);
+module.exports =  model('Ticket', TicketSchema);
