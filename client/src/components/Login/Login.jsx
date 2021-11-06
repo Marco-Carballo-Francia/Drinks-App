@@ -50,7 +50,7 @@ const Login = () => {
                 <div className={style.password}>
                     <label className={style.title}>Contraseña</label>
                     <input className={style.input}
-                        type="text"
+                        type='password'
                         placeholder='Su contraseña...'
                         // value={input.password}
                     />
