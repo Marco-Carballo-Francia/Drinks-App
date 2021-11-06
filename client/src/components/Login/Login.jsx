@@ -23,7 +23,6 @@ const Login = () => {
         const data = { result, token }
         try {
           dispatch({type: "AUTH", data: data })  //VER REDUCER:asi tira las actions el chabon, me dio cosa cambiarlas
-          dispatch(findOrCreateUser(data))
           history.push("/"); // para que cuando termine el login, te redirige al home.
             //Para bloquear el carrito tendriamos que ahcer simplemente que chequee el user, y de ser null redirigimos (history.push("/login"))
         } catch (error) {
