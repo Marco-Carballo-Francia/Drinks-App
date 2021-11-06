@@ -45,8 +45,8 @@ const NavBar = () => {
                 {
                     user? (
                             <>
-                            <img className={style.userImg} src={user.result.imageUrl} alt="" />
-                            <p className={style.nameUser}>{user.result.name}</p>
+                            <img className={style.userImg} src={user.result?.imageUrl} alt="" />
+                            <p className={style.nameUser}>{user.result?.name}</p>
                             <button onClick={logout} className={style.logout}>Salir</button>
                         </>
                         ): 

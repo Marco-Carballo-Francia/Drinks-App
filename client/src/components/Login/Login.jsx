@@ -3,25 +3,25 @@ import {useDispatch} from "react-redux"
 import style from './Login.module.css';
 import {Link, useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import { loginGoogle } from "../../redux/actions/actions.js";
 
 const Login = () => {
     const history=useHistory();
-    const dispatch= useDispatch();
+    const dispatch= useDispatch(); 
     const [input, setInput] = useState({
         username: '',
         password: ''
     });
 
-    const googleSuccess = async(res) => {
-
-
-        const result= res?.profileObj; //aca esta toda la data relevante(email, token, nombre, foto, etc)
+    const googleSuccess = (response) => {
+        const result= response?.profileObj; //aca esta toda la data relevante(email, token, nombre, foto, etc)
         //la idea mas adelante, es llevar esta data al back (deberia ser facil) y ahi checkear si existe, 
         //y usar la lógica que usen los chicos para validar a los otros usuarios.
         //pero con una funcion distinta que no corrobore la password (ya que aca no tiene)
-        const token= res?.tokenId;
-        const data = { result, token }
+        const tokenId = response?.tokenId;
+        const data = { result, tokenId }
         try {
+          dispatch(loginGoogle(data))
           dispatch({type: "AUTH", data: data })  //VER REDUCER:asi tira las actions el chabon, me dio cosa cambiarlas
           history.push("/"); // para que cuando termine el login, te redirige al home.
             //Para bloquear el carrito tendriamos que ahcer simplemente que chequee el user, y de ser null redirigimos (history.push("/login"))
@@ -60,7 +60,7 @@ const Login = () => {
                     clientId="747892078799-2pubruaa67kl0km9f73nffj3tq10lrn1.apps.googleusercontent.com"
                     onSuccess={googleSuccess}
                     onFailure={googleFailure}
-                    cookiePolicy="single_host_origin"
+                    cookiePolicy={"single_host_origin"}
                 />
                 <button type="submit" className={style.btn}>INGRESÁ</button>
                 </div>

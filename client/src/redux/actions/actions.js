@@ -30,7 +30,7 @@ export const getProducts = ({ name, category }) => async (dispatch) => {
         });
     } catch (error) {
         console.log(error);
-    }
+    } 
 };
 
 export const getProductsDetails = (id) => async (dispatch) => {
@@ -102,8 +102,8 @@ export const getCart = () => {
     }
   };
 
-
-export const deleteCartItem  = (id) =>{
+            
+export const deleteCartItem = (id) =>{
     return {
         type: DELETE_CART_ITEM,
         payload: id
@@ -116,3 +116,15 @@ export const setModal = (modal) => {
         payload: modal
     }
 }
+
+export const loginGoogle = (data) => async (dispatch) => {
+    try {
+        const res = await axios.post("/users/user/google", data)
+        return dispatch ({
+            type: "GOOGLE"
+        })        
+    }
+    catch(err) {                                   
+        console.log(err);
+    }
+} 
