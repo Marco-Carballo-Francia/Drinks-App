@@ -30,7 +30,7 @@ export const getProducts = ({ name, category }) => async (dispatch) => {
         });
     } catch (error) {
         console.log(error);
-    } 
+    }
 };
 
 export const getProductsDetails = (id) => async (dispatch) => {
@@ -100,15 +100,15 @@ export const getCart = () => {
     return {
         type: GET_CART
     }
-  };
+};
 
-            
-export const deleteCartItem = (id) =>{
+
+export const deleteCartItem = (id) => {
     return {
         type: DELETE_CART_ITEM,
         payload: id
     }
-} 
+}
 
 export const setModal = (modal) => {
     return {
@@ -120,11 +120,24 @@ export const setModal = (modal) => {
 export const loginGoogle = (data) => async (dispatch) => {
     try {
         const res = await axios.post("/users/user/google", data)
-        return dispatch ({
+        return dispatch({
             type: "GOOGLE"
-        })        
+        })
     }
-    catch(err) {                                   
+    catch (err) {
         console.log(err);
     }
-} 
+}
+
+export const registerLocal = (values) => async (dispatch) => {
+    try {
+        const res = await axios.post("/users/user/register", values )
+        return dispatch({
+            type: "REGISTER_LOCAL",
+            payload: res.data
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}

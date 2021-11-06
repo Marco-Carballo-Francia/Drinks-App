@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL } from "../actions/const.js";
 
 
 const initialState = {
@@ -22,6 +22,11 @@ export function userReducer(state=initialState, action){
 				...state,
 				user: null
 			}	
+			case REGISTER_LOCAL:
+			return {
+				...state,
+				user: action.payload
+			};
 		default: 
 		return state;
 	}

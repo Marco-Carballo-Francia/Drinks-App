@@ -25,7 +25,8 @@ const SET_MODAL = "SET_MODAL";
 
 //USER
 const AUTH="AUTH";
-const LOGOUT= "LOGOUT"
+const LOGOUT= "LOGOUT";
+const REGISTER_LOCAL= "REGISTER_LOCAL";
 
 module.exports = {
     GET_PRODUCTS,
@@ -40,5 +41,6 @@ module.exports = {
     DELETE_CART_ITEM,
     SET_MODAL,
     AUTH,
-    LOGOUT
+    LOGOUT,
+    REGISTER_LOCAL
 }
