@@ -9,8 +9,7 @@ const googleLogin = (req, res) => {
     const { tokenId } = req.body;
     client.verifyIdToken({ idToken: tokenId, audience: "747892078799-2pubruaa67kl0km9f73nffj3tq10lrn1.apps.googleusercontent.com" })
         .then(response => {
-            const { email_verified, email } = response.payload 
-            // console.log(response.payload)
+            const { email_verified, email } = response.payload            // console.log(response.payload)
             if (email_verified) {
                  User.findOne({email}).exec((err, user) => {
                      if(err) {
