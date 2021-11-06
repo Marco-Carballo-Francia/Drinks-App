@@ -65,8 +65,9 @@ const Register = () => {
             left: '50%',
             right: 'auto',
             bottom: 'auto',
-            marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
+            backgroundColor: '#000000',
+            color: 'rgb(255, 255, 255)',
         },
     };
 
@@ -123,11 +124,8 @@ const Register = () => {
                         contentLabel="Example Modal"
                     >
                         <div className={style.ctnText} >
-                            <h2 className={style.title} >El usuario se a registrado correctamente</h2>
-                        </div>
-
-                        <div>
-                            <button className={style.modalBTN} onClick={handleOnClick}>Aceptar</button>
+                            <h2 className={style.titleModal} >El usuario se a registrado correctamente</h2>
+                            <button className={style.btnAceptar} onClick={handleOnClick}>Aceptar</button>
                         </div>
                     </Modal>
                 </div>
