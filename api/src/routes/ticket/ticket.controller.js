@@ -1,5 +1,6 @@
 const Ticket = require("../../models/Ticket");
 const Stripe = require("stripe");
+const axios = require("axios");
 
 const stripe = new Stripe("...")
 
@@ -14,7 +15,7 @@ const makePayment = async (req, res) => {
       confirm: true
     })
     console.log(payment);
-    // acá deberíamos asignarle el ticket al usuario en la DB 
+    await axios.post("/ticket/create", payment);
     res.send({message: "Success"})
   }
   catch (error) {
@@ -34,6 +35,30 @@ const getTickets = async (req, res) => {
   }
 }
 
+const createTicket = async (req, res) => {
+  let payment = req.body;
+  try {
+    let newTicket = {
+      fecha,
+      numOrden,
+      item,
+      precioTotal,
+      user,
+      state,
+      direccion,
+      metodoPago
+    }
+    newTicket = new Ticket(newTicket)
+    newTicket = await newTicket.save()
+    res.json(newTicket);
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
-  makePayment
+  makePayment,
+  getTickets,
+  createTicket
 }
