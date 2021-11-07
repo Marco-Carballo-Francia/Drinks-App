@@ -10,14 +10,9 @@ import {
     ADD_CART,
     GET_CART,
     DELETE_CART_ITEM,
-    SET_MODAL
-    // FILTER_CERVEZA, 
-    // FILTER_DESTILADOS, 
-    // FILTER_ESPUMANTES, 
-    // FILTER_SINAL, 
-    // FILTER_VINO, 
-    // FILTER_VODKA, 
-    // FILTER_WISKY, 
+    SET_MODAL,
+    CREATE_TICKET,
+    GET_TICKETS
 } from './const';
 
 
@@ -147,10 +142,23 @@ export const createTicket = (value) => async (dispatch) => {
     try {
         const res = await axios.post("/ticket/checkout", value)
         return dispatch({
-            type: "CREATE_TICKET",
+            type: CREATE_TICKET,
             payload: res.data
         })
     } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getUserTickets = (user) => async (dispatch) => {
+    try {
+        const tickets = (await axios.get("/ticket/history")).data
+        return dispatch({
+            type: GET_TICKETS,
+            payload: tickets
+        })
+    }
+    catch (error) {
         console.log(error)
     }
 }

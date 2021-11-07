@@ -28,6 +28,11 @@ const AUTH="AUTH";
 const LOGOUT= "LOGOUT";
 const REGISTER_LOCAL= "REGISTER_LOCAL";
 
+// TICKETS
+const CREATE_TICKET = "CREATE_TICKET";
+const GET_TICKETS = "GET_TICKETS";
+
+
 module.exports = {
     GET_PRODUCTS,
     GET_PRODUCTS_DETAILS,
@@ -42,5 +47,7 @@ module.exports = {
     SET_MODAL,
     AUTH,
     LOGOUT,
-    REGISTER_LOCAL
+    REGISTER_LOCAL,
+    GET_TICKETS,
+    CREATE_TICKET
 }
