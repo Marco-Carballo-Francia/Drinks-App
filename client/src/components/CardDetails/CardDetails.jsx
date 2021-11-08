@@ -27,6 +27,10 @@ function CardDetails(props) {
         console.log("sin dependecias")
     })
 
+    function onClick(payload) {
+        dispatch(addCart(payload));
+    }
+
     // const handleAddToCart = (product) => {
     //     dispatch(addCart(product))
     // }
@@ -68,7 +72,7 @@ function CardDetails(props) {
                                     <button className={style.comprar}>Comprar</button>
                                 </div>
                                 <div>
-                                    <button className={style.añadir}>Agregar al carrito</button>
+                                    <button onClick={()=> onClick()} className={style.añadir}>Agregar al carrito</button>
                                 </div>
                             </div>
                         </div>

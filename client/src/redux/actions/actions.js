@@ -10,14 +10,12 @@ import {
     ADD_CART,
     GET_CART,
     DELETE_CART_ITEM,
-    SET_MODAL
-    // FILTER_CERVEZA, 
-    // FILTER_DESTILADOS, 
-    // FILTER_ESPUMANTES, 
-    // FILTER_SINAL, 
-    // FILTER_VINO, 
-    // FILTER_VODKA, 
-    // FILTER_WISKY, 
+    SET_MODAL,
+    CREATE_TICKET,
+    GET_TICKETS,
+    LOGIN_GOOGLE,
+    SET_TOTAL,
+    LOGIN_LOCAL
 } from './const';
 
 
@@ -117,11 +115,12 @@ export const setModal = (modal) => {
     }
 }
 
-export const loginGoogle = (data) => async (dispatch) => {
+export const loginGoogle = (obj) => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/google", data)
+        const res = await axios.post("/users/user/google", obj)
         return dispatch({
-            type: "GOOGLE"
+            type: LOGIN_GOOGLE,
+            payload: res.data
         })
     }
     catch (err) {
@@ -139,5 +138,55 @@ export const registerLocal = (values) => async (dispatch) => {
     }
     catch (err) {
         console.log(err);
+    }
+}
+
+export const loginLocal = input => async (dispatch) => {
+    try {
+        const res = await axios.post("/users/user/login", input )
+        return dispatch({
+            type: LOGIN_LOCAL,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const createTicket = (value) => async (dispatch) => {
+    try {
+        const res = await axios.post("/ticket/checkout", value)
+        return dispatch({
+            type: CREATE_TICKET,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getUserTickets = (id) => async (dispatch) => {
+    try {
+        const tickets = (await axios.get(`/ticket/history/${id}`)).data
+        return dispatch({
+            type: GET_TICKETS,
+            payload: tickets
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+export const setTotal = (total) => {
+    return {
+        type: SET_TOTAL,
+        payload: total
+    }
+}
+
+export const checkout = () => {
+    return {
+        type: "CHECK_USER"
     }
 }

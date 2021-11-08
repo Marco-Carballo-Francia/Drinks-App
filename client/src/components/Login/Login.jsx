@@ -1,75 +1,101 @@
-import React, { useState } from 'react';
-import {useDispatch} from "react-redux"
-import style from './Login.module.css';
-import {Link, useHistory} from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
-import { loginGoogle } from "../../redux/actions/actions.js";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import style from "./Login.module.css";
+import { Link, useHistory } from "react-router-dom";
+import Google from "../Google/Google";
+import { loginLocal } from "../../redux/actions/actions";
+
 
 const Login = () => {
-    const history=useHistory();
-    const dispatch= useDispatch(); 
-    const [input, setInput] = useState({
-        username: '',
-        password: ''
+  const history = useHistory();
+  const [input, setInput] = useState({
+    email: "",
+    contraseña: "",
+  });
+  const [error, setError] = useState({})
+
+  let validateEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  let validateContraseña = /^.{4,12}$/
+  const validate = () => {
+    let errors = {};
+    if (!validateEmail.test(input.email)) {
+      errors.email = "Email requerido";
+    }
+    if (!validateContraseña.test(input.contraseña)) {
+      errors.contraseña = "Desde 4 a 14 digitos";
+    }
+    return errors;
+  };
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!error.email && !error.contraseña) {
+      dispatch(loginLocal(input));
+      history.push('/');
+    }
+    else { alert("The form is required"); }
+    setInput({
+      email: "",
+      contraseña: "",
+    })
+  }
+
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
     });
 
-    const googleSuccess = (response) => {
-        const result= response?.profileObj; //aca esta toda la data relevante(email, token, nombre, foto, etc)
-        //la idea mas adelante, es llevar esta data al back (deberia ser facil) y ahi checkear si existe, 
-        //y usar la lógica que usen los chicos para validar a los otros usuarios.
-        //pero con una funcion distinta que no corrobore la password (ya que aca no tiene)
-        const tokenId = response?.tokenId;
-        const data = { result, tokenId }
-        try {
-          dispatch(loginGoogle(data))
-          dispatch({type: "AUTH", data: data })  //VER REDUCER:asi tira las actions el chabon, me dio cosa cambiarlas
-          history.push("/"); // para que cuando termine el login, te redirige al home.
-            //Para bloquear el carrito tendriamos que ahcer simplemente que chequee el user, y de ser null redirigimos (history.push("/login"))
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    setError(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))
+  }
 
-    const googleFailure = (err) => {
-        console.log(err);
-        console.log("Google Sing In was unsuccessful :(")
-    }
-
-    return (
-        <div className={style.Login}>
-            <form className={style.form}>
-                <p className={style.titleLogin}><b>INGRESAR </b> </p>
-                <div className={style.username}>
-                    <label className={style.title}>Usuario</label>
-                    <input className={style.input}
-                        type="text"
-                        placeholder='Su usuario o email...'
-                        // value={input.username}
-                    />
-                </div>
-                <div className={style.password}>
-                    <label className={style.title}>Contraseña</label>
-                    <input className={style.input}
-                        type='password'
-                        placeholder='Su contraseña...'
-                        // value={input.password}
-                    />
-                </div>
-                <div>
-                <GoogleLogin 
-                    clientId="747892078799-2pubruaa67kl0km9f73nffj3tq10lrn1.apps.googleusercontent.com"
-                    onSuccess={googleSuccess}
-                    onFailure={googleFailure}
-                    cookiePolicy={"single_host_origin"}
-                />
-                <button type="submit" className={style.btn}>INGRESÁ</button>
-                </div>
-                <div className={style.link}>
-                    No tenes cuenta? <Link to="/register">Registrate</Link>
-                </div>
-            </form>
+  return (
+    <div className={style.Login}>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <p className={style.titleLogin}>
+          <b>INGRESAR </b>{" "}
+        </p>
+        <div className={style.username}>
+          <label className={style.title}>Email</label>
+          <input
+            className={style.input}
+            type="text"
+            name='email'
+            placeholder="Su usuario o email..."
+            value={input.email}
+            onChange={handleChange}
+          />
+          <p className={style.error}>{error.email}</p>
         </div>
-    );
+        <div className={style.password}>
+          <label className={style.title}>Contraseña</label>
+          <input
+            className={style.input}
+            type="password"
+            name='contraseña'
+            placeholder="Su contraseña..."
+            value={input.contraseña}
+            onChange={handleChange}
+          />
+          <p className={style.error}>{error.contraseña}</p>
+        </div>
+        <div>
+          <button type="submit" className={style.btn}>
+            INGRESÁ
+          </button>
+          <Google />
+        </div>
+        <div className={style.link}>
+          No tenes cuenta? <Link to="/register">Registrate</Link>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default Login;

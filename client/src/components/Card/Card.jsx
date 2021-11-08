@@ -8,11 +8,11 @@ import { addCart } from "../../redux/actions/actions.js";
 
 const Card = (prod) => {
     let p = prod.prod
-    console.log(p);
-    const cart=useSelector(state => state.cart.cart);
     const dispatch=useDispatch();
-    
+    // const [clicked, setClicked] = useState(false);
+
     function onClick(payload) {
+        // setClicked(true);
         dispatch(addCart(payload));
     }
 
