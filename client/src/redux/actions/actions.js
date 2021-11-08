@@ -13,7 +13,8 @@ import {
     SET_MODAL,
     CREATE_TICKET,
     GET_TICKETS,
-    LOGIN_GOOGLE
+    LOGIN_GOOGLE,
+    SET_TOTAL
 } from './const';
 
 
@@ -161,5 +162,12 @@ export const getUserTickets = (id) => async (dispatch) => {
     }
     catch (error) {
         console.log(error)
+    }
+}
+
+export const setTotal = (total) => {
+    return {
+        type: SET_TOTAL,
+        payload: total
     }
 }

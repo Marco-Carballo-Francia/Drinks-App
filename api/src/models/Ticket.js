@@ -10,16 +10,15 @@ const TicketSchema = new Schema({
     //     type: Number,
     //     required: true
     // },
-    items:[{
-        item:{
+    items: [{
+        item: {
             type: Schema.Types.ObjectId,
             ref: 'Item',
             required: true
         },
-        cantidad:{
+        qty: {
             type: Number,
-            required: true
-        },
+        }
     }],
     precioTotal: {
         type: Number,

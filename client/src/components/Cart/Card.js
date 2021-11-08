@@ -5,7 +5,7 @@ import { deleteCartItem } from "../../redux/actions/actions.js";
 
 const Card = ({ id, name, image, rating, precio, qty }) => {
   const dispatch = useDispatch();
-  const [state, setState] = useState(1);
+  const [state, setState] = useState(0);
 
   function onClose(idcard) {
     dispatch(deleteCartItem(idcard));
@@ -32,7 +32,7 @@ const Card = ({ id, name, image, rating, precio, qty }) => {
         <h3 className={style.name}>{name}</h3>
       </div>
       <div className={style.containerInfo}>
-        <p className={style.precio}> $ {precio * state} </p>
+        <p className={style.precio}> $ {precio * qty} </p>
       </div>
       {/*<div className={style.statebuttons}>
                     <button onClick={increment}>+</button>

@@ -18,6 +18,7 @@ const SET_CATEGORY = "SET_CATEGORY";
 const ADD_CART ="ADD_CART";
 const GET_CART ="GET_CART";
 const DELETE_CART_ITEM= "DELETE_CART_ITEM";
+const SET_TOTAL = "SET_TOTAL";
 
 const SET_MODAL = "SET_MODAL";
 
@@ -51,5 +52,6 @@ module.exports = {
     REGISTER_LOCAL,
     GET_TICKETS,
     CREATE_TICKET,
-    LOGIN_GOOGLE
+    LOGIN_GOOGLE,
+    SET_TOTAL
 }

@@ -1,7 +1,9 @@
 const Ticket = require("../../models/Ticket");
 const Stripe = require("stripe");
-const axios = require("axios");
+const axios = require("axios").default;
 const config =  require("../../config.js");
+const User = require('../../models/User');
+const Item = require('../../models/Item')
 
 const stripe = new Stripe(config.STRIPE_SECRET_KEY)
 
@@ -15,30 +17,43 @@ const makePayment = async (req, res) => {
       payment_method: id,
       confirm: true
     })
-    console.log("PAYMENT", payment);
     const body = { payment, cart, userId }
-    await axios.post("/ticket/create", body);
-    res.send({message: "Success"})
+    let ticket = await axios.post("http://localhost:4000/ticket/create", body);
+    res.json(ticket)
   }
   catch (error) {
     console.log(error)
-    res.json({message: error.raw.message})
   }
 }
 
 const createTicket = async (req, res) => {
   let { payment, cart, userId } = req.body;
   try {
-    let user = await User.findById(userId)
+    let user = await User.findById(userId);
+
+    let itemCart = [];
+    for (let i = 0; i < cart.length; i++) {
+      let itemDB = await Item.findById(cart[i]._id);
+      let qty = cart[i].qty;
+      let obj = {
+        item: itemDB,
+        qty: qty
+      }
+      itemCart.push(obj);
+    }
+    // console.log("qTY", cart[0].qty)
+    itemCart = await Promise.all(itemCart);
+    console.log('itemcart', itemCart);
     let newTicket = {
-      items: cart,
+      items: itemCart,
       precioTotal: payment.amount,
-      user: user,
+      user: user._id,
       direccion: "Av Siempreviva 123",
     }
     newTicket = new Ticket(newTicket)
     newTicket = await newTicket.save()
-    res.json(newTicket);
+    console.log("NEW TICKET", newTicket)
+    return newTicket;
   }
   catch (error) {
     console.log(error)
@@ -48,7 +63,8 @@ const createTicket = async (req, res) => {
 const getTickets = async (req, res) => {
   const { id } = req.params;
   try {
-    let userTickets = await Tickets.find({'user._id': id })
+    let userTickets = await Ticket.find().populate('user').populate('items');
+    
     res.json(userTickets);
   }
   catch (error) {
