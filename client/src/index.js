@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -9,8 +10,8 @@ import {Provider} from "react-redux";
 import store from "./redux/store/store.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import dotenv from "dotenv";
 dotenv.config();
+
 axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:4000';
 
 ReactDOM.render(
@@ -21,6 +22,9 @@ ReactDOM.render(
     </Provider>,
   document.getElementById('root')
 );
+
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
