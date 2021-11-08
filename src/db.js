@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const config =  require("./config.js");
 
-const MONGODB_URI = `mongodb+srv://molucax:${config.MONGO_PASSWORD}@drinkscluster.miouw.mongodb.net/drinks?retryWrites=true&w=majority`
+const MONGODB_URI = `mongodb+srv://molucax:74DmtnKCB3APPtKE@drinkscluster.miouw.mongodb.net/drinks?retryWrites=true&w=majority`
 
 mongoose
 	.connect(MONGODB_URI, {
