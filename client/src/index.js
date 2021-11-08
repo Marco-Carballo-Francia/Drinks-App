@@ -9,8 +9,9 @@ import {Provider} from "react-redux";
 import store from "./redux/store/store.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-axios.defaults.baseURL = 'http://localhost:4000';
+import dotenv from "dotenv";
+dotenv.config();
+axios.defaults.baseURL = process.env.REACT_APP_API || 'http://localhost:4000';
 
 ReactDOM.render(
    <Provider store={store}>
