@@ -5,13 +5,12 @@ const TicketSchema = new Schema({
     fecha:{
         type: Date,
         default: Date.now,
-        required: true
     },
-    numOrden:{
-        type: Number,
-        required: true
-    },
-    item:[{
+    // numOrden:{
+    //     type: Number,
+    //     required: true
+    // },
+    items:[{
         item:{
             type: Schema.Types.ObjectId,
             ref: 'Item',
@@ -33,16 +32,16 @@ const TicketSchema = new Schema({
     },
     state:{
         type: String,
-        required: true
+        default: "Pending"
     },
     direccion:{
         type: String,
         required: true
     },
-    metodoPago: {
-        type: String,
-        required: true
-    }
+    // metodoPago: {
+    //     type: String,
+    //     required: true
+    // }
 });
 
 module.exports =  model('Ticket', TicketSchema);

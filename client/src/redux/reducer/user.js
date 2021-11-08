@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE } from "../actions/const.js";
 
 const initialState = {
   user: null,
@@ -30,6 +30,12 @@ export function userReducer(state = initialState, action) {
         ...state,
         tickets: action.payload,
       };
+    case LOGIN_GOOGLE:
+      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
+      return {
+        ...state,
+        user: action.payload,
+      }
     default:
       return state;
   }

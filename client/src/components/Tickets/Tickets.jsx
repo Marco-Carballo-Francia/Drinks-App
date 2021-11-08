@@ -6,9 +6,11 @@ const Tickets = () => {
   const dispatch = useDispatch();
   const { user, tickets } = useSelector((state) => state.user);
 
+  const { id } = user;
+
   useEffect(() => {
-    dispatch(getUserTickets(user));
-  }, [dispatch, user]);
+    dispatch(getUserTickets(id));
+  }, [dispatch, id]);
 
   return (
     <div>

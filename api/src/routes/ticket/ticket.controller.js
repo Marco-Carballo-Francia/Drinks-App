@@ -1,12 +1,13 @@
 const Ticket = require("../../models/Ticket");
 const Stripe = require("stripe");
 const axios = require("axios");
+const config =  require("../../config.js");
 
-const stripe = new Stripe("...")
+const stripe = new Stripe(config.STRIPE_SECRET_KEY)
 
 const makePayment = async (req, res) => {
+  const { id, amount, cart, userId } = req.body;
   try {
-    const { id, amount } = req.body;
     let payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
@@ -14,8 +15,9 @@ const makePayment = async (req, res) => {
       payment_method: id,
       confirm: true
     })
-    console.log(payment);
-    await axios.post("/ticket/create", payment);
+    console.log("PAYMENT", payment);
+    const body = { payment, cart, userId }
+    await axios.post("/ticket/create", body);
     res.send({message: "Success"})
   }
   catch (error) {
@@ -24,29 +26,15 @@ const makePayment = async (req, res) => {
   }
 }
 
-const getTickets = async (req, res) => {
-  // tomo info del usuario (¿id? ¿email?) de algun lugar (query, params)
-  try {
-    let userTickets = await Tickets.find( /*traer todos los tickets de este usario*/)
-    res.json(userTickets);
-  }
-  catch (error) {
-    console.log(error)
-  }
-}
-
 const createTicket = async (req, res) => {
-  let payment = req.body;
+  let { payment, cart, userId } = req.body;
   try {
+    let user = await User.findById(userId)
     let newTicket = {
-      fecha,
-      numOrden,
-      item,
-      precioTotal,
-      user,
-      state,
-      direccion,
-      metodoPago
+      items: cart,
+      precioTotal: payment.amount,
+      user: user,
+      direccion: "Av Siempreviva 123",
     }
     newTicket = new Ticket(newTicket)
     newTicket = await newTicket.save()
@@ -56,6 +44,18 @@ const createTicket = async (req, res) => {
     console.log(error)
   }
 }
+
+const getTickets = async (req, res) => {
+  const { id } = req.params;
+  try {
+    let userTickets = await Tickets.find({'user._id': id })
+    res.json(userTickets);
+  }
+  catch (error) {
+    console.log(error)
+  }
+}
+
 
 module.exports = {
   makePayment,

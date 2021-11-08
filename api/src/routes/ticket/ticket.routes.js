@@ -4,7 +4,7 @@ const { makePayment, getTickets, createTicket } = require("./ticket.controller.j
 const router = Router();
 
 router.post("/checkout", makePayment);
-router.get("/history", getTickets);
+router.get("/history/:id", getTickets);
 router.post("/create", createTicket);
 
 module.exports =  router;

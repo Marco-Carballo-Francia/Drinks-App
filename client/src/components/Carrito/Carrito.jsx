@@ -1,23 +1,27 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getCart } from "../../redux/actions/actions.js";
+import { useSelector, useDispatch } from "react-redux";
 import style from "./Cart.module.css";
 import Card from "./Card.js";
+import { getCart } from "../../redux/actions/actions";
 
-const Cart = () => {
+
+function Carrito() {
+
+  
+  const { cart } = useSelector(state => state.cart);  
+
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
 
-    function totalCart(array) {
-        let total = 0;
-        for (var i = 0; i < array.length; i++) {
-        console.log(array[i].precio);
-        let neto = price(array[i].precio);
-        total = total + neto;
-        }
-        return total;
+  function totalCart(array) {
+    let total = 0;
+    for (var i = 0; i < array.length; i++) {
+      console.log(array[i].precio);
+      let neto = price(array[i].precio);
+      total = total + neto;
     }
+    return total;
+  }
+
   function price(precio) {
     let total;
     let splitprice = precio?.split(",");
@@ -38,7 +42,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getCart());
-  }, [dispatch]);
+    }, [dispatch]);
 
   return (
     <div className={style.container}>
@@ -52,7 +56,6 @@ const Cart = () => {
                 image={p.imagen}
                 rating={p.rating}
                 precio={price(p.precio)}
-                qty={p.qty}
               />
             );
           })
@@ -74,16 +77,6 @@ const Cart = () => {
       </div>
     </div>
   );
-};
-
-export default Cart;
-
-{
-  /*<Card
-            id={p.id}
-            name={p.name}
-            image={p.imagen}
-            rating={p.rating}
-            precio={p.precio} 
-            /> */
 }
+
+export default Carrito;

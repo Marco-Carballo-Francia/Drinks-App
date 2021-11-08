@@ -12,7 +12,8 @@ import {
     DELETE_CART_ITEM,
     SET_MODAL,
     CREATE_TICKET,
-    GET_TICKETS
+    GET_TICKETS,
+    LOGIN_GOOGLE
 } from './const';
 
 
@@ -112,11 +113,11 @@ export const setModal = (modal) => {
     }
 }
 
-export const loginGoogle = (data) => async (dispatch) => {
+export const loginGoogle = (obj) => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/google", data)
+        const res = await axios.post("/users/user/google", obj)
         return dispatch({
-            type: "GOOGLE",
+            type: LOGIN_GOOGLE,
             payload: res.data
         })
     }
@@ -150,9 +151,9 @@ export const createTicket = (value) => async (dispatch) => {
     }
 }
 
-export const getUserTickets = (user) => async (dispatch) => {
+export const getUserTickets = (id) => async (dispatch) => {
     try {
-        const tickets = (await axios.get("/ticket/history")).data
+        const tickets = (await axios.get(`/ticket/history/${id}`)).data
         return dispatch({
             type: GET_TICKETS,
             payload: tickets
