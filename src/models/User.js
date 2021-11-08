@@ -12,11 +12,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    // nombre: {
-    //     type: String,
-    //     //required: true,
-    //     trim: true
-    // },
+    nombre: {
+        type: String,
+        //required: true,
+        trim: true
+    },
     // apellido: {
     //     type: String,
     //     trim: true
