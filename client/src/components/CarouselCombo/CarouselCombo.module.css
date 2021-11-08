@@ -1,0 +1,30 @@
+.ctn {
+  height: 390px;
+}
+
+.btn {
+  margin: 0 auto;
+  padding: 0.5em 1.5em;
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background-color: #00000000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgba(141, 137, 137, 0.541);
+  color: rgb(255, 255, 255);
+}
+
+.ctntxt {
+  margin-bottom: 100px;
+}
+
+.txt {
+  font-size: 20px;
+  letter-spacing: 1px;
+}

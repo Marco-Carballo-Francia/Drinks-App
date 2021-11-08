@@ -1,0 +1,27 @@
+.Categories {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  margin-right: 10px;
+  background: none;
+  color: rgb(255, 255, 255);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  color: rgb(207, 117, 0);
+} 
+
+.btn:focus {
+  color: rgb(207, 117, 0);
+}

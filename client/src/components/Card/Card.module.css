@@ -1,0 +1,80 @@
+.btn {
+  margin-bottom: 5px;
+  padding: 0.5em 1.5em;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(207, 117, 0);
+  color: rgb(255, 255, 255);
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  margin: 0px 5px 0px 5px;
+}
+
+.link:hover {
+  color: #000000 !important;
+}
+
+.name {
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+}
+
+.Card {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: 50px;
+  width: 260px;
+  height: 370px;
+  text-align: center;
+  top: 0px;
+  border-radius: 3px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+}
+
+.Card:hover {
+  transition: all 0.2s ease-out;
+  box-shadow: 30px 40px 8px rgba(38, 38, 38, 0.2);
+  top: -4px;
+  background-color: rgb(255, 255, 255);
+  border: 1.5px solid rgba(0, 0, 0, 0.212);
+}
+
+.PR {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 5px;
+}
+
+.precio {
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 16px;
+  margin: 0;
+  font-family: "Glegoo", serif;
+}
+
+.image {
+  height: 200px;
+  width: 100px;
+  object-fit: scale-down;
+}

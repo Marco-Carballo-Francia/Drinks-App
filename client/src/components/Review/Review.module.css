@@ -1,0 +1,41 @@
+.btnEnviar {
+  width: 1000px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding: 8px 3px;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  background-color: #000000;
+  cursor: pointer;
+}
+.btnEnviar:hover {
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  border: solid 1px black;
+}
+
+.ctnSuperior {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.textarea {
+  border: 0.5px solid rgba(0, 0, 0, 0.849)0, 0, 0, 0.849;
+  width: 1000px;
+  height: 150px;
+  margin-top: 15px;
+}
+
+.titulo {
+  color: rgb(0, 0, 0);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 12px;
+}

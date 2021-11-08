@@ -1,0 +1,38 @@
+.SearchBar {
+  margin-top: 15px;
+}
+
+.btn {
+  margin: 0 auto;
+  padding: 0.4em 1.5em;
+  border: 1px solid rgb(255, 255, 255);
+  border-left: none;
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background-color: #000000c0;
+  cursor: pointer;
+  
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(207, 117, 0);
+  border: 1px solid rgb(207, 117, 0);
+  border-left: none;
+}
+
+.input {
+  margin: o auto;
+  border: 1px solid rgb(255, 255, 255);
+  width: 350px;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 0.4em ;
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0);
+  color: #ffffff;
+  
+}
