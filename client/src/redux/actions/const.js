@@ -34,6 +34,9 @@ const LOGIN_GOOGLE = "LOGIN_GOOGLE";
 const CREATE_TICKET = "CREATE_TICKET";
 const GET_TICKETS = "GET_TICKETS";
 
+// PAGO
+const DATOS_COMPRA = "DATOS_COMPRA";
+
 
 module.exports = {
     GET_PRODUCTS,
@@ -53,5 +56,6 @@ module.exports = {
     GET_TICKETS,
     CREATE_TICKET,
     LOGIN_GOOGLE,
-    SET_TOTAL
+    SET_TOTAL,
+    DATOS_COMPRA
 }

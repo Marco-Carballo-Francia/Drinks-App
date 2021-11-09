@@ -1,14 +1,28 @@
 import { Route } from 'react-router-dom';
 import './App.css';
-import CardDetails from './components/CardDetails/CardDetails';
-import Cards from './components/Cards/Cards';
-import Home from './components/Home/Home';
+
+// Home
 import NavBar from './components/NavBar/NavBar';
-import Cart from './components/Cart/Cart';
+import Home from './components/Home/Home';
+import Cards from './components/Cards/Cards';
+
+// Item detalle
+import CardDetails from './components/CardDetails/CardDetails';
+
+// Usuarios
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import Pago from "./components/Pago/Pago.js"
+import Forgot from "./components/Forgot/Forgot";
 
+// Carrito y Pago
+import Cart from './components/Cart/Cart';
+import Checkout from "./components/Checkout/Checkout";
+
+// Admin
+import Admin from "./components/Admin/Admin";
+import AdminStock from './components/AdminStock/AdminStock';
+import AdminTickets from './components/AdminTickets/AdminTickets';
+import AdminUsers from './components/AdminUsers/AdminUsers';
 
 function App() {
   return (
@@ -20,7 +34,14 @@ function App() {
       <Route exact path='/category/:category' component={Cards} />
       <Route exact path="/" component={Home} />
       <Route path="/detail/:id" component={CardDetails} />
-      <Route path="/pago" component={Pago} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/forgot" component={Forgot} /> 
+
+      {/* Admin */}
+      <Route path="/admin" component={Admin} />
+      <Route path="/admin/stock" component={AdminStock} />
+      <Route path="/admin/tickets" component={AdminTickets} />
+      <Route path="/admin/users" component={AdminUsers} />
     </div>
   );
 }

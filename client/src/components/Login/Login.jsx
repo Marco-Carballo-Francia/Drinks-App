@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./Login.module.css";
 import { Link } from "react-router-dom";
 import Google from "../Google/Google";
+import Forgot from "../Forgot/Forgot";
 
 const Login = () => {
   const [input, setInput] = useState({
@@ -41,6 +42,9 @@ const Login = () => {
         </div>
         <div className={style.link}>
           No tenes cuenta? <Link to="/register">Registrate</Link>
+        </div>
+        <div>
+          Olvidaste tu contraseña? <Link to= "/forgot">Cambiala ahora</Link>
         </div>
       </form>
     </div>

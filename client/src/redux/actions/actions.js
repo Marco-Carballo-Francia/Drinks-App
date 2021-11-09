@@ -14,7 +14,8 @@ import {
     CREATE_TICKET,
     GET_TICKETS,
     LOGIN_GOOGLE,
-    SET_TOTAL
+    SET_TOTAL,
+    DATOS_COMPRA,
 } from './const';
 
 
@@ -169,5 +170,12 @@ export const setTotal = (total) => {
     return {
         type: SET_TOTAL,
         payload: total
+    }
+}
+
+export const datosCompra = (payload) => {
+    return {
+        type: DATOS_COMPRA,
+        payload
     }
 }
