@@ -14,7 +14,8 @@ import {
     CREATE_TICKET,
     GET_TICKETS,
     LOGIN_GOOGLE,
-    SET_TOTAL
+    SET_TOTAL,
+    LOGIN_LOCAL
 } from './const';
 
 
@@ -140,6 +141,18 @@ export const registerLocal = (values) => async (dispatch) => {
     }
 }
 
+export const loginLocal = input => async (dispatch) => {
+    try {
+        const res = await axios.post("/users/user/login", input )
+        return dispatch({
+            type: LOGIN_LOCAL,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const createTicket = (value) => async (dispatch) => {
     try {
         const res = await axios.post("/ticket/checkout", value)
@@ -169,5 +182,11 @@ export const setTotal = (total) => {
     return {
         type: SET_TOTAL,
         payload: total
+    }
+}
+
+export const checkout = () => {
+    return {
+        type: "CHECK_USER"
     }
 }

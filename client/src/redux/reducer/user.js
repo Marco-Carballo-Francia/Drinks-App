@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL } from "../actions/const.js";
 
 const initialState = {
   user: null,
@@ -25,6 +25,13 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+    case LOGIN_LOCAL:
+      let getUser = action.payload;
+      localStorage.setItem("user", JSON.stringify(getUser));
+      return {
+        ...state,
+        user: JSON.parse(localStorage.getItem("user"))
+      };
     case GET_TICKETS:
       return {
         ...state,
@@ -36,6 +43,8 @@ export function userReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       }
+    case "CHECK_USER":
+      return state;
     default:
       return state;
   }
