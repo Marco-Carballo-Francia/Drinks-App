@@ -22,3 +22,8 @@
   font-size: 14px;
   font-family: "Roboto", sans-serif;
 }
+
+.error {
+  margin-top: 3px;
+  color: rgb(255, 0, 0);
+}
