@@ -19,7 +19,7 @@ const Register = () => {
         validarContraseña : ""
     });
 
-    let validateLetras = /^[A-Z]+$/i
+    let validateLetras = /^[A-Z]+$/i 
     let validateEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     let validateContraseña = /^.{4,12}$/
     const validate = () => {

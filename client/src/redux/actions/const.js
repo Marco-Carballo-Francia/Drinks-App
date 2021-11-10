@@ -43,6 +43,10 @@ const CHANGE_TICKET_STATUS = "CHANGE_TICKET_STATUS"
 // PAGO
 const DATOS_COMPRA = "DATOS_COMPRA";
 
+//ADMIN
+
+const CREATE_ITEM = "CREATE_ITEM";
+
 
 module.exports = {
     GET_PRODUCTS,
@@ -69,5 +73,6 @@ module.exports = {
     CHANGE_TICKET_STATUS,
     LOGIN_LOCAL,
     CHANGE_USER_ROLE,
-    GET_USERS
+    GET_USERS,
+    CREATE_ITEM,
 }
