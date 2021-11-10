@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./Login.module.css";
 import { Link, useHistory } from "react-router-dom";
 import Google from "../Google/Google";
+import Forgot from "../Forgot/Forgot";
 import { loginLocal } from "../../redux/actions/actions";
 
 
@@ -92,6 +93,9 @@ const Login = () => {
         </div>
         <div className={style.link}>
           No tenes cuenta? <Link to="/register">Registrate</Link>
+        </div>
+        <div>
+          Olvidaste tu contraseña? <Link to= "/forgot">Cambiala ahora</Link>
         </div>
       </form>
     </div>

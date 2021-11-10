@@ -19,7 +19,7 @@ const makePayment = async (req, res) => {
     })
     const body = { payment, cart, userId }
     let ticket = await axios.post("http://localhost:4000/ticket/create", body);
-    res.json(ticket)
+    res.json(ticket.data)
   }
   catch (error) {
     console.log(error)
@@ -60,16 +60,15 @@ const createTicket = async (req, res) => {
   }
 }
 
-const getTickets = async (req, res) => {
-  const { id } = req.params;
+const getTicketsInPending = async (req, res) => {
   try {
-    let userTickets = await Ticket.findById(id)
-      .populate('items.item', ['name', 'precio', 'categoria'])
-      .populate('user', ['nombre']);
+    let userTickets = await Ticket.find({ state: "Pending" }).populate('user', "nombre").populate('items');
+    let sortTickets = userTickets.sort((a, b) => {
+      if (a.fecha < b.fecha)  return -1;
+      if (a.fecha > b.fecha)  return 1;
+    })
+    res.json(sortTickets);
 
-    // console.log('userTickets', userTickets);
-    
-    res.json(userTickets);
   }
   catch (error) {
     console.log(error)
@@ -79,6 +78,6 @@ const getTickets = async (req, res) => {
 
 module.exports = {
   makePayment,
-  getTickets,
+  getTicketsInPending,
   createTicket
 }

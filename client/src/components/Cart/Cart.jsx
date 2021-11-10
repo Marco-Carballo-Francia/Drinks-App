@@ -79,7 +79,9 @@ const Cart = () => {
           </p>
         </div>
         <div>
+          <Link to="/checkout">
             <button onClick={handleClick} className={style.btn}>PAGAR</button>
+            </Link>
         </div>
       </div>
     </div>
