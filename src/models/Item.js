@@ -16,30 +16,35 @@ const itemSchema = new Schema({
 		required: true
 	},
 	imagen: {
-		type: String,
+		type: String
 	},
 	rating: {
-		type: String,
+		type: String
 	},
 	numReviews: {
 		cinco: { type: Number, default: 1 },
 		cuatro: { type: Number, default: 1 },
 		tres: { type: Number, default: 1 },
 		dos: { type: Number, default: 1 },
-		uno: { type: Number, default: 1 },
+		uno: { type: Number, default: 1 }
 	},
 	categoria: {
 		type: String,
+		required: true
+	},
+	stock: {
+		type: Number,
+		required: true
 	}
 }, {
 	versionKey: false,
 	timestamps: true
 });
 
-itemSchema.set('toJSON', {
-	transform: (document, returnedObject) => {
-		returnedObject.codigo = returnedObject._id
-	}
-})
+// itemSchema.set('toJSON', {
+// 	transform: (document, returnedObject) => {
+// 		returnedObject.codigo = returnedObject._id
+// 	}
+// })
 
 module.exports =  model("Item", itemSchema);

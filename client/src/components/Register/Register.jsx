@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+    import React, { useState } from "react";
 import style from './Register.module.css';
 import { useDispatch } from 'react-redux';
 import { registerLocal } from '../../redux/actions/actions';

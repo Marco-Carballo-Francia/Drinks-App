@@ -4,6 +4,7 @@ import {cartReducer} from "../reducer/cart.js";
 import {productsReducer} from "../reducer/products.js";
 import {userReducer} from "../reducer/user.js";
 import {functionalityReducer} from "../reducer/functionality.js";
+import {adminReducer} from "../reducer/admin.js"; 
 import thunk from "redux-thunk" ;
 
 
@@ -13,7 +14,8 @@ const store= createStore(
 		cart: cartReducer,
 		products: productsReducer,
 		user: userReducer,
-		functionality: functionalityReducer
+		functionality: functionalityReducer,
+		admin: adminReducer,
 	}), composeWithDevTools(
 		applyMiddleware(thunk) 
 	));
