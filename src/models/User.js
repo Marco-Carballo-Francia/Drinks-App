@@ -7,6 +7,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        trim: true
     },
     contraseña: {
         type: String,
@@ -14,35 +15,35 @@ const UserSchema = new Schema({
     },
     nombre: {
         type: String,
-        //required: true,
+        required: true,
         trim: true
     },
-    // apellido: {
-    //     type: String,
-    //     trim: true
-    // },
-    // direccion: {
-    //     type: String
-    // },
-    // telefono:{
-    //     type:String,
-    // },
-    // admin:{
-    //     type: Boolean,
-    //     default: false
-    // },
-    // itemList:[{
-    //     item:{
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Item',
-    //     }
-    // }],
-    // ticketHistory:[{
-    //     ticket:{
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Ticket',
-    //     }
-    // }],
+    apellido: {
+        type: String,
+        trim: true
+    },
+    direccion: {
+        type: String
+    },
+    telefono: {
+        type: String
+    },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    itemList: [{
+        item: {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }
+    }],
+    ticketHistory: [{
+        ticket: {
+            type: Schema.Types.ObjectId,
+            ref: 'Ticket',
+        }
+    }],
 });
 
 UserSchema.pre('save', async function (next) {

@@ -1,7 +1,8 @@
 import { ADD_CART, GET_CART, DELETE_CART_ITEM, SET_TOTAL } from "../actions/const";
 const initialstate = {
   cart: [],
-  total: 0
+  total: 0,
+  ticket: {}
 };
 
 export function cartReducer(state = initialstate, action) {

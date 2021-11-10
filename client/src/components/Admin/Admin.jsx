@@ -3,11 +3,9 @@ import { useHistory } from "react-router-dom";
 
 const Admin = () => {
     const history = useHistory();
-    const [section, setSection] = useState("");
 
     const handleClick = (e) => {
-        setSection(e.target.name);
-        history.push(`/admin/${section}`)
+        history.push(`/admin/${e.target.name}`)
     }
 
     return (

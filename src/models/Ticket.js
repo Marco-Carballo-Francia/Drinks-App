@@ -4,12 +4,12 @@ const { Schema, model } = pkg;
 const TicketSchema = new Schema({
     fecha:{
         type: Date,
-        default: Date.now,
+        default: Date.now
     },
-    // numOrden:{
-    //     type: Number,
-    //     required: true
-    // },
+    numOrden:{
+        type: Number,
+        required: true
+    },
     items: [{
         item: {
             type: Schema.Types.ObjectId,
@@ -37,10 +37,10 @@ const TicketSchema = new Schema({
         type: String,
         required: true
     },
-    // metodoPago: {
-    //     type: String,
-    //     required: true
-    // }
+    metodoPago: {
+        type: String,
+        required: true
+    }
 });
 
 module.exports =  model('Ticket', TicketSchema);

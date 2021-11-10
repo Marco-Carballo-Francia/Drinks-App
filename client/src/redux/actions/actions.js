@@ -16,6 +16,8 @@ import {
     LOGIN_GOOGLE,
     SET_TOTAL,
     DATOS_COMPRA,
+    GET_TICKETS_ADMIN,
+    CHANGE_TICKET_STATUS,
 } from './const';
 
 
@@ -153,18 +155,18 @@ export const createTicket = (value) => async (dispatch) => {
     }
 }
 
-export const getUserTickets = (id) => async (dispatch) => {
-    try {
-        const tickets = (await axios.get(`/ticket/history/${id}`)).data
-        return dispatch({
-            type: GET_TICKETS,
-            payload: tickets
-        })
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
+// export const getTickets = () => async (dispatch) => {
+//     try {
+//         const tickets = (await axios.get(`/ticket/checkout`)).data
+//         return dispatch({
+//             type: GET_TICKETS,
+//             payload: tickets
+//         })
+//     }
+//     catch (error) {
+//         console.log(error)
+//     }
+// }
 
 export const setTotal = (total) => {
     return {
@@ -173,9 +175,35 @@ export const setTotal = (total) => {
     }
 }
 
-export const datosCompra = (payload) => {
+export const datosDeCompra = (payload) => {
     return {
         type: DATOS_COMPRA,
         payload
+    }
+}
+
+export const getTicketsAdmin = () => async (dispatch) => {
+    try {
+        const ticketsPending = (await axios.get(`/ticket/admin`)).data
+        return dispatch({
+            type: GET_TICKETS_ADMIN,
+            payload: ticketsPending
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+export const changeTicketStatus = (info) => async (dispatch) => {
+    try {
+        const tickets = (await axios.put(`/ticket/status`, info)).data
+        return dispatch({
+            type: CHANGE_TICKET_STATUS,
+            payload: tickets // esto tiene que venir como un objeto { pending: [{}, {}...], processing: [{}, {}...] }
+        })
+    }
+    catch (error) {
+        console.log(error)
     }
 }

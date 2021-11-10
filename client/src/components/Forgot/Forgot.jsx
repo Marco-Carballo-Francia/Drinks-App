@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 import style from './Forgot.module.css';
 
 const Forgot = () => {
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const [input, setInput] = useState({
         email: ""
     })
@@ -43,10 +43,8 @@ return(
     <h4>Ingrese su Email para recuperar la contraseña</h4>
         
     <div>
-        <input type="text" value={input.email} name="email" placeholder="Ingresa tu Email" onChange={handleInputChange}></input>
+        <input type="text" value={input.email} name="email" placeholder="Email..." onChange={handleInputChange}></input>
         <p className={style.error}>{errors.email && errors.email}</p>        
-        
-    
     </div>
 
 
