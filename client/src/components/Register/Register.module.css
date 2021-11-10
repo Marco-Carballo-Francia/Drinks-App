@@ -42,6 +42,14 @@
   margin-bottom: 15px;
 }
 
+.validatePassword{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
 .email {
   display: flex;
   justify-content: flex-start;

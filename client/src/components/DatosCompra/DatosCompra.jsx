@@ -5,41 +5,47 @@ import { Link } from "react-router-dom";
 import Modal from 'react-modal';
 
 
-const validateInput = (input) => {
-    let errors = {}
-    if(!input.name){
-        errors.name = ("Se requiere un Nombre");
-    }
-    if(!input.apellido){
-        errors.apellido = ("Se requiere un Apellido");
-    }
-    if(!input.calle){
-        errors.calle = ("Se requiere una direccion de envio");
-    }
-    if(!input.altura){
-        errors.altura = ("Se requiere la altura de la calle");
-    }
-    if(!input.codigoPostal){
-        errors.codigoPostal = ("Se requiere un codigo postal");
-    }
-    if(!input.telefono){
-        errors.telefono = ("Se requiere un telefono");
-    }
-   return errors;
-}
 
 const DatosCompra = () => {
-   const dispatch = useDispatch();
-   const [errors, setErrors] = useState({})
-   const [modalIsOpen, setIsOpen] = useState(false);
-   const [input, setInput] = useState({
-       name: "",
-       apellido: "",
-       calle: "",
-       altura: "",
-       codigoPostal: "",
-       telefono: "",
-   })
+    const dispatch = useDispatch();
+    const [errors, setErrors] = useState({})
+    const [modalIsOpen, setIsOpen] = useState(false);
+    const [input, setInput] = useState({
+        name: "",
+        apellido: "",
+        calle: "",
+        altura: "",
+        codigoPostal: "",
+        telefono: "",
+    })
+    let validateLetras = /^[A-Z]+$/i
+    
+
+    const validateInput = (input) => {
+        let errors = {}
+        if(!validateLetras.test(input.name)){
+            errors.name = ("Debe ser solo letras");
+        }
+        if(!validateLetras.test(input.apellido)){
+            errors.apellido = ("Debe ser solo letras");
+        }
+        if(!validateLetras.test(input.calle)){
+            errors.calle = ("Debe ser solo letras");
+        }
+        if(!input.altura){
+            errors.altura = ("Se requiere la altura de la calle");
+        }
+        if(!input.codigoPostal){
+            errors.codigoPostal = ("Se requiere un codigo postal");
+        }
+        if(!input.telefono){
+            errors.telefono = ("Se requiere un telefono");
+        }
+        if(input.telefono < 0){
+            errors.telefono = ("error")
+        }
+       return errors;
+    }
 
    const handleInputChange = (e) => {
        setInput({

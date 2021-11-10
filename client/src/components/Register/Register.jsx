@@ -15,7 +15,8 @@ const Register = () => {
         nombre: '',
         apellido: '',
         email: '',
-        contraseña: ''
+        contraseña: '',
+        validarContraseña : ""
     });
 
     let validateLetras = /^[A-Z]+$/i
@@ -35,6 +36,9 @@ const Register = () => {
         if (!validateContraseña.test(values.contraseña)) {
             errors.contraseña = "Desde 4 a 14 digitos";
         }
+        if(values.validarContraseña !== values.contraseña){
+            errors.validarContraseña = "Error"
+        }
         return errors;
     };
 
@@ -46,13 +50,16 @@ const Register = () => {
         setValues({
             ...values,
             [e.target.name]: e.target.value,
+            
         })
+        console.log(values)
         setErrors(
             validate({
                 ...values,
                 [e.target.name]: e.target.value,
             })
-        );
+            );
+            console.log(values)
     }
 
     const handleOnSumit = e => {
@@ -138,6 +145,18 @@ const Register = () => {
                         value={values.contraseña}
                     />
                     <p className={style.error}>{errors.contraseña}</p>
+                </div>
+
+                <div className={style.validatePassword}>
+                    <label className={style.title}>Validar Contraseña</label>
+                    <input className={style.input}
+                        name='validarContraseña'
+                        type='password'
+                        placeholder='Su contraseña...'
+                        onChange={handleOnChange}
+                        value={values.validarContraseña}
+                    />
+                    <p className={style.error}>{errors.validarContraseña}</p>
                 </div>
 
                 <div>
