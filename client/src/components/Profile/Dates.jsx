@@ -13,7 +13,7 @@ function Dates() {
             </div>
             <div className={style.data}>
                 <p className={style.title} >Apellido:</p>
-                <p className={style.user}>{user.apellido ? user.apellido : user.user.apellido} </p>
+                {/* <p className={style.user}>{user.apellido ? user.apellido : user.user.apellido} </p> */}
             </div>
             <div className={style.data}>
                 <p className={style.title} >Email:</p>
