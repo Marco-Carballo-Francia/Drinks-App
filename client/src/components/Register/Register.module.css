@@ -1,27 +1,29 @@
 .Register {
   justify-content: center;
   position: absolute;
-  top: 55%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%);
+}
+
+.form {
   border: 2px solid gainsboro;
   background-color: rgb(247, 247, 247);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
+  padding: 0px 100px 0px 100px ;
   height: max-content;
-  width: 30%;
+  width: 100%;
   border-radius: 7px;
   box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
 }
 
 .titleRegister {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
   font-size: 30px;
   letter-spacing: 1px;
+  margin-top: 1.5rem;
 }
 
 .username {
@@ -67,15 +69,25 @@
 }
 
 .btn {
-  background-color: black;
-  color: white;
-  width: 100%;
-  height: 35px;
-  border-radius: 0.25rem;
+  padding: 0.5em 1.5em;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #000000;
+  cursor: pointer;
 }
 
+.btn:hover {
+  background-color: rgb(207, 117, 0);
+  color: rgb(255, 255, 255);
+}
+
+
 .link {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
