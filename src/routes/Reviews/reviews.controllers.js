@@ -11,11 +11,13 @@ const getReviews = async (req, res) => {
 
 
 const postReviews = async (req, res) => {
-    const { comment, rating } = req.body
+    const { comment, rating, nameUser } = req.body
     try {
+        
         const newReview = new Review({
             comment,
-            rating
+            rating,
+            user: objectId
         });
 
         newReview = await newReview.save();

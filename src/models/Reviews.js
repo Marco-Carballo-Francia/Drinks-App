@@ -2,7 +2,7 @@ const pkg = require("mongoose");
 const { Schema, model } = pkg;
 
 const reviewsSchema = new Schema({
-  coment: {
+  comment: {
     type: String
   },
   rating: {
@@ -11,7 +11,7 @@ const reviewsSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    requie
+    required: true
   }
 }, {
   versionKey: false,
