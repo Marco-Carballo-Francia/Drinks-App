@@ -123,7 +123,7 @@ const Register = () => {
                         contentLabel="Example Modal"
                     >
                         <div className={style.ctnText} >
-                            <h2 className={style.titleModal} >El usuario se a registrado correctamente</h2>
+                            <h2 className={style.titleModal} >El usuario se ha registrado correctamente</h2>
                             <button className={style.btnAceptar} onClick={handleOnClick} >Aceptar</button>
                         </div>
                     </Modal>

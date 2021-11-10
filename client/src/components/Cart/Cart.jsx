@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, setTotal } from "../../redux/actions/actions.js";
 import style from "./Cart.module.css";
@@ -8,13 +8,15 @@ import Card from "./Card.js";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
+  const user = useSelector(state => state.user.user);
+  const history = useHistory();
 
   function totalCart(array) {
     let total = 0;
-    for (var i = 0; i < array.length; i++) {
-      console.log(array[i].precio);
-      let neto = price(array[i].precio);
-      let bruto = neto * array[i].qty;
+    for (var i = 0; i < array?.length; i++) {
+      console.log(array[i]?.precio);
+      let neto = price(array[i]?.precio);
+      let bruto = neto * array[i]?.qty;
       total = total + bruto;
     }
     return total;
@@ -38,7 +40,12 @@ const Cart = () => {
   }
 
   const handleClick = () => {
-    dispatch(setTotal(totalCart(cart)));
+    if(user !== null) {
+      dispatch(setTotal(totalCart(cart)));
+      history.push('/pago');
+    } else {
+      history.push('/login');
+    }
   }
 
   useEffect(() => {
@@ -74,7 +81,7 @@ const Cart = () => {
         <div>
           <Link to="/checkout">
             <button onClick={handleClick} className={style.btn}>PAGAR</button>
-          </Link>
+            </Link>
         </div>
       </div>
     </div>

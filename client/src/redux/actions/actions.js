@@ -18,6 +18,8 @@ import {
     DATOS_COMPRA,
     GET_TICKETS_ADMIN,
     CHANGE_TICKET_STATUS,
+    LOGIN_LOCAL
+
 } from './const';
 
 
@@ -143,6 +145,18 @@ export const registerLocal = (values) => async (dispatch) => {
     }
 }
 
+export const loginLocal = input => async (dispatch) => {
+    try {
+        const res = await axios.post("/users/user/login", input )
+        return dispatch({
+            type: LOGIN_LOCAL,
+            payload: res.data
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const createTicket = (value) => async (dispatch) => {
     try {
         const res = await axios.post("/ticket/checkout", value)
@@ -207,3 +221,11 @@ export const changeTicketStatus = (info) => async (dispatch) => {
         console.log(error)
     }
 }
+
+
+export const checkout = () => {
+    return {
+        type: "CHECK_USER"
+    }
+}
+

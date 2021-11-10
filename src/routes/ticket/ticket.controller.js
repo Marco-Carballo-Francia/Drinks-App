@@ -43,7 +43,7 @@ const createTicket = async (req, res) => {
     }
     // console.log("qTY", cart[0].qty)
     itemCart = await Promise.all(itemCart);
-    console.log('itemcart', itemCart);
+    // console.log('itemcart', itemCart);
     let newTicket = {
       items: itemCart,
       precioTotal: payment.amount,
@@ -52,7 +52,7 @@ const createTicket = async (req, res) => {
     }
     newTicket = new Ticket(newTicket)
     newTicket = await newTicket.save()
-    console.log("NEW TICKET", newTicket)
+    // console.log("NEW TICKET", newTicket)
     return newTicket;
   }
   catch (error) {
@@ -63,12 +63,12 @@ const createTicket = async (req, res) => {
 const getTicketsInPending = async (req, res) => {
   try {
     let userTickets = await Ticket.find({ state: "Pending" }).populate('user', "nombre").populate('items');
-
     let sortTickets = userTickets.sort((a, b) => {
       if (a.fecha < b.fecha)  return -1;
       if (a.fecha > b.fecha)  return 1;
     })
     res.json(sortTickets);
+
   }
   catch (error) {
     console.log(error)
