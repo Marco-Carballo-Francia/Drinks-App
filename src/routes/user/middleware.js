@@ -7,10 +7,12 @@ const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 passport.use('register', new localStrategy({
     usernameField: "email",
-    passwordField: "contraseña"
-}, async (email, contraseña, done) => {
+    passwordField: "contraseña",
+    passReqToCallback: true
+}, async (req, email, contraseña, done) => {
     try {
-        const user = await User.create({ email, contraseña });
+        const { nombre, apellido } = req.body;
+        const user = await User.create({ nombre, apellido, email, contraseña });
         return done(null, user);
     } catch (e) {
         return done(e);

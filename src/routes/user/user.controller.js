@@ -29,7 +29,7 @@ const googleLogin = (req, res) => {
                 nombre: name,
                 token,
               };
-            //   console.log(userFront);
+              //   console.log(userFront);
               return res.json(userFront);
             } else {
               let contraseña = email + "top_secret";
@@ -96,6 +96,24 @@ const profileAuthenticate = async (req, res, next) => {
   });
 };
 
+const editUser = async (req, res, next) => {
+  const { nombre, apellido, direccion, telefono, documento } = req.body;
+  try {
+    let edit = await User.findByIdAndUpdate(req.params.id, {
+      nombre: nombre,
+      apellido: apellido,
+      direccion: direccion,
+      telefono: telefono,
+      documento: documento
+    });
+    // Send response in here
+    res.json(edit);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //  const getUserByNP = async (req, res) => {
 //     const { nombre, contraseña } = req.body;
 //     try {
@@ -138,4 +156,5 @@ module.exports = {
   postUser,
   profileAuthenticate,
   googleLogin,
+  editUser
 };

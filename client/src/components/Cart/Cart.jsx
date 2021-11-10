@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCart, setTotal } from "../../redux/actions/actions.js";
 import style from "./Cart.module.css";

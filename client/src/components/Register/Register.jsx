@@ -1,4 +1,4 @@
-    import React, { useState } from "react";
+import React, { useState } from "react";
 import style from './Register.module.css';
 import { useDispatch } from 'react-redux';
 import { registerLocal } from '../../redux/actions/actions';
@@ -12,15 +12,23 @@ const Register = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const [values, setValues] = useState({
+        nombre: '',
+        apellido: '',
         email: '',
         contraseña: ''
     });
 
-
+    let validateLetras = /^[A-Z]+$/i
     let validateEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     let validateContraseña = /^.{4,12}$/
     const validate = () => {
         let errors = {};
+        if (!validateLetras.test(values.nombre)) {
+            errors.nombre = "debe ser solo letras";
+        }
+        if (!validateLetras.test(values.apellido)) {
+            errors.apellido = "debe ser solo letras";
+        }
         if (!validateEmail.test(values.email)) {
             errors.email = "Email requerido";
         }
@@ -50,6 +58,8 @@ const Register = () => {
     const handleOnSumit = e => {
         e.preventDefault();
         if (
+            !errors.nombre &&
+            !errors.apellido &&
             !errors.email &&
             !errors.contraseña
         ) {
@@ -74,20 +84,37 @@ const Register = () => {
     };
 
 
-    const handleOnClick = () => history.push('/login');
+    const handleOnClick = () => history.push('/');
 
     return (
         <div className={style.Register}>
             <form className={style.form} onSubmit={handleOnSumit} >
                 <p className={style.titleRegister}><b>REGISTRARSE</b></p>
                 <div className={style.username}>
-                    <label className={style.title}>Nombre de usuario</label>
+                    <label className={style.title}>Nombre</label>
                     <input className={style.input}
+                        name='nombre'
                         type="text"
-                        placeholder='Su nombre de usuario...'
-                    // value={input.username}
+                        placeholder='Su nombre...'
+                        value={values.nombre}
+                        onChange={handleOnChange}
                     />
+                    <p className={style.error}>{errors.nombre}</p>
                 </div>
+
+
+                <div className={style.email}>
+                    <label className={style.title}>Apellido</label>
+                    <input className={style.input}
+                        name='apellido'
+                        type="text"
+                        placeholder='Su apellido...'
+                        value={values.apellido}
+                        onChange={handleOnChange}
+                    />
+                    <p className={style.error}>{errors.apellido}</p>
+                </div>
+
 
                 <div className={style.email}>
                     <label className={style.title}>Email</label>

@@ -13,7 +13,6 @@ import CardDetails from './components/CardDetails/CardDetails';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 
-import Pago from "./components/Pago/Pago.js";
 import ProfilePrincipal from './components/Profile/ProfilePrincipal';
 
 import Forgot from "./components/Forgot/Forgot";
@@ -40,8 +39,6 @@ function App() {
       <Route exact path='/category/:category' component={Cards} />
       <Route exact path="/" component={Home} />
       <Route path="/detail/:id" component={CardDetails} />
-      <Route path="/pago" component={Pago} />
-
       {/* Profile */}
       <Route exact path ="/profile" component={ProfilePrincipal} />
       <Route path="/checkout" component={Checkout} />
@@ -52,7 +49,7 @@ function App() {
       {/* Admin */}
       {/* <Route path="/admin" component={Admin} />
       <Route path="/admin/stock" component={AdminStock} />
-      <Route path="/admin/tickets" component={AdminTickets} />
+      <Route path="/admin/tickets" component={AdminTickets} /> */}
     </div>
   );
 }
