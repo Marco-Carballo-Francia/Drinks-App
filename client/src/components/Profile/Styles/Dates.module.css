@@ -1,11 +1,10 @@
-.ctn {
-  margin: 0px 500px 0px 500px;
-  padding: 20px;
-}
-
 .data {
   display: flex;
   align-items: center;
+}
+
+.img {
+  margin: 10px 0px 10px 0px;
 }
 
 .title {
@@ -23,7 +22,16 @@
   font-family: "Roboto", sans-serif;
 }
 
-.error {
-  margin-top: 3px;
-  color: rgb(255, 0, 0);
+.titlePrin {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 1.5px solid black;
+  padding: 5px 0px 5px 0px;
+  width: 350px;
+}
+
+.icon:hover {
+  color: rgb(207, 117, 0);
 }
