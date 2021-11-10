@@ -169,18 +169,18 @@ export const createTicket = (value) => async (dispatch) => {
     }
 }
 
-// export const getTickets = () => async (dispatch) => {
-//     try {
-//         const tickets = (await axios.get(`/ticket/checkout`)).data
-//         return dispatch({
-//             type: GET_TICKETS,
-//             payload: tickets
-//         })
-//     }
-//     catch (error) {
-//         console.log(error)
-//     }
-// }
+ export const getUserTickets = (id) => async (dispatch) => {
+     try {
+         const tickets = (await axios.get(`/ticket/user/${id}`)).data
+         return dispatch({
+            type: GET_TICKETS,
+             payload: tickets
+         })
+    }
+    catch (error) {
+        console.log(error)
+     }
+ }
 
 export const setTotal = (total) => {
     return {

@@ -1,9 +1,18 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import style from './Styles/Shopping.module.css';
+import {getUserTickets} from "../../redux/actions/actions.js";
+import { useDispatch, useSelector } from "react-redux";
 
 function Shopping() {
-    // const { user } = useSelector((state) => state.user);
+     const { user, tickets } = useSelector((state) => state.user);
+     const id = user?.id;
+     const dispatch= useDispatch();
+     console.log("tickets", tickets);
+
+     useEffect(() => {
+    dispatch(getUserTickets(id));
+  }, [dispatch]);
 
     // console.log(user)
     return (
@@ -16,16 +25,26 @@ function Shopping() {
                         <th>Productos</th>
                         <th>Estado</th>
                         <th>Direccion </th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
+                {
+                    tickets.length?
+                    tickets.map( x => {
+                        return(
                     <tr>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <th>- </th>
-                    </tr>
+                        <td>{x._id}</td>
+                        <td>{x.fecha}</td>
+                        <td>{x.items.map(i => <p>{i.item.name}</p>)}</td>
+                        <td>{x.state}</td>
+                        <th>{x.direccion}</th>
+                        <th>$ {x.precioTotal}</th>
+
+                         </tr>         
+                )}): null
+
+                }
                 </tbody>
             </Table>
         </div>

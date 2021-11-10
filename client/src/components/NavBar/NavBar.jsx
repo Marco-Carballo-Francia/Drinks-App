@@ -18,11 +18,6 @@ const NavBar = () => {
     const { user } = useSelector(state => state.user);
 
     useEffect(() => {
-        // const token = user?.token;
-        // setUser(JSON.parse(localStorage.getItem('profile')))
-        //Con esto muestro el usuario (si es que hay)
-        //en caso de estar null, se usa el bloque de codigo estandar. NO LE PUSE ESTILOS (porque soy malisimo)
-        console.log('hola');
         dispatch(checkout());
     }, [user, dispatch, location])
 
@@ -32,8 +27,6 @@ const NavBar = () => {
         dispatch(checkout());
         history.push("/");
     }
-
-    console.log("user", user)
 
     return (
         <div className={style.NavBar}>
