@@ -13,16 +13,16 @@
 .imgIcono {
   height: 150px;
   width: 200px;
-
 }
 
-.ctnRegis{
+.ctnRegis {
   display: flex;
+  align-items: center;
 }
 
 .linkCart {
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   color: #ffffff;
 }
 
@@ -32,7 +32,7 @@
 
 .btns {
   margin-left: 20px;
-  padding: 0.4em ;
+  padding: 0.4em;
   color: white;
   border: 1px solid rgb(255, 255, 255);
   font-family: inherit;
@@ -50,25 +50,44 @@
   border: 1px solid rgb(207, 117, 0);
 }
 
-
-.userImg{
+.userImg {
   margin-top: 50px;
-  
   margin-bottom: 10px;
   width: 20px;
   height: 20px;
 }
 
-.nameUser{
+.nameUser {
   color: white;
-  margin-top: 50px;
-  margin-bottom: 10px;
+  margin: 0 auto;
+  font-size: 12px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.logout{
-  margin-top: 50px;
-  margin-bottom: 10px;
+.nameUser:hover {
+  color: rgb(207, 117, 0);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.logout {
+  padding: 0.4em;
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background-color: #00000000;
+  cursor: pointer;
   width: 60px;
-  height: 30px;
 }
 
+.logout:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(207, 117, 0);
+  border: 1px solid rgb(207, 117, 0);
+}

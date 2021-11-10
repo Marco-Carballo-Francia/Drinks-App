@@ -12,6 +12,10 @@ import CardDetails from './components/CardDetails/CardDetails';
 // Usuarios
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+
+import Pago from "./components/Pago/Pago.js";
+import ProfilePrincipal from './components/Profile/ProfilePrincipal';
+
 import Forgot from "./components/Forgot/Forgot";
  import NewPassword from './components/NewPassword/NewPassword';
 
@@ -25,6 +29,7 @@ import Checkout from "./components/Checkout/Checkout";
 // import AdminTickets from './components/AdminTickets/AdminTickets';
 // import AdminUsers from './components/AdminUsers/AdminUsers';
 
+
 function App() {
   return (
     <div className="App">
@@ -35,6 +40,10 @@ function App() {
       <Route exact path='/category/:category' component={Cards} />
       <Route exact path="/" component={Home} />
       <Route path="/detail/:id" component={CardDetails} />
+      <Route path="/pago" component={Pago} />
+
+      {/* Profile */}
+      <Route exact path ="/profile" component={ProfilePrincipal} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/forgot" component={Forgot} /> 
       <Route path="/newPassword" component={NewPassword} /> 
@@ -44,7 +53,6 @@ function App() {
       {/* <Route path="/admin" component={Admin} />
       <Route path="/admin/stock" component={AdminStock} />
       <Route path="/admin/tickets" component={AdminTickets} />
-      <Route path="/admin/users" component={AdminUsers} /> */}
     </div>
   );
 }

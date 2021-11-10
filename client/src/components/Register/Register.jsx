@@ -78,14 +78,14 @@ const Register = () => {
 
     return (
         <div className={style.Register}>
-            <p className={style.titleRegister}><b>REGISTRARSE</b></p>
             <form className={style.form} onSubmit={handleOnSumit} >
+                <p className={style.titleRegister}><b>REGISTRARSE</b></p>
                 <div className={style.username}>
                     <label className={style.title}>Nombre de usuario</label>
                     <input className={style.input}
                         type="text"
                         placeholder='Su nombre de usuario...'
-                        // value={input.username}
+                    // value={input.username}
                     />
                 </div>
 
