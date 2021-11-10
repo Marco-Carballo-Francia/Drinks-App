@@ -96,17 +96,6 @@ const profileAuthenticate = async (req, res, next) => {
   });
 };
 
-//  const getUserByNP = async (req, res) => {
-//     const { nombre, contraseña } = req.body;
-//     try {
-//         const getByNP = await User.findOne({nombre, contraseña});
-//         console.log('getByNP', getByNP);
-//         res.json(getByNP);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
 //  const getUserById = async (req, res) => {
 //     const { id } = req.params
 //     try {
@@ -128,6 +117,22 @@ const profileAuthenticate = async (req, res, next) => {
 //         console.log(error);
 //     }
 // };
+
+// const newAdmin(req, res, next) {
+//   let { id, changeRol } = req.body
+//   value = JSON.parse(value)
+//   if (!id) return next({ message: 'El id del nuevo admin es necesario' })
+//   try {
+//       const user = await User.findByPk(id)
+//       if (!user) return res.send({message: 'El usuario no fue encontrado'})
+//       if(user.admin === value) return res.send({message: 'El usuario ya tiene esta credencial'})
+//       user.admin = value;
+//       user.save();
+//       return value === true ? res.send('Usuario elevado a admin') : res.send('Usuario dejo de ser admin')
+//   } catch (error) {
+//       next(error)
+//   }
+// }
 
 // getUserByNP,
 // getUserById,

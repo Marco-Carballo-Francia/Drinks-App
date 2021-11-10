@@ -26,6 +26,8 @@ const makePayment = async (req, res) => {
   }
 }
 
+// 618c28aa8264eae2657d8df3
+
 const createTicket = async (req, res) => {
   let { payment, cart, userId } = req.body;
   try {
@@ -62,7 +64,10 @@ const createTicket = async (req, res) => {
 
 const getTicketsInPending = async (req, res) => {
   try {
-    let userTickets = await Ticket.find({ state: "Pending" }).populate('user', "nombre").populate('items');
+    let userTickets = await Ticket.find({ state: "Pending" })
+      .populate('items')
+      .populate('user', "nombre");
+
     let sortTickets = userTickets.sort((a, b) => {
       if (a.fecha < b.fecha)  return -1;
       if (a.fecha > b.fecha)  return 1;
@@ -78,7 +83,9 @@ const getTicketsInPending = async (req, res) => {
 const getUserTickets = async (req, res) => {
   const { id } = req.params;
   try {
-    let userTickets = await Ticket.find().populate('user').populate('items.item');
+    let userTickets = await Ticket.find()
+      .populate('user')
+      .populate('items.item');
 
     function splitt(string){
       let id= string.split('"')

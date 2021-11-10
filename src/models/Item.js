@@ -18,9 +18,10 @@ const itemSchema = new Schema({
 	imagen: {
 		type: String
 	},
-	rating: {
-		type: String
-	},
+	reviews: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Reviews'
+	}],
 	numReviews: {
 		cinco: { type: Number, default: 1 },
 		cuatro: { type: Number, default: 1 },
@@ -28,10 +29,11 @@ const itemSchema = new Schema({
 		dos: { type: Number, default: 1 },
 		uno: { type: Number, default: 1 }
 	},
-	categoria: {
-		type: String,
+	categoria: [{
+		type: Schema.Types.ObjectId,
+		ref:'Category',
 		required: true
-	},
+	}],
 	stock: {
 		type: Number,
 		required: true

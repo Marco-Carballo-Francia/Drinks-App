@@ -41,7 +41,7 @@ const UserSchema = new Schema({
     ticketHistory: [{
         ticket: {
             type: Schema.Types.ObjectId,
-            ref: 'Ticket',
+            ref: 'Ticket'
         }
     }],
 });
