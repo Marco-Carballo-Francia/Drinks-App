@@ -18,7 +18,8 @@ import {
     DATOS_COMPRA,
     GET_TICKETS_ADMIN,
     CHANGE_TICKET_STATUS,
-    LOGIN_LOCAL
+    LOGIN_LOCAL,
+    EDIT_DATE_PROFILE
 
 } from './const';
 
@@ -134,7 +135,7 @@ export const loginGoogle = (obj) => async (dispatch) => {
 
 export const registerLocal = (values) => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/register", values )
+        const res = await axios.post("/users/user/register", values)
         return dispatch({
             type: "REGISTER_LOCAL",
             payload: res.data
@@ -147,7 +148,7 @@ export const registerLocal = (values) => async (dispatch) => {
 
 export const loginLocal = input => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/login", input )
+        const res = await axios.post("/users/user/login", input)
         return dispatch({
             type: LOGIN_LOCAL,
             payload: res.data
@@ -169,18 +170,18 @@ export const createTicket = (value) => async (dispatch) => {
     }
 }
 
- export const getUserTickets = (id) => async (dispatch) => {
-     try {
-         const tickets = (await axios.get(`/ticket/user/${id}`)).data
-         return dispatch({
+export const getUserTickets = (id) => async (dispatch) => {
+    try {
+        const tickets = (await axios.get(`/ticket/user/${id}`)).data
+        return dispatch({
             type: GET_TICKETS,
-             payload: tickets
-         })
+            payload: tickets
+        })
     }
     catch (error) {
         console.log(error)
-     }
- }
+    }
+}
 
 export const setTotal = (total) => {
     return {
@@ -228,4 +229,18 @@ export const checkout = () => {
         type: "CHECK_USER"
     }
 }
+
+export const editDateProfile = (_id) => async (dispatch) => {
+    try {
+        const res = (await axios.put(`/users/user/edit/${_id}`)).data
+        return dispatch({
+            type: EDIT_DATE_PROFILE,
+            payload: res
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 

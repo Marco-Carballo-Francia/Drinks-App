@@ -1,4 +1,4 @@
-import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL, EDIT_DATE_PROFILE } from "../actions/const.js";
 
 const initialState = {
   user: null,
@@ -45,6 +45,12 @@ export function userReducer(state = initialState, action) {
       }
     case "CHECK_USER":
       return state;
+
+    case EDIT_DATE_PROFILE:
+      return {
+        ...state,
+        user: action.payload,
+      }
     default:
       return state;
   }

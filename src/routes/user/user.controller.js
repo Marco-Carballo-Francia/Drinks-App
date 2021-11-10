@@ -99,14 +99,15 @@ const profileAuthenticate = async (req, res, next) => {
 const editUser = async (req, res, next) => {
   const { nombre, apellido, direccion, telefono, documento } = req.body;
   try {
-    let edit = await User.findByIdAndUpdate(req.params.id, {
+
+    let edit = await User.findByIdAndUpdate(req.params._id, {
       nombre: nombre,
       apellido: apellido,
       direccion: direccion,
       telefono: telefono,
       documento: documento
     });
-    // Send response in here
+
     res.json(edit);
 
   } catch (error) {
