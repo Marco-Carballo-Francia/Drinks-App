@@ -231,13 +231,13 @@ export const checkout = () => {
     }
 }
 
-export const changeUserRole = ({id})  => async (dispatch) => {
+export const changeUserRole = ({id, changeRol})  => async (dispatch) => {
  
     try{
-        const changeRole = await axios.put(`/admin/users/changeRole/${id}`)
+        const user = await axios.put(`/users/admin/update/${id}`, { changeRol })
         return dispatch({
             type: CHANGE_USER_ROLE,
-            payload: changeRole
+            payload: user.data
         })
     } 
     catch(error){
@@ -245,9 +245,9 @@ export const changeUserRole = ({id})  => async (dispatch) => {
     }
 }
 
-export const getUsers = ({ name }) => async (dispatch) => {
+export const getUsers = ({ nombre }) => async (dispatch) => {
     try {
-        const users = (await axios.get(`/admin/users?name=${name}`)).data;
+        const users = (await axios.get(`/users/admin/users?nombre=${nombre ? nombre : ""}`)).data;
         return dispatch({
             type: GET_USERS,
             payload: users
@@ -260,10 +260,10 @@ export const getUsers = ({ name }) => async (dispatch) => {
 
 export const createItem = (item) => async (dispatch) => {
     try{
-        const createItem = (await axios.post (`/admin/create`, item)).data
+        const item = (await axios.post (`/admin/create`, item)).data
         return dispatch({
             type: CREATE_ITEM,
-            payload: createItem
+            payload: item
 
         })
     }
