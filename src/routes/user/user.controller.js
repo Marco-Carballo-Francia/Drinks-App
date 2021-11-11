@@ -88,12 +88,47 @@ const postLogin = async (req, res) => {
   })(req, res);
 };
 
-const profileAuthenticate = async (req, res, next) => {
+const profileAuthenticate = (req, res) => {
   res.json({
     message: "Dale que sos vos",
     user: req.user,
     token: req.query.secret_token,
   });
+};
+
+
+const getUserByName = async (req, res) => {
+  const { nombre } = req.body;
+  try {
+    if(nombre) {
+      let getByName = await User.find({nombre: nombre});
+      return res.json(getByName);
+    } else {
+      let getUsers = await User.find();
+      return res.json(getUsers);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const newAdmin = async (req, res) => {
+  const { id } = req.params;
+  const { changeRol } = req.body;
+  try {
+    let user = await User.findById(id);
+    
+    if (user.admin === false && changeRol === false) {
+      return res.json(user);
+    }
+    if ((user.admin === false && changeRol === true) || (user.admin === true && changeRol === false)) {
+      const update = await User.findOneAndUpdate({_id: id}, {$set: {admin: changeRol}}, {new: true}); 
+      let newAdmin = await update.save();
+      return res.json(newAdmin);
+    }
+  } catch (error) {
+      console.log(error);
+  }
 };
 
 const editUser = async (req, res, next) => {
@@ -125,6 +160,7 @@ const editUser = async (req, res, next) => {
 //     }
 // }
 
+
 //  const getUserById = async (req, res) => {
 //     const { id } = req.params
 //     try {
@@ -147,7 +183,7 @@ const editUser = async (req, res, next) => {
 //     }
 // };
 
-// getUserByNP,
+
 // getUserById,
 // getUser
 
@@ -156,5 +192,7 @@ module.exports = {
   postUser,
   profileAuthenticate,
   googleLogin,
+  newAdmin,
+  getUserByName,
   editUser
 };
