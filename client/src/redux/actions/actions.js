@@ -247,7 +247,7 @@ export const changeUserRole = ({id, changeRol})  => async (dispatch) => {
 
 export const getUsers = ({ nombre }) => async (dispatch) => {
     try {
-        const users = (await axios.get(`/users/admin/users?name=${nombre ? nombre : ""}`)).data;
+        const users = (await axios.get(`/users/admin/users?nombre=${nombre ? nombre : ""}`)).data;
         return dispatch({
             type: GET_USERS,
             payload: users

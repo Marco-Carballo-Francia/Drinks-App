@@ -98,9 +98,9 @@ const profileAuthenticate = (req, res) => {
 
 
 const getUserByName = async (req, res) => {
-  const { nombre } = req.body;
+  const { nombre } = req.query;
   try {
-    if(nombre) {
+    if(nombre && nombre !== "") { // acá le puse el && para que cuando el admin borre el input no entre a este if y le muestre todos los usuarios de nuevo
       let getByName = await User.find({nombre: nombre});
       return res.json(getByName);
     } else {
