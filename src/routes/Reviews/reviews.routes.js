@@ -1,4 +1,4 @@
-const { Routes } = require('express');
+const { Router } = require('express');
 const { getReviews, postReviews } = require('./reviews.controllers');
 
 const router = Router();

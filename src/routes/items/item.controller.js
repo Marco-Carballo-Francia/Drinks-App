@@ -66,7 +66,7 @@ const getItemById = async (req, res) => {
 
 const updateItemUser = async (req, res) => {
     const { id } = req.params;
-    const { number,  } = req.body;
+    const { number } = req.body;
   try {
     let item = await Item.findById(id);
     let { cinco, cuatro, tres, dos, uno } = item.numReviews;
@@ -108,15 +108,14 @@ const updateItemUser = async (req, res) => {
   }
 };
 
-const updateItemAdmin = async (req, res) => {
-	const {  } = req.body;
-	const { id } = req.params;
-	try {
-
-	}catch (error) {
-		console.log(error)
-	}
-}
+// const updateItemAdmin = async (req, res) => {
+// 	const {  } = req.body;
+// 	const { id } = req.params;
+// 	try {
+// 	}catch (error) {
+// 		console.log(error)
+// 	}
+// }
 
 module.exports = {
   getItems,
@@ -124,5 +123,5 @@ module.exports = {
   createItem,
   getItemById,
   updateItemUser,
-  updateItemAdmin
+  // updateItemAdmin
 };
