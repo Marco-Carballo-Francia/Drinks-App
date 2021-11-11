@@ -67,7 +67,7 @@ function validateAltura(value) {
         ...input,
         altura: value,
     })
-    if(!/^[1-7]+$/.test(value)) {
+    if(!/^[0-9]+$/.test(value)) {
         setErrorAltura("Error");
     }
     else {
@@ -81,7 +81,7 @@ function validateCodigoPostal(value) {
         ...input,
         codigoPostal: value,
     })
-    if(!/^[1-4]+$/.test(value)) { 
+    if(!/^[0-9]+$/.test(value)) { 
         setErrorCodigoPostal("Error");
     }
     else {
@@ -96,7 +96,7 @@ function validateTelefono(value) {
         ...input,
         telefono: value,
     })
-    if(!/^[0-10]+$/.test(value)) { 
+    if(!/^[0-9]+$/.test(value)) { 
         setErrorTelefono("Error");
     }
     else {
@@ -104,7 +104,6 @@ function validateTelefono(value) {
     }
 }
 
-    
 
 //-------------------------------------.-----------------------------
    const handleInputChange = (e) => {
@@ -145,7 +144,7 @@ function validateTelefono(value) {
                   name="name" 
                   required={true}
                  onChange={e => validateName(e.target.value)}/>
-               <p className={style.error}>{!errorName ? null : (<p>{errorName}</p>)}</p>
+               {!errorName ? null : (<p className={style.error}>{errorName}</p>)}
             </div>
             <div className={style.apellido}> 
                 <input  className={style.input}
@@ -155,7 +154,7 @@ function validateTelefono(value) {
                  name="apellido" 
                  required={true}
                  onChange={e => validateApellido(e.target.value)}/>
-                {!errorApellido ? null : (<p>{errorApellido}</p>)}
+                {!errorApellido ? null : (<p className={style.error}>{errorApellido}</p>)}
             </div>
             <div className={style.direccion}>
                 <input  className={style.input}
@@ -165,15 +164,16 @@ function validateTelefono(value) {
                 name="calle" 
                 required={true}
                 onChange={e => validateCalle(e.target.value)}/>
-                {!errorCalle ? null : (<p>{errorCalle}</p>)} 
+                {!errorCalle ? null : (<p className={style.error}>{errorCalle}</p>)} 
                 <input  className={style.input}
                 type="text" 
                 value={input.altura} 
                 placeholder="ingrese la altura de la calle"
                 name="altura" 
+                maxLength="4"
                 required={true}
                 onChange={e => {validateAltura(e.target.value)}}/>
-                {!errorAltura ? null : (<p>{errorAltura}</p>)}
+                {!errorAltura ? null : (<p className={style.error}>{errorAltura}</p>)}
             </div>
             <div className={style.codigo}>
                 <input  className={style.input} 
@@ -181,8 +181,9 @@ function validateTelefono(value) {
                 value={input.codigoPostal} 
                 placeholder="Su Codigo Postal" 
                 name="codigoPostal" 
+                maxLength="4"
                 onChange={e => validateCodigoPostal(e.target.value)}/>
-                {!errorCodigoPostal ? null : (<p>{errorCodigoPostal}</p>)} 
+                {!errorCodigoPostal ? null : (<p className={style.error}>{errorCodigoPostal}</p>)} 
             </div>
             <div className={style.telefono}> 
                 <input  className={style.input} 
@@ -190,7 +191,7 @@ function validateTelefono(value) {
                 value={input.telefono} 
                 placeholder="Su numero de telefono"
                 name="telefono" onChange={e => validateTelefono(e.target.value)}/>
-               {!errorTelefono ? null : (<p>{errorTelefono}</p>)} 
+               {!errorTelefono ? null : (<p className={style.error}>{errorTelefono}</p>)} 
             </div>
             <div>
                 <Link to="/home"/>

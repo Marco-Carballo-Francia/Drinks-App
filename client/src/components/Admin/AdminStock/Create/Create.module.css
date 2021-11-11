@@ -28,36 +28,37 @@
     margin-bottom: 15px;
   }
 
-  .apellido {
-   display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-  .direccion{
+.descripcion {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: 15px;
-  }
-  .codigo {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-
-.telefono{
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-bottom: 15px;
 }
-  .error {
+.precio {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.img {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.category {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.error {
     margin-top: 3px;
     color: rgb(255, 0, 0);
   }

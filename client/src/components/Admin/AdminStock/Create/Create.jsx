@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import style from './DatosCompra.module.css';
 
 
 const Create = () => {
@@ -45,51 +46,62 @@ const Create = () => {
     }
 
     return (
-        <form>
+    <div className={style.Register}>
+        <form className={style.form}>
+            <div className={style.nombre}>
             <label>Nombre</label>
-            <input
+            <input className={style.input}
                 name="nombre"
                 type="text"
                 placeholder="Nombre del producto..."
                 value={input.nombre}
                 onChange={handleOnChange}
             />
-
+            </div>
+            <div className={style.descripcion}>
             <label>Descripcion</label>
-            <input
+            <input className={style.input}
                 name="descripcion"
                 type="text"
                 placeholder="Descripcion del producto..."
                 value={input.descripcion}
                 onChange={handleOnChange}
             />
+            </div>
+            <div className={style.precio}>
             <label>Precio</label>
-            <input
+            <input className={style.input}
                 name="precio"
                 type="text"
                 placeholder="Precio del producto..."
                 value={input.precio}
                 onChange={handleOnChange}
             />
-            <p>{errors.precio}</p>
+            <p className={style.error}>{errors.precio}</p>
+            </div>
+            <div className={style.img}>
             <label>Imagen</label>
-            <input
+            <input className={style.input}
                 name="imagen"
                 type="text"
                 placeholder="Imagen del producto..."
                 value={input.imagen}
                 onChange={handleOnChange}
             />
+            </div>
+            <div className={style.category}>
             <label>Categoria</label>
-            <input
+            <input className={style.input}
                 name="categoria"
                 type="text"
                 placeholder="Categoria del producto..."
                 value={input.categoria}
                 onChange={handleOnChange}
             />
+            </div>
              <button onClick={hadleClick}>Crear</button>
         </form>
+    </div>
 
     )
 }
