@@ -1,13 +1,30 @@
 import React from "react";
-import AdminStockR from "./AdminStockR/AdminStockR";
-import AdminStockCUD from "./AdminStockCUD/AdminStockCUD";
+import StockItems from "./Update/StockItems/StockItems";
+import StockUpdate from "./Update/StockUpdate/StockUpdate";
+import { useHistory } from "react-router";
 
 const AdminStock = () => {
+    
+    const history = useHistory();
+
+    const handleClick = (e) => {
+        history.push(`/admin/stock/${e.target.name}`);
+    }
+
     return (
         <div>
-            <AdminStockR />
-            <AdminStockCUD />
+            <button name="update" onClick={handleClick}>
+                Update
+            </button>
+            <button name="create" onClick={handleClick}>
+                Create
+            </button>
         </div>
+        // <div>
+
+        //     <AdminStockR />
+        //     <AdminStockCUD />
+        // </div>
     )
 }
 

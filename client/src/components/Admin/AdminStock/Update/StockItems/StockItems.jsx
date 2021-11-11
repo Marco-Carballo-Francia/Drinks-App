@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 //  import { getAdminItems } from "../../redux/actions/actions";
 /*  import Loading from "../components/Loading/Loading"; */ 
 
-const AdminStockR = () => {
+const StockItems = () => {
     const dispatch = useDispatch();
     const { items } = useSelector(state => state.admin);
 
@@ -23,4 +23,4 @@ const AdminStockR = () => {
     )
 }
 
-export default AdminStockR;
+export default StockItems;

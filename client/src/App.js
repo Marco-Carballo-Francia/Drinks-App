@@ -49,7 +49,11 @@ function App() {
       {/* Admin */}
       {/* <Route path="/admin" component={Admin} />
       <Route path="/admin/stock" component={AdminStock} />
-      <Route path="/admin/tickets" component={AdminTickets} /> */}
+      <Route path="/admin/tickets" component={AdminTickets} /> 
+      <Route path="/admin/users" component={AdminUsers} />
+      <Route path="/admin/stock/create" component={Create} />
+      <Route path="/admin/stock/update" component={Update} />
+      */}
     </div>
   );
 }

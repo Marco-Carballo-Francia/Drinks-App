@@ -18,8 +18,10 @@ import {
     DATOS_COMPRA,
     GET_TICKETS_ADMIN,
     CHANGE_TICKET_STATUS,
-    LOGIN_LOCAL
-
+    LOGIN_LOCAL,
+    CHANGE_USER_ROLE,
+    GET_USERS,
+    CREATE_ITEM
 } from './const';
 
 
@@ -229,3 +231,43 @@ export const checkout = () => {
     }
 }
 
+export const changeUserRole = ({id})  => async (dispatch) => {
+ 
+    try{
+        const changeRole = await axios.put(`/admin/users/changeRole/${id}`)
+        return dispatch({
+            type: CHANGE_USER_ROLE,
+            payload: changeRole
+        })
+    } 
+    catch(error){
+        console.log(error)
+    }
+}
+
+export const getUsers = ({ name }) => async (dispatch) => {
+    try {
+        const users = (await axios.get(`/admin/users?name=${name}`)).data;
+        return dispatch({
+            type: GET_USERS,
+            payload: users
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+export const createItem = (item) => async (dispatch) => {
+    try{
+        const createItem = (await axios.post (`/admin/create`, item)).data
+        return dispatch({
+            type: CREATE_ITEM,
+            payload: createItem
+
+        })
+    }
+    catch(error){
+        console.log(error)
+    }
+}
