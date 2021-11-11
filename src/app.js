@@ -10,7 +10,7 @@ const indexCatgoryRoutes = require('./routes/Category/index');
 const indexReviewsRoutes = require('./routes/Reviews/index');
 
 const app = express();
-require("./routes/user/middleware.js")
+require("./routes/user/middleware.passport.js")
 
 // Settings
 app.set("port", config.PORT);
