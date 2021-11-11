@@ -19,7 +19,7 @@ const NavBar = () => {
 
     useEffect(() => {
         dispatch(checkout());
-    }, [user, dispatch, location])
+    }, [user, dispatch])
 
 
     const logout = () => {

@@ -11,6 +11,6 @@ router.post('/user/register', passport.authenticate("register", { session: false
 router.post('/user/login', postLogin);
 router.get('/user/profile', passport.authenticate('jwt', { session: false }), profileAuthenticate);
 router.post('/user/google', googleLogin)
-router.put('/user/edit/:id', editUser);
+router.patch('/user/edit/:id', editUser);
 
 module.exports = router;

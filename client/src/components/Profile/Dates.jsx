@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, onEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import style from './Styles/Dates.module.css'
 import { BsPencilSquare } from "react-icons/bs";
@@ -9,6 +9,10 @@ function Dates() {
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user);
     const [modalIsOpen, setIsOpen] = useState(false);
+    console.log(user);
+    const id = user?.id;
+
+
 
     function openModal() {
         setIsOpen(true);
@@ -33,8 +37,7 @@ function Dates() {
     }
 
     const handleOnSumit = e => {
-        e.preventDefault();
-        dispatch(editDateProfile(values));
+        dispatch(editDateProfile(id, values));
     }
 
     const customStyles = {
@@ -75,7 +78,7 @@ function Dates() {
                 </div>
                 <div className={style.data}>
                     <p className={style.title1} >Documento:</p>
-                    <p className={style.user}>{user?.docuemento ? user?.docuemento : user?.user?.docuemento} </p>
+                    <p className={style.user}>{user?.documento ? user?.documento : user?.user?.documento} </p>
                 </div>
                 <div className={style.data}>
                     <p className={style.title1} >Telefono:</p>

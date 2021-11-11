@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Shopping() {
      const { user, tickets } = useSelector((state) => state.user);
-     const id = user?.id;
+     const id = user?._id;
      const dispatch= useDispatch();
      console.log("tickets", tickets);
+     console.log("idfront", id);
 
      useEffect(() => {
     dispatch(getUserTickets(id));
