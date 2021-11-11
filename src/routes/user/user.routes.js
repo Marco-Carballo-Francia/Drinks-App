@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const passport = require("passport");
-const { postUser, postLogin, profileAuthenticate, googleLogin, newAdmin, getUserByName } = require("./user.controller.js");
+const { postUser, postLogin, profileAuthenticate, googleLogin, newAdmin, getUserByName, editUser } = require("./user.controller.js");
 
 const router = Router();
 
@@ -12,6 +12,6 @@ router.get('/user/profile', passport.authenticate('jwt', { session: false }), pr
 router.post('/user/google', googleLogin);
 router.put('/admin/update/:id', newAdmin);
 router.get('/admin/users', getUserByName);
-
+router.put('/user/edit/:id', editUser);
 
 module.exports = router;

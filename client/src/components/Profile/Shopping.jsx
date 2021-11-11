@@ -17,6 +17,7 @@ function Shopping() {
     // console.log(user)
     return (
         <div className={style.ctnTable}>
+            <h3 className={style.titlePrin}>Mis compras</h3>
             <Table striped bordered hover>
                 <thead>
                     <tr>

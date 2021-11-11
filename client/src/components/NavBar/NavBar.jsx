@@ -30,7 +30,7 @@ const NavBar = () => {
 
     return (
         <div className={style.NavBar}>
-            <Link  to='/'>
+            <Link to='/'>
                 <img className={style.imgIcono} src={iconHome} alt="icono de home" />
             </Link>
             <div >
@@ -44,8 +44,8 @@ const NavBar = () => {
                 {
                     user !== null ? (
                         <>
-                            <Link className={style.link} to='/profile'>  <p className={style.nameUser}>{
-                                user.email ? user.email : user.user.email
+                            <Link className={style.link} to='/profile'>  <p className={style.nameUser}>Hola, {
+                                user.nombre ? user.nombre : user.user.nombre
                             }</p>
                             </Link>
                             <button onClick={logout} className={style.logout}>Salir</button>

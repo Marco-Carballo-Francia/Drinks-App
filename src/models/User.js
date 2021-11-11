@@ -15,12 +15,17 @@ const UserSchema = new Schema({
     },
     nombre: {
         type: String,
-        required: true,
         trim: true
     },
     apellido: {
         type: String,
         trim: true
+    },
+    documento: {
+        type: String,
+    },
+    imagen: {
+        type: String,
     },
     direccion: {
         type: String

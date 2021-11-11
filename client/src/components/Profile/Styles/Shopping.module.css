@@ -1,3 +1,15 @@
-.ctnTable{
-    margin: 20px 100px 0px 100px;
+.ctnTable {
+  margin: 20px 100px 0px 100px;
+}
+
+.titlePrin {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 1.5px solid black;
+  padding: 5px 0px 5px 0px;
+  width: 350px;
+  margin: 0 auto;
+
 }
