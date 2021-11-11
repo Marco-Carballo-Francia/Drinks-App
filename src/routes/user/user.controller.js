@@ -21,7 +21,10 @@ const googleLogin = (req, res) => {
           } else {
             if (user) {
               const { _id } = user;
-              const token = jwt.sign({ user: { id: _id, email } }, "top_secret");
+              const token = jwt.sign(
+                { user: { id: _id, email } },
+                "top_secret"
+              );
               const userFront = {
                 id: _id,
                 email: email,
@@ -96,17 +99,18 @@ const profileAuthenticate = (req, res) => {
   });
 };
 
-
 const getUserByName = async (req, res) => {
   const { nombre } = req.query;
   try {
-    if(nombre && nombre !== "") { // acá le puse el && para que cuando el admin borre el input no entre a este if y le muestre todos los usuarios de nuevo
-      let getByName = await User.find({nombre: nombre});
+    let getUser = await User.find();
+
+    if (nombre && nombre !== "") {
+      let getByName = getUser.filter((u) =>
+        u.nombre?.toLowerCase().includes(nombre?.toLowerCase())
+      );
       return res.json(getByName);
-    } else {
-      let getUsers = await User.find();
-      return res.json(getUsers);
     }
+    return res.json(getUser);
   } catch (error) {
     console.log(error);
   }
@@ -117,17 +121,24 @@ const newAdmin = async (req, res) => {
   const { changeRol } = req.body;
   try {
     let user = await User.findById(id);
-    
+
     if (user.admin === false && changeRol === false) {
       return res.json(user);
     }
-    if ((user.admin === false && changeRol === true) || (user.admin === true && changeRol === false)) {
-      const update = await User.findOneAndUpdate({_id: id}, {$set: {admin: changeRol}}, {new: true}); 
+    if (
+      (user.admin === false && changeRol === true) ||
+      (user.admin === true && changeRol === false)
+    ) {
+      const update = await User.findOneAndUpdate(
+        { _id: id },
+        { $set: { admin: changeRol } },
+        { new: true }
+      );
       let newAdmin = await update.save();
       return res.json(newAdmin);
     }
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };
 
@@ -139,27 +150,14 @@ const editUser = async (req, res, next) => {
       apellido: apellido,
       direccion: direccion,
       telefono: telefono,
-      documento: documento
+      documento: documento,
     });
     // Send response in here
     res.json(edit);
-
   } catch (error) {
     console.log(error);
   }
 };
-
-//  const getUserByNP = async (req, res) => {
-//     const { nombre, contraseña } = req.body;
-//     try {
-//         const getByNP = await User.findOne({nombre, contraseña});
-//         console.log('getByNP', getByNP);
-//         res.json(getByNP);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
 
 //  const getUserById = async (req, res) => {
 //     const { id } = req.params
@@ -183,7 +181,6 @@ const editUser = async (req, res, next) => {
 //     }
 // };
 
-
 // getUserById,
 // getUser
 
@@ -194,5 +191,5 @@ module.exports = {
   googleLogin,
   newAdmin,
   getUserByName,
-  editUser
+  editUser,
 };
