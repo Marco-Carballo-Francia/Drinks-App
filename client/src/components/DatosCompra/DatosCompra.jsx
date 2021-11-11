@@ -17,6 +17,7 @@ const DatosCompra = () => {
        altura: "",
        codigoPostal: "",
        telefono: "",
+       telefono2: ""
    })
 //-------------------------------------.-----------------------------
    const [errorName, setErrorName] = useState("");
@@ -103,7 +104,13 @@ function validateTelefono(value) {
         setErrorTelefono("");
     }
 }
-
+const [errorTelefono2, setErrorTelefono2] = useState("");
+function validateTelefono2(value) {
+    setInput({
+        ...input,
+        telefono2: value,
+    })
+}
 
 //-------------------------------------.-----------------------------
    const handleInputChange = (e) => {
