@@ -20,11 +20,6 @@ const AdminStock = () => {
                 Create
             </button>
         </div>
-        // <div>
-
-        //     <AdminStockR />
-        //     <AdminStockCUD />
-        // </div>
     )
 }
 

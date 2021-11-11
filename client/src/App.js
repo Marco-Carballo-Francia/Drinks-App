@@ -25,7 +25,9 @@ import Checkout from "./components/Checkout/Checkout";
 // Admin
 import Admin from "./components/Admin/Admin";
 import AdminUsers from './components/Admin/AdminUsers/AdminUsers';
-// import AdminStock from './components/AdminStock/AdminStock';
+import AdminStock from './components/Admin/AdminStock/AdminStock';
+import Create from "./components/Admin/AdminStock/Create/Create";
+import Update from "./components/Admin/AdminStock/Update/Update";
 // import AdminTickets from './components/AdminTickets/AdminTickets';
 
 
@@ -49,10 +51,10 @@ function App() {
       {/* Admin */}
       <Route path="/admin" component={Admin} />
       <Route path="/admin/users" component={AdminUsers} />
-      {/* <Route path="/admin/stock" component={AdminStock} />
-      <Route path="/admin/tickets" component={AdminTickets} /> 
+      <Route path="/admin/stock" component={AdminStock} />
       <Route path="/admin/stock/create" component={Create} />
-      <Route path="/admin/stock/update" component={Update} /> */}
+      <Route path="/admin/stock/update" component={Update} />
+      {/* <Route path="/admin/tickets" component={AdminTickets} />  */}
       
     </div>
   );

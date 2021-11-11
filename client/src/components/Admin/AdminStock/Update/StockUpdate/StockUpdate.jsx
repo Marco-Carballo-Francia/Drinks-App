@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useConfirmAlert } from 'material-confirm-alert';
+// import { useConfirmAlert } from 'material-confirm-alert';
 
 const StockUpdate = () => {
-    const confirm = useConfirmAlert();
+    // const confirm = useConfirmAlert();
     const dispatch = useDispatch();
     const { item } = useSelector(state => state.admin);
     const id = item.id;
@@ -17,11 +17,12 @@ const StockUpdate = () => {
         categoria: item.categoria
     })
 
-    const handleDelete = async () => {
-        const result = await confirm("Eliminar item definitivamente?")
-        if (result) {
-            dispatch(deleteItem(id))
-        }
+    const handleDelete = () => {
+        // const result = await confirm("Eliminar item definitivamente?")
+        // if (result) {
+        //     dispatch(deleteItem(id))
+        // }
+        console.log("holiiiiiiiiiiiiiiiiiiiiiiiiiiii")
     }
 
     const handleChange = (e) => {
