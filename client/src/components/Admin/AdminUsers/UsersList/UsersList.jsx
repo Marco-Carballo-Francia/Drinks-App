@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../../redux/actions/actions";
 
@@ -15,11 +15,11 @@ const UsersList = () => {
     const handleChange = (e) => {
         const { value } = e.target;
         setInput(value);
-        dispatch(getUsers({ name: value }))
+        dispatch(getUsers({ nombre: value }))
     }
 
-    return
-        <div>
+    return (
+            <div>
             <input type="text" value={input} onChange={(e) => handleChange(e)} />
             <div>
                 {
@@ -31,6 +31,7 @@ const UsersList = () => {
                 }
             </div>
         </div>
+    )
 }
 
-export const UsersList;
+export default UsersList;

@@ -6,9 +6,9 @@ const UserDetail = () => {
 
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.admin)
-
+    const {id} = user;
     const handleClick = () => {
-        dispatch(changeUserRole({ isAdmin: true }));
+        dispatch(changeUserRole({ id, changeRol: true }));
     }
 
     return (
