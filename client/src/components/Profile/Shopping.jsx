@@ -15,7 +15,7 @@ function Shopping() {
     dispatch(getUserTickets(id));
   }, [dispatch]);
 
-    // console.log(user)
+     console.log(tickets)
     return (
         <div className={style.ctnTable}>
             <h3 className={style.titlePrin}>Mis compras</h3>
