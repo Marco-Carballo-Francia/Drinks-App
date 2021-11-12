@@ -1,7 +1,7 @@
 const Ticket = require("../../models/Ticket");
 const Stripe = require("stripe");
 const axios = require("axios").default;
-const config =  require("../../config.js");
+const config = require("../../config.js");
 const User = require('../../models/User');
 const Item = require('../../models/Item')
 
@@ -67,8 +67,8 @@ const getTicketsInPending = async (req, res) => {
       .populate('user', "nombre");
 
     let sortTickets = userTickets.sort((a, b) => {
-      if (a.fecha < b.fecha)  return -1;
-      if (a.fecha > b.fecha)  return 1;
+      if (a.fecha < b.fecha) return -1;
+      if (a.fecha > b.fecha) return 1;
     })
     res.json(sortTickets);
 
@@ -84,17 +84,16 @@ const getUserTickets = async (req, res) => {
     let userTickets = await Ticket.find()
       .populate('user')
       .populate('items.item');
-    let userTickets = await Ticket.find().populate('user').populate('items.item');
     // console.log("userTickets",userTickets);
     // console.log("idback",id)
-    function splitt(string){
-      let id= string.split('"')
-      let dividido= id[1]
+    function splitt(string) {
+      let id = string.split('"')
+      let dividido = id[1]
       return dividido;
     }
 
-    let tickets= userTickets.filter(x=> splitt(JSON.stringify(x.user._id)) === id.toString()) 
-    console.log("ticketsback", tickets) 
+    let tickets = userTickets.filter(x => splitt(JSON.stringify(x.user._id)) === id.toString())
+    console.log("ticketsback", tickets)
     res.json(tickets);
   }
   catch (error) {
