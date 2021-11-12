@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserRole } from "../../../../redux/actions/actions"
+import style from "./UserDetail.module.css";
 
 const UserDetail = () => {
 
@@ -15,7 +16,7 @@ const UserDetail = () => {
         <div>
             <h2>{user.id}</h2>
             <h2>{user.email}</h2>
-            <button onClick={handleClick}>Hacer Admin</button>
+            <button className={style.bo} onClick={handleClick}>Hacer Admin</button>
         </div>
     )
 

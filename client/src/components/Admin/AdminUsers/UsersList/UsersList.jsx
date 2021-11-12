@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../../redux/actions/actions";
+import style from "./UsersList.module.css";
 
 const UsersList = () => {
 
@@ -21,12 +22,12 @@ const UsersList = () => {
     return (
 
         <div>
-            <input type="text" value={input} onChange={(e) => handleChange(e)} />
+            <input className={style.input} type="text" value={input} onChange={(e) => handleChange(e)} />
             <div>
                 {
                     users?.map(x => (
                         <div>
-                            <span>{x.nombre}</span>
+                            <p>{x.nombre}</p>
                         </div>
                     ))
                 }

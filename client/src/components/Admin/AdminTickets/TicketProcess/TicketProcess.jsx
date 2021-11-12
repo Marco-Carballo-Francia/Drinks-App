@@ -5,17 +5,19 @@ import { changeTicketStatus } from "../../../../redux/actions/actions";
 const TicketProcess = () => {
     const dispatch = useDispatch();
     const { ticket } = useSelector(state => state.admin);
-    
+
     const handleClick = () => {
-        dispatch(changeTicketStatus({state: "processing", id: ticket.id}))
-        dispatch({type: "DELETE_TICKET"})
+        dispatch(changeTicketStatus({ state: "processing", id: ticket.id }))
+        dispatch({ type: "DELETE_TICKET" })
     }
 
-    return 
+    return (
+
+
         <div>
             <div>
                 {
-                    ticket 
+                    ticket
                         ? <div>
                             <div>
                                 <h2>{ticket.id}</h2>
@@ -23,12 +25,15 @@ const TicketProcess = () => {
                             <div>
                                 Ticket Info
                             </div>
-                          </div>
+                        </div>
                         : <div>Nada para procesar</div>
                 }
             </div>
             <button disabled={!ticket} onClick={handleClick}>ENVIAR A PROCESAR</button>
         </div>
+
+
+    )
 }
 
 export default TicketProcess;

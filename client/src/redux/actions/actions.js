@@ -21,7 +21,8 @@ import {
     LOGIN_LOCAL,
     CHANGE_USER_ROLE,
     GET_USERS,
-    CREATE_ITEM
+    CREATE_ITEM,
+    DELETE_ITEM,
 } from './const';
 
 
@@ -231,6 +232,7 @@ export const checkout = () => {
     }
 }
 
+
 export const changeUserRole = ({id, changeRol})  => async (dispatch) => {
  
     try{
@@ -245,6 +247,7 @@ export const changeUserRole = ({id, changeRol})  => async (dispatch) => {
     }
 }
 
+
 export const getUsers = ({ nombre }) => async (dispatch) => {
     try {
         const users = (await axios.get(`/users/admin/users?nombre=${nombre ? nombre : ""}`)).data;
@@ -257,6 +260,7 @@ export const getUsers = ({ nombre }) => async (dispatch) => {
         console.log(error)
     }
 }
+
 
 export const createItem = (item) => async (dispatch) => {
     try{
@@ -271,3 +275,16 @@ export const createItem = (item) => async (dispatch) => {
         console.log(error)
     }
 }
+
+export const deleteItem = (id) => async (dispatch) => {
+    try{
+        const deleteItem = (await axios.delete(`/admin/delete/${id}` )).data
+        return dispatch({
+            type: DELETE_ITEM,
+            payload: deleteItem
+        })
+    }
+    catch (err){
+        console.log(err)
+    }
+} 

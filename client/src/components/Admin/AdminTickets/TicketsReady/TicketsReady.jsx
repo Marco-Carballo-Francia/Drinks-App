@@ -8,7 +8,7 @@ const TicketsReady = () => {
     const dispatch = useDispatch();
 
     const handleClick = (id) => {
-        dispatch(changeTicketStatus({status: "finished", id})) // va al back y cambia el status del ticket a finalizado (o loqsea)
+        dispatch(changeTicketStatus({status: "finished", id}))
     }
 
     return 
