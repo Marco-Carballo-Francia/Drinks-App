@@ -24,7 +24,7 @@ const Categories = () => {
 
 	return (
 		<div className={style.Categories}>
-			<Link to="/">
+			{/* <Link to="/">
 				<button className={style.btn} value="" onClick={handleClick}>TODOS</button>
 			</Link>
 			{
@@ -35,7 +35,7 @@ const Categories = () => {
 						</Link>
 					)
 				})
-			}
+			} */}
 		</div>
 	)
 }

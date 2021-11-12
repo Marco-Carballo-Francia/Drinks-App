@@ -1,4 +1,4 @@
-import React, { useState, onEffect} from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import style from './Styles/Dates.module.css'
 import { BsPencilSquare } from "react-icons/bs";
@@ -9,10 +9,8 @@ function Dates() {
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user);
     const [modalIsOpen, setIsOpen] = useState(false);
-    console.log(user);
-    const id = user?.id;
 
-
+    const id = user?._id ? user?._id : user.user?._id;
 
     function openModal() {
         setIsOpen(true);
@@ -26,8 +24,10 @@ function Dates() {
         nombre: '',
         apellido: '',
         telefono: '',
-        documento: ''
+        documento: '',
+        fechadenacimiento: ''
     });
+
 
     const handleOnChange = e => {
         setValues({
@@ -37,7 +37,33 @@ function Dates() {
     }
 
     const handleOnSumit = e => {
-        dispatch(editDateProfile(id, values));
+        e.preventDefault()
+        let obj = {}
+        if (values.nombre.length > 1) {
+            obj.nombre = values.nombre
+        }
+        if (values.apellido.length > 1) {
+            obj.apellido = values.apellido
+        }
+        if (values.telefono.length > 1) {
+            obj.telefono = values.telefono
+        }
+        if (values.documento.length > 1) {
+            obj.documento = values.documento
+        }
+        if (values.fechadenacimiento.length > 1) {
+            obj.fechadenacimiento = values.fechadenacimiento
+        }
+
+        dispatch(editDateProfile(id, obj));
+        closeModal()
+        setValues({
+            nombre: '',
+            apellido: '',
+            telefono: '',
+            documento: '',
+            fechadenacimiento: ''
+        });
     }
 
     const customStyles = {
@@ -86,7 +112,7 @@ function Dates() {
                 </div>
                 <div className={style.data}>
                     <p className={style.title1} >Fecha de nacimiento:</p>
-                    <p className={style.user}> </p>
+                    <p className={style.user}>{user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento} </p>
                 </div>
 
             </div>
@@ -96,7 +122,6 @@ function Dates() {
                 style={customStyles}
                 contentLabel="Example Modal"
             >
-
                 <form className={style.form} >
                     <p className={style.titleEditar}><b>Editar Datos</b></p>
                     <div className={style.username}>
@@ -104,33 +129,31 @@ function Dates() {
                         <input className={style.input}
                             name='nombre'
                             type="text"
-                            placeholder='Su nombre...'
+                            placeholder={user?.nombre ? user?.nombre : user?.user?.nombre}
                             value={values.nombre}
                             onChange={handleOnChange}
                         />
                         {/* <p className={style.error}>{errors.nombre}</p> */}
                     </div>
 
-
                     <div className={style.apellido}>
                         <label className={style.title}>Apellido</label>
                         <input className={style.input}
                             name='apellido'
                             type="text"
-                            placeholder='Su apellido...'
+                            placeholder={user?.apellido ? user?.apellido : user?.user?.apellido}
                             value={values.apellido}
                             onChange={handleOnChange}
                         />
                         {/* <p className={style.error}>{errors.apellido}</p> */}
                     </div>
 
-
                     <div className={style.telefono}>
                         <label className={style.title}>Telefono</label>
                         <input className={style.input}
                             name='telefono'
                             type="text"
-                            placeholder='Su telefono...'
+                            placeholder={user?.telefono ? user?.telefono : user?.user?.telefono}
                             value={values.telefono}
                             onChange={handleOnChange}
                         />
@@ -142,21 +165,34 @@ function Dates() {
                         <input className={style.input}
                             name='documento'
                             type='text'
-                            placeholder='Su docuemento...'
+                            placeholder={user?.documento ? user?.documento : user?.user?.documento}
                             onChange={handleOnChange}
                             value={values.documento}
                         />
                         {/* <p className={style.error}>{errors.contraseña}</p> */}
                     </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Fecha de nacimiento</label>
+                        <input className={style.input}
+                            name='fechadenacimiento'
+                            type='text'
+                            placeholder={user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento}
+                            onChange={handleOnChange}
+                            value={values.fechadenacimiento}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+
                     <div className={style.ctnBtns}>
-                        <button className={style.btn} onClick={handleOnSumit}>Aceptar</button>
+                        <button className={style.btn} onClick={handleOnSumit} >Aceptar</button>
                         <button className={style.btn} onClick={closeModal}> Cancelar </button>
                     </div>
 
                 </form>
             </Modal>
         </div>
-
     )
 }
 

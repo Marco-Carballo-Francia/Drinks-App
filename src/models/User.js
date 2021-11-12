@@ -33,6 +33,9 @@ const UserSchema = new Schema({
     telefono: {
         type: String
     },
+    fechadenacimiento: {
+        type: String
+    },
     admin: {
         type: Boolean,
         default: false

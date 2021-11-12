@@ -101,8 +101,8 @@ const profileAuthenticate = async (req, res, next) => {
 };
 
 const editUser = async (req, res, next) => {
-  const { nombre, apellido, direccion, telefono, documento } = req.body;
-  console.log(req.body, apellido)
+  const { nombre, apellido, direccion, telefono, documento, fechadenacimiento } = req.body;
+  console.log('ideBack', req.params._id)
   try {
 
     let edit = await User.findByIdAndUpdate(req.params.id,{
@@ -110,11 +110,12 @@ const editUser = async (req, res, next) => {
       apellido: apellido,
       telefono: telefono,
       documento: documento,
-      direccion: direccion
+      direccion: direccion,
+      fechadenacimiento: fechadenacimiento
 
     }, {new: true})
-
-    await edit.save();
+  
+    // await edit.save();
 
     if(edit) res.json(edit);
     else res.send("not found");

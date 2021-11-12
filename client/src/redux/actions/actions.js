@@ -230,9 +230,9 @@ export const checkout = () => {
     }
 }
 
-export const editDateProfile = (_id, values) => async (dispatch) => {
+export const editDateProfile = (id, values) => async (dispatch) => {
     try {
-        const res = (await axios.put(`/users/user/edit/${_id}`, values)).data
+        const res = (await axios.patch(`/users/user/edit/${id}`, values)).data
         return dispatch({
             type: EDIT_DATE_PROFILE,
             payload: res
