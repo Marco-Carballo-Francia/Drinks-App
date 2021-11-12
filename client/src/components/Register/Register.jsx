@@ -19,47 +19,109 @@ const Register = () => {
         validarContraseña : ""
     });
 
-    let validateLetras = /^[A-Z]+$/i 
-    let validateEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    let validateContraseña = /^.{4,12}$/
-    const validate = () => {
-        let errors = {};
-        if (!validateLetras.test(values.nombre)) {
-            errors.nombre = "debe ser solo letras";
+   
+    
+    
+
+    const validateLetters = (e) => {
+    let {name, value} = e.target;
+    setValues({
+        ...values,
+        [name] : value
+    })
+    if(!/^[A-Z]+$/i.test(value)){
+        setErrors({
+            ...errors,
+            [name] : "Solo letras"
+        })
+    } else {
+        setErrors({
+            ...errors,
+            [name] : ""
+        })
+    }
+    }
+//--------------------------------------------------------
+    const validateEmail = (e) => {
+        let {name, value} = e.target;
+        let expresion = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    setValues({
+        ...values,
+        [name] : value
+    })
+    if(!expresion.test(value)){
+        setErrors({
+            ...errors,
+            [name] : "No es un email valido!"
+        })
+    } else {
+        setErrors({
+            ...errors,
+            [name] : ""
+        })
+    }
+    }
+
+//--------------------------------------    
+    const validatePassword = (e) => {
+        let {name, value} = e.target;
+    setValues({
+        ...values,
+        [name] : value
+    })
+    if(!/^.{4,12}$/.test(value)){
+        setErrors({
+            ...errors,
+            [name] : "Debe contener entre 4 y 12 caracteres"
+        })
+    } else {
+        setErrors({
+            ...errors,
+            [name] : ""
+        })
+    }
+    }
+
+    const validatePassword2 = (e) => {
+        let {name, value } = e.target
+        setValues({
+            ...values,
+            [name] : value
+        })
+     if(value !== values.contraseña){
+         setErrors({
+             ...errors,
+             [name] : "No coincide"
+         })
+        } else {
+            setErrors({
+                ...errors,
+              [name] : "" ,
+            })
         }
-        if (!validateLetras.test(values.apellido)) {
-            errors.apellido = "debe ser solo letras";
-        }
-        if (!validateEmail.test(values.email)) {
-            errors.email = "Email requerido";
-        }
-        if (!validateContraseña.test(values.contraseña)) {
-            errors.contraseña = "Desde 4 a 14 digitos";
-        }
-        if(values.validarContraseña !== values.contraseña){
-            errors.validarContraseña = "Error"
-        }
-        return errors;
-    };
+    }
+
+
+
+
+
+
+
+
+
 
     function openModal() {
         setIsOpen(false);
     }
 
     const handleOnChange = e => {
+        e.preventDefault();
         setValues({
             ...values,
             [e.target.name]: e.target.value,
             
-        })
-        console.log(values)
-        setErrors(
-            validate({
-                ...values,
-                [e.target.name]: e.target.value,
-            })
-            );
-            console.log(values)
+        }) 
+
     }
 
     const handleOnSumit = e => {
@@ -68,7 +130,7 @@ const Register = () => {
             !errors.nombre &&
             !errors.apellido &&
             !errors.email &&
-            !errors.contraseña
+            !errors.contraseña 
         ) {
             dispatch(registerLocal(values));
             setIsOpen(true)
@@ -98,13 +160,15 @@ const Register = () => {
             <form className={style.form} onSubmit={handleOnSumit} >
                 <p className={style.titleRegister}><b>REGISTRARSE</b></p>
                 <div className={style.username}>
+
                     <label className={style.title}>Nombre</label>
                     <input className={style.input}
                         name='nombre'
                         type="text"
                         placeholder='Su nombre...'
                         value={values.nombre}
-                        onChange={handleOnChange}
+                        onChange={e => validateLetters(e)}
+                        required
                     />
                     <p className={style.error}>{errors.nombre}</p>
                 </div>
@@ -117,7 +181,8 @@ const Register = () => {
                         type="text"
                         placeholder='Su apellido...'
                         value={values.apellido}
-                        onChange={handleOnChange}
+                        onChange={e => validateLetters(e)}
+                        required
                     />
                     <p className={style.error}>{errors.apellido}</p>
                 </div>
@@ -130,7 +195,8 @@ const Register = () => {
                         type="text"
                         placeholder='Su email...'
                         value={values.email}
-                        onChange={handleOnChange}
+                        onChange={e => validateEmail(e)}
+                        required
                     />
                     <p className={style.error}>{errors.email}</p>
                 </div>
@@ -141,8 +207,9 @@ const Register = () => {
                         name='contraseña'
                         type='password'
                         placeholder='Su contraseña...'
-                        onChange={handleOnChange}
+                        onChange={e => validatePassword(e)}
                         value={values.contraseña}
+                        required
                     />
                     <p className={style.error}>{errors.contraseña}</p>
                 </div>
@@ -153,8 +220,9 @@ const Register = () => {
                         name='validarContraseña'
                         type='password'
                         placeholder='Su contraseña...'
-                        onChange={handleOnChange}
+                        onChange={e => validatePassword2(e)}
                         value={values.validarContraseña}
+                        required
                     />
                     <p className={style.error}>{errors.validarContraseña}</p>
                 </div>

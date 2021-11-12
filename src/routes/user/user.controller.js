@@ -21,19 +21,20 @@ const googleLogin = async (req, res) => {
           } else {
             if (user) {
               const { _id } = user;
-              const token = jwt.sign({ user: { id: _id, email } }, "top_secret");
-             /* const userFront = {
-                id: _id,
-                email: email,
-                imagen: picture,
-                nombre: name,
-                token,
 
-              };*/
-               
-               user.token=token;
-              await user.save(); 
-              //   console.log(userFront);
+              const token = jwt.sign({ user: { id: _id, email } }, "top_secret");
+
+              //  const userFront = {
+              //    id: _id,
+              //    email: email,
+              //    imagen: picture,
+              //    nombre: name,
+              //    token
+              //  }
+
+              user.token = token;
+              await user.save();
+
               return res.json(user);
             } else {
               let contraseña = email + "top_secret";
@@ -100,17 +101,18 @@ const profileAuthenticate = (req, res) => {
   });
 };
 
-
 const getUserByName = async (req, res) => {
-  const { nombre } = req.body;
+  const { nombre } = req.query;
   try {
-    if(nombre) {
-      let getByName = await User.find({nombre: nombre});
+    let getUser = await User.find();
+
+    if (nombre && nombre !== "") {
+      let getByName = getUser.filter((u) =>
+        u.nombre?.toLowerCase().includes(nombre?.toLowerCase())
+      );
       return res.json(getByName);
-    } else {
-      let getUsers = await User.find();
-      return res.json(getUsers);
     }
+    return res.json(getUser);
   } catch (error) {
     console.log(error);
   }
@@ -121,17 +123,24 @@ const newAdmin = async (req, res) => {
   const { changeRol } = req.body;
   try {
     let user = await User.findById(id);
-    
+
     if (user.admin === false && changeRol === false) {
       return res.json(user);
     }
-    if ((user.admin === false && changeRol === true) || (user.admin === true && changeRol === false)) {
-      const update = await User.findOneAndUpdate({_id: id}, {$set: {admin: changeRol}}, {new: true}); 
+    if (
+      (user.admin === false && changeRol === true) ||
+      (user.admin === true && changeRol === false)
+    ) {
+      const update = await User.findOneAndUpdate(
+        { _id: id },
+        { $set: { admin: changeRol } },
+        { new: true }
+      );
       let newAdmin = await update.save();
       return res.json(newAdmin);
     }
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };
 
@@ -139,8 +148,7 @@ const editUser = async (req, res, next) => {
   const { nombre, apellido, direccion, telefono, documento, fechadenacimiento } = req.body;
   console.log('ideBack', req.params._id)
   try {
-
-    let edit = await User.findByIdAndUpdate(req.params.id,{
+    let edit = await User.findByIdAndUpdate(req.params.id, {
       nombre: nombre,
       apellido: apellido,
       telefono: telefono,
@@ -148,30 +156,16 @@ const editUser = async (req, res, next) => {
       direccion: direccion,
       fechadenacimiento: fechadenacimiento
 
-    }, {new: true})
-  
+    }, { new: true })
+
     // await edit.save();
 
-    if(edit) res.json(edit);
+    if (edit) res.json(edit);
     else res.send("not found");
-
-
   } catch (error) {
     console.log(error);
   }
 };
-
-//  const getUserByNP = async (req, res) => {
-//     const { nombre, contraseña } = req.body;
-//     try {
-//         const getByNP = await User.findOne({nombre, contraseña});
-//         console.log('getByNP', getByNP);
-//         res.json(getByNP);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
 
 //  const getUserById = async (req, res) => {
 //     const { id } = req.params
@@ -195,7 +189,6 @@ const editUser = async (req, res, next) => {
 //     }
 // };
 
-
 // getUserById,
 // getUser
 
@@ -206,5 +199,5 @@ module.exports = {
   googleLogin,
   newAdmin,
   getUserByName,
-  editUser
+  editUser,
 };

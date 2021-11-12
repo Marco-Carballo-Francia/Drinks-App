@@ -23,10 +23,10 @@ import Cart from './components/Cart/Cart';
 import Checkout from "./components/Checkout/Checkout";
 
 // Admin
-// import Admin from "./components/Admin/Admin";
+import Admin from "./components/Admin/Admin";
+import AdminUsers from './components/Admin/AdminUsers/AdminUsers';
 // import AdminStock from './components/AdminStock/AdminStock';
 // import AdminTickets from './components/AdminTickets/AdminTickets';
-// import AdminUsers from './components/AdminUsers/AdminUsers';
 
 
 function App() {
@@ -47,13 +47,13 @@ function App() {
       
     
       {/* Admin */}
-      {/* <Route path="/admin" component={Admin} />
-      <Route path="/admin/stock" component={AdminStock} />
-      <Route path="/admin/tickets" component={AdminTickets} /> 
+      <Route path="/admin" component={Admin} />
       <Route path="/admin/users" component={AdminUsers} />
+      {/* <Route path="/admin/stock" component={AdminStock} />
+      <Route path="/admin/tickets" component={AdminTickets} /> 
       <Route path="/admin/stock/create" component={Create} />
-      <Route path="/admin/stock/update" component={Update} />
-      */}
+      <Route path="/admin/stock/update" component={Update} /> */}
+      
     </div>
   );
 }

@@ -19,14 +19,10 @@ import {
     GET_TICKETS_ADMIN,
     CHANGE_TICKET_STATUS,
     LOGIN_LOCAL,
-<<<<<<< HEAD
     CHANGE_USER_ROLE,
     GET_USERS,
-    CREATE_ITEM
-=======
+    CREATE_ITEM,
     EDIT_DATE_PROFILE
-
->>>>>>> tomas/ticket
 } from './const';
 
 
@@ -236,35 +232,13 @@ export const checkout = () => {
     }
 }
 
-<<<<<<< HEAD
-export const changeUserRole = ({id})  => async (dispatch) => {
- 
-    try{
-        const changeRole = await axios.put(`/admin/users/changeRole/${id}`)
+export const changeUserRole = ({ id, changeRol }) => async (dispatch) => {
+
+    try {
+        const user = await axios.put(`/users/admin/update/${id}`, { changeRol })
         return dispatch({
             type: CHANGE_USER_ROLE,
-            payload: changeRole
-        })
-    } 
-    catch(error){
-        console.log(error)
-    }
-}
-
-export const getUsers = ({ name }) => async (dispatch) => {
-    try {
-        const users = (await axios.get(`/admin/users?name=${name}`)).data;
-        return dispatch({
-            type: GET_USERS,
-            payload: users
-=======
-export const editDateProfile = (id, values) => async (dispatch) => {
-    try {
-        const res = (await axios.patch(`/users/user/edit/${id}`, values)).data
-        return dispatch({
-            type: EDIT_DATE_PROFILE,
-            payload: res
->>>>>>> tomas/ticket
+            payload: user.data
         })
     }
     catch (error) {
@@ -272,20 +246,43 @@ export const editDateProfile = (id, values) => async (dispatch) => {
     }
 }
 
-<<<<<<< HEAD
-export const createItem = (item) => async (dispatch) => {
-    try{
-        const createItem = (await axios.post (`/admin/create`, item)).data
+export const getUsers = ({ nombre }) => async (dispatch) => {
+    try {
+        const users = (await axios.get(`/users/admin/users?nombre=${nombre ? nombre : ""}`)).data;
         return dispatch({
-            type: CREATE_ITEM,
-            payload: createItem
-
+            type: GET_USERS,
+            payload: users
         })
     }
-    catch(error){
+    catch (error) {
+        console.log(error)
+
+    }
+}
+
+export const editDateProfile = (id, values) => async (dispatch) => {
+    try {
+        const res = (await axios.patch(`/users/user/edit/${id}`, values)).data
+        return dispatch({
+            type: EDIT_DATE_PROFILE,
+            payload: res
+        })
+    }
+    catch (error) {
         console.log(error)
     }
 }
-=======
 
->>>>>>> tomas/ticket
+export const createItem = (item) => async (dispatch) => {
+    try {
+        const item = (await axios.post(`/admin/create`, item)).data
+        return dispatch({
+            type: CREATE_ITEM,
+            payload: item
+
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
