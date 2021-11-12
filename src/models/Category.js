@@ -8,9 +8,13 @@ const categorySchema = new Schema({
       required: false,
       trim: true
     }
+    // listItems: [{
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Item'
+    // }]
     }, {
       versionKey: false,
-      timestamps: true
+      timestamps: false
     });
 
 module.exports =  model("Category", categorySchema);

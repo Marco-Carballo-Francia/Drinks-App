@@ -7,7 +7,7 @@ const itemSchema = new Schema({
 		required: true,
 		trim: true
 	},
-	descripcion: {
+	description: {
 		type: String,
 		trim: true
 	},
@@ -22,14 +22,7 @@ const itemSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Reviews'
 	}],
-	numReviews: {
-		cinco: { type: Number, default: 1 },
-		cuatro: { type: Number, default: 1 },
-		tres: { type: Number, default: 1 },
-		dos: { type: Number, default: 1 },
-		uno: { type: Number, default: 1 }
-	},
-	categoria: [{
+	categories: [{
 		type: Schema.Types.ObjectId,
 		ref:'Category',
 		required: true
