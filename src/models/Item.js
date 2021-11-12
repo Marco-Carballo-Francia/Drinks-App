@@ -2,12 +2,12 @@ const pkg = require("mongoose");
 const { Schema, model } = pkg;
 
 const itemSchema = new Schema({
-	name: {
+	nombre: {
 		type: String,
 		required: true,
 		trim: true
 	},
-	description: {
+	descripcion: {
 		type: String,
 		trim: true
 	},
@@ -22,7 +22,7 @@ const itemSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Reviews'
 	}],
-	categories: [{
+	categoria: [{
 		type: Schema.Types.ObjectId,
 		ref:'Category',
 		required: true

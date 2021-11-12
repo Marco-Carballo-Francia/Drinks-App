@@ -2,7 +2,7 @@ const pkg = require("mongoose");
 const { Schema, model } = pkg;
 
 const reviewsSchema = new Schema({
-  comment: {
+  commentario: {
     type: String
   },
   rating: {

@@ -31,7 +31,7 @@ const TicketSchema = new Schema({
     ref: "User",
     required: true,
   },
-  state: {
+  estado: {
     type: String,
     default: "Pending",
   },
