@@ -1,20 +1,20 @@
 const Item = require("../../models/Item.js");
 const Category = require('../../models/Category');
+const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
+  let { name, category } = req.query;
+  // console.log('category', category);
   try {
-    let { name, category } = req.query;
-    console.log(name);
-    let items = await Item.find();
+    let items = await Item.find()
+      .populate('categories', ['name'])
+      .populate('reviews', ['coment', 'rating']);
+
     if (name) {
-      items = items.filter((x) =>
-        x.name.toLowerCase().includes(name.toLowerCase())
-      );
-      return res.json(items);
-    } else {
-      if (category) {
-        items = items.filter((x) => x.categoria === category);
-      }
+      items = items.filter((i) => i.name.toLowerCase().includes(name.toLowerCase()));
+    } else if (category) {
+      // console.log('items.categoria', items[0].numReviews);
+        items = items.filter((i) => i.categories === category); //no trae las categorias pq cambiamos el modelo, mismo error que en tickets
     }
     res.json(items);
   } catch (err) {
@@ -22,10 +22,40 @@ const getItems = async (req, res) => {
   }
 };
 
+const updateItem = async (req, res) => {
+  const { name, description, precio, imagen, reviewsID, category, stock } = req.body;
+  const { id } = req.params;
+  try {
+    let categories
+    if(category) {
+      categories = await Category.find({ name: category }); 
+    };
+
+    let reviews
+    if(reviewsID) {
+      reviews = await Reviews.find({ _id: reviewsID }); 
+    };
+
+    let edit = await Item.findByIdAndUpdate(id, {
+      name: name,
+      description: description,
+      precio: precio,
+      imagen: imagen,
+      reviews: reviews._id,
+      categories: categories._id,
+      stock: stock
+    });
+    res.json(edit);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 const getCategories = async (req, res) => {
   try {
     let categories = await Item.find();
-    categories = categories.map((x) => x.categoria);
+    categories = categories.map((x) => x.category);
     categories = [...new Set(categories)];
     res.json(categories);
   } catch (error) {
@@ -34,20 +64,23 @@ const getCategories = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-	const { name, descripcion, precio, imagen, reviews, categoria, stock } = req.body
+  const { name, descripcion, precio, imagen, reviews, categories, stock, rating } = req.body;
+
   try {
-	  let getCategory = await Category.find({name: categoria})
+	  let getCategory = await Category.find({name: categories});
+    console.log('getCategory', getCategory);
 	let newItem = new Item({
 		name,
 		descripcion,
 		precio,
 		imagen,
-		categoria: getCategory._id,
+		categories: getCategory[0]._id,
 		stock,
+    rating,
 		reviews
 	});
 	newItem = await newItem.save();
-	res.send(newItem);
+	res.json(newItem);
   } catch (error) {
 	  console.log(error);
   }
@@ -123,5 +156,14 @@ module.exports = {
   createItem,
   getItemById,
   updateItemUser,
-  // updateItemAdmin
+  updateItem
 };
+
+
+
+
+    // "name": "skoll",
+		// "descripcion": "Cerveza brasilera",
+		// "precio": "$150",
+		// "categories": "vinos",
+		// "stock": 120
