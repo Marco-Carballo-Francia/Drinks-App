@@ -6,14 +6,14 @@ const config = require("../../config.js");
 
 const client = new OAuth2Client(config.GOOGLE_CLIENT_ID);
 
-const googleLogin = (req, res) => {
+const googleLogin = async (req, res) => {
   const { tokenId } = req.body;
   client
     .verifyIdToken({ idToken: tokenId, audience: config.GOOGLE_CLIENT_ID })
     .then((response) => {
       const { email_verified, email, picture, name } = response.payload;
       if (email_verified) {
-        User.findOne({ email }).exec((err, user) => {
+        User.findOne({ email }).exec(async (err, user) => {
           if (err) {
             return res.status(400).json({
               error: "Something went wrong",
@@ -22,15 +22,19 @@ const googleLogin = (req, res) => {
             if (user) {
               const { _id } = user;
               const token = jwt.sign({ user: { id: _id, email } }, "top_secret");
-              const userFront = {
+             /* const userFront = {
                 id: _id,
                 email: email,
                 imagen: picture,
                 nombre: name,
                 token,
-              };
+
+              };*/
+               
+               user.token=token;
+              await user.save(); 
               //   console.log(userFront);
-              return res.json(userFront);
+              return res.json(user);
             } else {
               let contraseña = email + "top_secret";
               let newUser = new User({
@@ -132,17 +136,25 @@ const newAdmin = async (req, res) => {
 };
 
 const editUser = async (req, res, next) => {
-  const { nombre, apellido, direccion, telefono, documento } = req.body;
+  const { nombre, apellido, direccion, telefono, documento, fechadenacimiento } = req.body;
+  console.log('ideBack', req.params._id)
   try {
-    let edit = await User.findByIdAndUpdate(req.params.id, {
+
+    let edit = await User.findByIdAndUpdate(req.params.id,{
       nombre: nombre,
       apellido: apellido,
-      direccion: direccion,
       telefono: telefono,
-      documento: documento
-    });
-    // Send response in here
-    res.json(edit);
+      documento: documento,
+      direccion: direccion,
+      fechadenacimiento: fechadenacimiento
+
+    }, {new: true})
+  
+    // await edit.save();
+
+    if(edit) res.json(edit);
+    else res.send("not found");
+
 
   } catch (error) {
     console.log(error);

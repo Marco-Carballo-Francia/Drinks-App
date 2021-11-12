@@ -19,9 +19,14 @@ import {
     GET_TICKETS_ADMIN,
     CHANGE_TICKET_STATUS,
     LOGIN_LOCAL,
+<<<<<<< HEAD
     CHANGE_USER_ROLE,
     GET_USERS,
     CREATE_ITEM
+=======
+    EDIT_DATE_PROFILE
+
+>>>>>>> tomas/ticket
 } from './const';
 
 
@@ -136,7 +141,7 @@ export const loginGoogle = (obj) => async (dispatch) => {
 
 export const registerLocal = (values) => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/register", values )
+        const res = await axios.post("/users/user/register", values)
         return dispatch({
             type: "REGISTER_LOCAL",
             payload: res.data
@@ -149,7 +154,7 @@ export const registerLocal = (values) => async (dispatch) => {
 
 export const loginLocal = input => async (dispatch) => {
     try {
-        const res = await axios.post("/users/user/login", input )
+        const res = await axios.post("/users/user/login", input)
         return dispatch({
             type: LOGIN_LOCAL,
             payload: res.data
@@ -171,18 +176,18 @@ export const createTicket = (value) => async (dispatch) => {
     }
 }
 
- export const getUserTickets = (id) => async (dispatch) => {
-     try {
-         const tickets = (await axios.get(`/ticket/user/${id}`)).data
-         return dispatch({
+export const getUserTickets = (id) => async (dispatch) => {
+    try {
+        const tickets = (await axios.get(`/ticket/user/${id}`)).data
+        return dispatch({
             type: GET_TICKETS,
-             payload: tickets
-         })
+            payload: tickets
+        })
     }
     catch (error) {
         console.log(error)
-     }
- }
+    }
+}
 
 export const setTotal = (total) => {
     return {
@@ -231,6 +236,7 @@ export const checkout = () => {
     }
 }
 
+<<<<<<< HEAD
 export const changeUserRole = ({id})  => async (dispatch) => {
  
     try{
@@ -251,6 +257,14 @@ export const getUsers = ({ name }) => async (dispatch) => {
         return dispatch({
             type: GET_USERS,
             payload: users
+=======
+export const editDateProfile = (id, values) => async (dispatch) => {
+    try {
+        const res = (await axios.patch(`/users/user/edit/${id}`, values)).data
+        return dispatch({
+            type: EDIT_DATE_PROFILE,
+            payload: res
+>>>>>>> tomas/ticket
         })
     }
     catch (error) {
@@ -258,6 +272,7 @@ export const getUsers = ({ name }) => async (dispatch) => {
     }
 }
 
+<<<<<<< HEAD
 export const createItem = (item) => async (dispatch) => {
     try{
         const createItem = (await axios.post (`/admin/create`, item)).data
@@ -271,3 +286,6 @@ export const createItem = (item) => async (dispatch) => {
         console.log(error)
     }
 }
+=======
+
+>>>>>>> tomas/ticket

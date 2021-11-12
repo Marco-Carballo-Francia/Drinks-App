@@ -83,9 +83,16 @@ const getTicketsInPending = async (req, res) => {
 const getUserTickets = async (req, res) => {
   const { id } = req.params;
   try {
+<<<<<<< HEAD
     let userTickets = await Ticket.find()
       .populate('user')
       .populate('items.item');
+=======
+    let userTickets = await Ticket.find().populate('user').populate('items.item');
+    // console.log("userTickets",userTickets);
+    // console.log("idback",id)
+
+>>>>>>> tomas/ticket
 
     function splitt(string){
       let id= string.split('"')
@@ -93,7 +100,8 @@ const getUserTickets = async (req, res) => {
       return dividido;
     }
 
-    let tickets= userTickets.filter(x=> splitt(JSON.stringify(x.user._id)) === id.toString())  
+    let tickets= userTickets.filter(x=> splitt(JSON.stringify(x.user._id)) === id.toString()) 
+    console.log("ticketsback", tickets) 
     res.json(tickets);
   }
   catch (error) {

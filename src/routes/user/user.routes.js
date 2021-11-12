@@ -12,6 +12,7 @@ router.get('/user/profile', passport.authenticate('jwt', { session: false }), pr
 router.post('/user/google', googleLogin);
 router.put('/admin/update/:id', newAdmin);
 router.get('/admin/users', getUserByName);
-router.put('/user/edit/:id', editUser);
+router.post('/user/google', googleLogin)
+router.patch('/user/edit/:id', editUser);
 
 module.exports = router;
