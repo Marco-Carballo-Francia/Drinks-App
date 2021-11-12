@@ -2,8 +2,8 @@ const Ticket = require("../../models/Ticket");
 const Stripe = require("stripe");
 const axios = require("axios").default;
 const config = require("../../config.js");
-const User = require("../../models/User");
-const Item = require("../../models/Item");
+const User = require('../../models/User');
+const Item = require('../../models/Item')
 
 const stripe = new Stripe(config.STRIPE_SECRET_KEY);
 
@@ -24,8 +24,6 @@ const makePayment = async (req, res) => {
     console.log(error);
   }
 };
-
-// 618c28aa8264eae2657d8df3
 
 const createTicket = async (req, res) => {
   let { payment, cart, userId } = req.body;
