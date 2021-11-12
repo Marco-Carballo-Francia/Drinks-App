@@ -26,14 +26,22 @@ const updateItem = async (req, res) => {
   const { name, description, precio, imagen, reviewsID, category, stock } = req.body;
   const { id } = req.params;
   try {
-    let categories
+    let categories;
     if(category) {
-      categories = await Category.find({ name: category }); 
+      let getCategory = await Category.find({ name: category });
+      if(getCategory) {
+        categories = getCategory;
+      } else {
+        
+      }
     };
 
-    let reviews
+    let reviews;
     if(reviewsID) {
-      reviews = await Reviews.find({ _id: reviewsID }); 
+      let getReviews = await Reviews.find({ _id: reviewsID }); 
+      if(getReviews) {
+        reviews = getreviews;
+      }
     };
 
     let edit = await Item.findByIdAndUpdate(id, {

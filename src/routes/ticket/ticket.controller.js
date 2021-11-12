@@ -60,33 +60,49 @@ const createTicket = async (req, res) => {
   }
 };
 
-const getTicketsInPending = async (req, res) => {
+const getTicketsInPendAndPro = async (req, res) => {
   try {
     let userTicketsPending = await Ticket.find({ state: "Pending" })
-      .populate("items")
-      .populate("user", "nombre");
+      .populate("items", ["name", "precio"])
+      .populate("user", ["nombre"]);
+
+    let sortTicketsPending = userTicketsPending.sort((a, b) => {
+      if (a.fecha > b.fecha) return -1;
+      if (a.fecha < b.fecha) return 1;
+    });
 
     let userTicketsProcessing = await Ticket.find({ state: "Processing" })
       .populate("items")
       .populate("user", "nombre");
-    
-    let sortTicketsPending = userTicketsPending.sort((a, b) => {
-      if (a.fecha < b.fecha) return -1;
-      if (a.fecha > b.fecha) return 1;
-    });
 
     let sortTicketsProcessing = userTicketsProcessing.sort((a, b) => {
-      if (a.fecha < b.fecha) return -1;
-      if (a.fecha > b.fecha) return 1;
+      if (a.fecha > b.fecha) return -1;
+      if (a.fecha < b.fecha) return 1;
     });
 
     const ticketsObj = {
       pending: sortTicketsPending,
-      processing: sortTicketsProcessing
+      processing: sortTicketsProcessing,
     };
     res.json(ticketsObj);
   } catch (error) {
     console.log(error);
+  }
+};
+
+const updateTickets = async (req, res) => {
+  const { id } = req.params; //id del ticket
+  const { changeState } = req.body; //valor que recivo para cambiar el state
+  try {
+    let update = await Ticket.findOneAndUpdate(
+      { _id: id },
+      { $set: { state: changeState } },
+      { new: true }
+    );
+    update = update.save();
+    res.json(update);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -95,7 +111,7 @@ const getUserTickets = async (req, res) => {
   try {
     let userTickets = await Ticket.find()
       .populate("user")
-      .populate("items.item");
+      .populate("items");
 
     function splitt(string) {
       let id = string.split('"');
@@ -114,7 +130,8 @@ const getUserTickets = async (req, res) => {
 
 module.exports = {
   makePayment,
-  getTicketsInPending,
+  getTicketsInPendAndPro,
   createTicket,
   getUserTickets,
+  updateTickets,
 };
