@@ -3,7 +3,7 @@ const { Schema, model } = pkg;
 
 
 const categorySchema = new Schema({    
-    name: {
+    nombre: {
       type: String,
       required: false,
       trim: true

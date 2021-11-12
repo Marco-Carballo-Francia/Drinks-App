@@ -107,21 +107,20 @@ const updateTickets = async (req, res) => {
 const getUserTickets = async (req, res) => {
   const { id } = req.params;
   try {
-    let userTickets = await Ticket.find().populate("user").populate("items.item");
-      console.log("id", id);
-      console.log("usertickets", userTickets[0].items);
+    let userTickets = await Ticket.findById(id)
+      .populate("user")
+      .populate("items");
+    
+    // function splitt(string) {
+    //   let id = string.split('"');
+    //   let dividido = id[1];
+    //   return dividido;
+    // }
 
-    function splitt(string) {
-      let id = string.split('"');
-      let dividido = id[1];
-      return dividido;
-    }
-
-    let tickets = userTickets.filter(
-      (x) => splitt(JSON.stringify(x.user._id)) === id.toString()
-    );
-
-    res.json(tickets);
+    // let tickets = userTickets.filter(
+    //   (x) => splitt(JSON.stringify(x.user._id)) === id.toString()
+    // );
+    res.json(userTickets);
   } catch (error) {
     console.log(error);
   }
