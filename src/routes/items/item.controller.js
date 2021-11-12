@@ -7,7 +7,7 @@ const getItems = async (req, res) => {
   // console.log('category', category);
   try {
     let items = await Item.find()
-      .populate('categories', ['name'])
+      .populate('categoria', ['nombre'])
       .populate('reviews', ['coment', 'rating']);
 
     if (name) {
@@ -59,6 +59,7 @@ const updateItem = async (req, res) => {
   }
 };
 
+//ge items by category
 
 const getCategories = async (req, res) => {
   try {
@@ -72,17 +73,17 @@ const getCategories = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const { name, descripcion, precio, imagen, reviews, categories, stock, rating } = req.body;
+  const { nombre, descripcion, precio, imagen, reviews, categoria, stock, rating } = req.body;
 
   try {
-	  let getCategory = await Category.find({name: categories});
+	  let getCategory = await Category.find({nombre: categoria});
     console.log('getCategory', getCategory);
 	let newItem = new Item({
-		name,
+		nombre,
 		descripcion,
 		precio,
 		imagen,
-		categories: getCategory[0]._id,
+		categoria: getCategory[0]._id,
 		stock,
     rating,
 		reviews
@@ -97,8 +98,10 @@ const createItem = async (req, res) => {
 
 const getItemById = async (req, res) => {
   const { id } = req.params;
+  
   try {
-    const item = await Item.findById(id);
+    const item = await Item.findById(id)
+    .populate('categoria', ['nombre'])
     res.json(item);
   } catch (error) {
     console.log(error);

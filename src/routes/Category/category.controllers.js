@@ -4,7 +4,6 @@ const Category = require("../../models/Category");
 const getCategories = async (req, res) => {
     try {
         let categories = await Category.find()
-            .populate('listItems', ['name']);
         res.json(categories);
     } catch(error) {
         console.log(error);
@@ -13,12 +12,11 @@ const getCategories = async (req, res) => {
 
 const postCategory = async (req, res) => {
 
-    const { name } = req.body;
+    const { nombre } = req.body;
     try {
 
         let newCategory = new Category({
-            name,
-            listItems: items._id
+            nombre
         });
 
         newCategory = await newCategory.save();
@@ -29,10 +27,10 @@ const postCategory = async (req, res) => {
 };
 
 const updateCategory = async (req, res) => {
-    const { name } = req.body;
+    const { nombre } = req.body;
     const { id } = req.params;
     try {
-      let edit = await Category.findByIdAndUpdate(id, { name: name });
+      let edit = await Category.findByIdAndUpdate(id, { nombre: nombre });
       res.json(edit);
     } catch (error) {
       console.log(error);

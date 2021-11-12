@@ -33,7 +33,7 @@ const itemSchema = new Schema({
 	}
 }, {
 	versionKey: false,
-	timestamps: true
+	timestamps: false
 });
 
 // itemSchema.set('toJSON', {
