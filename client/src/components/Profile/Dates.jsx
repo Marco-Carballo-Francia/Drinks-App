@@ -10,7 +10,7 @@ function Dates() {
     const { user } = useSelector((state) => state.user);
     const [modalIsOpen, setIsOpen] = useState(false);
 
-    const id = user?._id ? user?._id : user.user?._id;
+    const id = user?._id ? user?._id : user?.user?._id;
 
     function openModal() {
         setIsOpen(true);

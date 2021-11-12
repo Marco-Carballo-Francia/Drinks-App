@@ -84,7 +84,6 @@ const getUserTickets = async (req, res) => {
     let userTickets = await Ticket.find()
       .populate('user')
       .populate('items.item');
-    let userTickets = await Ticket.find().populate('user').populate('items.item');
     // console.log("userTickets",userTickets);
     // console.log("idback",id)
     function splitt(string){
