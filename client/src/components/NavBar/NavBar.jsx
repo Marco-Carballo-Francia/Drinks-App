@@ -19,7 +19,7 @@ const NavBar = () => {
 
     useEffect(() => {
         dispatch(checkout());
-    }, [user, dispatch, location])
+    }, [user, dispatch])
 
 
     const logout = () => {
@@ -45,7 +45,7 @@ const NavBar = () => {
                     user !== null ? (
                         <>
                             <Link className={style.link} to='/profile'>  <p className={style.nameUser}>Hola, {
-                                user.nombre ? user.nombre : user.user.nombre
+                                user?.nombre ? user?.nombre : user?.user?.nombre
                             }</p>
                             </Link>
                             <button onClick={logout} className={style.logout}>Salir</button>

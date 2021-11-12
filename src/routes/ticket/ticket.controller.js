@@ -26,8 +26,6 @@ const makePayment = async (req, res) => {
   }
 }
 
-// 618c28aa8264eae2657d8df3
-
 const createTicket = async (req, res) => {
   let { payment, cart, userId } = req.body;
   try {
@@ -86,14 +84,17 @@ const getUserTickets = async (req, res) => {
     let userTickets = await Ticket.find()
       .populate('user')
       .populate('items.item');
-
+    let userTickets = await Ticket.find().populate('user').populate('items.item');
+    // console.log("userTickets",userTickets);
+    // console.log("idback",id)
     function splitt(string){
       let id= string.split('"')
       let dividido= id[1]
       return dividido;
     }
 
-    let tickets= userTickets.filter(x=> splitt(JSON.stringify(x.user._id)) === id.toString())  
+    let tickets= userTickets.filter(x=> splitt(JSON.stringify(x.user._id)) === id.toString()) 
+    console.log("ticketsback", tickets) 
     res.json(tickets);
   }
   catch (error) {
