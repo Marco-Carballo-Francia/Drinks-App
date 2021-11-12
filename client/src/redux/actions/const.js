@@ -31,11 +31,8 @@ const LOGOUT= "LOGOUT";
 const REGISTER_LOCAL= "REGISTER_LOCAL";
 const LOGIN_GOOGLE = "LOGIN_GOOGLE";
 const LOGIN_LOCAL = "LOGIN_LOCAL";
-<<<<<<< HEAD
 const CHANGE_USER_ROLE = "CHANGE_USER_ROLE"
-=======
 const EDIT_DATE_PROFILE = "EDIT_DATE_PROFILE";
->>>>>>> tomas/ticket
 
 // TICKETS
 const CREATE_TICKET = "CREATE_TICKET";
@@ -76,12 +73,8 @@ module.exports = {
     DELETE_TICKET,
     CHANGE_TICKET_STATUS,
     LOGIN_LOCAL,
-<<<<<<< HEAD
     CHANGE_USER_ROLE,
     GET_USERS,
     CREATE_ITEM,
-=======
     EDIT_DATE_PROFILE
-
->>>>>>> tomas/ticket
 }
