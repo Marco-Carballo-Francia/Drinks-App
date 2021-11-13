@@ -1,6 +1,14 @@
 const { Router } = require("express");
 const passport = require("passport");
-const { postUser, postLogin, profileAuthenticate, googleLogin, newAdmin, getUserByName, editUser } = require("./user.controller.js");
+const { 
+    postUser, 
+    postLogin, 
+    profileAuthenticate, 
+    googleLogin, 
+    newAdmin, 
+    getUserByName, 
+    editUser 
+} = require("./user.controller.js");
 
 const router = Router();
 

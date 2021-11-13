@@ -108,7 +108,7 @@ const getUserTicketsByID = async (req, res) => {
   const { id } = req.params;
   try {
     let userTickets = await Ticket.findById(id)
-      .populate("user", ["name"])
+      .populate("user", ["nombre"])
       .populate("items.item");
     
     // function splitt(string) {
@@ -130,6 +130,6 @@ module.exports = {
   makePayment,
   getTicketsInPendAndPro,
   createTicket,
-  getUserTickets,
+  getUserTicketsByID,
   updateTickets,
 };
