@@ -3,7 +3,7 @@ const Category = require('../../models/Category');
 const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
-  let { name, category } = req.query;
+  let { nombre, categoria } = req.query;
   // console.log('category', category);
   try {
     let items = await Item.find()
@@ -11,10 +11,10 @@ const getItems = async (req, res) => {
       .populate('reviews', ['coment', 'rating']);
 
     if (name) {
-      items = items.filter((i) => i.name.toLowerCase().includes(name.toLowerCase()));
+      items = items.filter((i) => i.nombre.toLowerCase().includes(nombre.toLowerCase()));
     } else if (category) {
       // console.log('items.categoria', items[0].numReviews);
-        items = items.filter((i) => i.categories === category); //no trae las categorias pq cambiamos el modelo, mismo error que en tickets
+        items = items.filter((i) => i.categoriae === categoria); //no trae las categorias pq cambiamos el modelo, mismo error que en tickets
     }
     res.json(items);
   } catch (err) {
@@ -23,12 +23,12 @@ const getItems = async (req, res) => {
 };
 
 const updateItem = async (req, res) => {
-  const { name, description, precio, imagen, reviewsID, category, stock } = req.body;
+  const { nombre, descripcion, precio, imagen, rating, categoria, stock } = req.body;
   const { id } = req.params;
   try {
     let categories;
-    if(category) {
-      let getCategory = await Category.find({ name: category });
+    if(categoria) {
+      let getCategory = await Category.find({ nombre: categoria });
       if(getCategory) {
         categories = getCategory;
       } else {
@@ -45,12 +45,12 @@ const updateItem = async (req, res) => {
     };
 
     let edit = await Item.findByIdAndUpdate(id, {
-      name: name,
-      description: description,
+      nombre: nombre,
+      descripcion: descripcion,
       precio: precio,
       imagen: imagen,
-      reviews: reviews._id,
-      categories: categories._id,
+       reviews: reviews._id,
+      categoria:  getCategory[0]._id,
       stock: stock
     });
     res.json(edit);
