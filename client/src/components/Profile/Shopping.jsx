@@ -32,8 +32,8 @@ function Shopping() {
                 </thead>
                 <tbody>
                 {
-                    tickets.length?
-                    tickets.map( x => {
+                    tickets?.length?
+                    tickets?.map( x => {
                         return(
                     <tr>
                         <td>{x._id}</td>
