@@ -1,20 +1,20 @@
 const Item = require("../../models/Item.js");
 const Category = require('../../models/Category');
-const Reviews = require('../../models/Category');
+// const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
   let { nombre, categorias } = req.query;
-  // console.log('category', category);
+  // console.log('categorias', categorias);
   try {
     let items = await Item.find()
-      .populate('categoria', ['nombre'])
+      .populate('categorias', ['nombre'])
       .populate('reviews', ['comentario', 'rating']);
 
     if (nombre) {
       items = items.filter(i => i.nombre.toLowerCase().includes(nombre.toLowerCase()));
     } else if (categorias) {
       // console.log('items.categoria', items[0].numReviews);
-        items = items.filter(i => i.categoria === categorias); //no trae las categorias pq cambiamos el modelo, mismo error que en tickets
+        items = items.filter(i => i.categoria === categorias); //Plantearlo con un for dentro del filter o ver como hacer
     }
     res.json(items);
   } catch (err) {
