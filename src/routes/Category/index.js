@@ -3,6 +3,6 @@ const indexCategory = require('./category.routes');
 
 const router = Router();
 
-router.use('/categoria', indexCategory);
+router.use('/category', indexCategory);
 
 module.exports = router;
