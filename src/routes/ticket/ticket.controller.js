@@ -61,7 +61,7 @@ const createTicket = async (req, res) => {
 const getTicketsInPendAndPro = async (req, res) => {
   try {
     let userTicketsPending = await Ticket.find({ state: "Pending" })
-      .populate("items", ["name", "precio"])
+      .populate("items.item", ["name", "precio"])
       .populate("user", ["nombre"]);
 
     let sortTicketsPending = userTicketsPending.sort((a, b) => {
@@ -104,12 +104,12 @@ const updateTickets = async (req, res) => {
   }
 };
 
-const getUserTickets = async (req, res) => {
+const getUserTicketsByID = async (req, res) => {
   const { id } = req.params;
   try {
     let userTickets = await Ticket.findById(id)
-      .populate("user")
-      .populate("items");
+      .populate("user", ["nombre"])
+      .populate("items.item");
     
     // function splitt(string) {
     //   let id = string.split('"');
@@ -130,6 +130,10 @@ module.exports = {
   makePayment,
   getTicketsInPendAndPro,
   createTicket,
-  getUserTickets,
+<<<<<<< HEAD
+  //getUserTickets,
+=======
+  getUserTicketsByID,
+>>>>>>> 032c6d11c32747e86d691c473f7945bfc326633b
   updateTickets,
 };
