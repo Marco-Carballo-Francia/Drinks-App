@@ -29,7 +29,7 @@ import {
 
 export const getProducts = ({ name, category }) => async (dispatch) => {
     try {
-        const res = await axios.get(`/user/items?name=${name ? name : ""}&category=${category ? category : ""}`);
+        const res = await axios.get(`/items?name=${name ? name : ""}&category=${category ? category : ""}`);
         return dispatch({
             type: GET_PRODUCTS,
             payload: res.data,
@@ -41,7 +41,7 @@ export const getProducts = ({ name, category }) => async (dispatch) => {
 
 export const getProductsDetails = (id) => async (dispatch) => {
     try {
-        const res = await axios.get("/user/items/" + id);
+        const res = await axios.get(`/items/${id}`);
 
         return dispatch({
             type: GET_PRODUCTS_DETAILS,
@@ -83,7 +83,7 @@ export const setCategory = (category) => {
 
 export const rateProduct = ({ number, id }) => async (dispatch) => {
     try {
-        let res = await axios.put(`/user/items/update/${id}`, { number })
+        let res = await axios.put(`/items/update/${id}`, { number })
         console.log(res.data)
         return dispatch({
             type: RATE_PRODUCT,
