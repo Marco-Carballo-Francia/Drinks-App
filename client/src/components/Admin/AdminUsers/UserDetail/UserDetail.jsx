@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserRole } from "../../../../redux/actions/actions"
+import style from "./UserDetail.module.css";
 
 const UserDetail = () => {
 

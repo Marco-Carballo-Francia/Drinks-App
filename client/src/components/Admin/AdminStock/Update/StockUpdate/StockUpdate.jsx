@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useConfirmAlert } from 'material-confirm-alert';
+import {deleteItem} from "../../../../../redux/actions/actions";
 
 const StockUpdate = () => {
-    const confirm = useConfirmAlert();
     const dispatch = useDispatch();
     const { item } = useSelector(state => state.admin);
-    const id = item.id;
+    const id =  "un id";
 
     const [edit, setEdit] = useState(false);
     const [object, setObject] = useState({
-        name: item.nombre,
-        precio: item.precio,
-        descripcion: item.descripcion,
-        imagen: item.imagen,
-        categoria: item.categoria
+        name: "name",
+        precio: "precio",
+        descripcion: "descripcion",
+        imagen: "imagen",
+        categoria: "categoria"
     })
 
-    const handleDelete = async () => {
-        const result = await confirm("Eliminar item definitivamente?")
-        if (result) {
+    const handleDelete = () => {
+        let answer = window.confirm("Borrar item?");
+        if (answer) {
             dispatch(deleteItem(id))
+        }
+        else {
+            console.log("shkere")
         }
     }
 
@@ -38,20 +40,20 @@ const StockUpdate = () => {
             {
                 !edit 
                     ? <div>
-                        <span>{item.name}</span>
-                        <span>{item.precio}</span>
-                        <span>{item.description}</span>
-                        <span>{item.imagen}</span>
-                        <span>{item.categoria}</span>
+                        <span>{object.name}</span>
+                        <span>{object.precio}</span>
+                        <span>{object.description}</span>
+                        <span>{object.imagen}</span>
+                        <span>{object.categoria}</span>
                     </div>
                     : <div>
-                        <input name="name" value={object.name} onChange={handleChange} />
-                        <input name="precio" value={object.precio} onChange={handleChange} />
-                        <input name="descripcion" value={object.descripcion} onChange={handleChange} />
-                        <input name="imagen" value={object.imagen} onChange={handleChange} />
-                        <input name="categoria" value={object.categoria} onChange={handleChange} />
-                    </div>     
-            }          
+                        <input name="name" value={object.name} placeholder="Nombre..." onChange={handleChange} />
+                        <input name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
+                        <input name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
+                        <input name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />
+                        <input name="categoria" value={object.categoria} placeholder="Categoria..." onChange={handleChange} />
+                    </div>
+            }
             <div>
                 <button onClick={handleDelete}>DELETE</button>
                 { 

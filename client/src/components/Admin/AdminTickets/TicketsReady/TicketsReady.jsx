@@ -11,7 +11,7 @@ const TicketsReady = () => {
         dispatch(changeTicketStatus({status: "finished", id})) // va al back y cambia el status del ticket a finalizado (o loqsea)
     }
 
-    return 
+    return (
         <div>
             {
                 ticketsReady?.length 
@@ -30,6 +30,7 @@ const TicketsReady = () => {
                     : <span>no hay tickets ready</span>
             }
         </div>
+    )
 }
 
 export default TicketsReady;

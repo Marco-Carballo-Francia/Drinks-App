@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../../redux/actions/actions";
+import style from "./UsersList.module.css";
 
 const UsersList = () => {
     

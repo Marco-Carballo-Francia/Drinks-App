@@ -38,11 +38,6 @@ export function adminReducer (state = initialState, action ) {
                 ...state,
                 users: action.payload
             }
-            // return {
-            //     ...state,
-            //     ticketsPending: state.ticketsPending.filter(x => x.id !== action.payload.id),
-            //     ticketsReady: [...state.ticketsReady, action.payload]
-            // }
         default:
             return state;
     }

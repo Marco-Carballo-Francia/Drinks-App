@@ -1,7 +1,7 @@
 import React from "react";
 import StockItems from "./Update/StockItems/StockItems";
 import StockUpdate from "./Update/StockUpdate/StockUpdate";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const AdminStock = () => {
     
@@ -20,11 +20,6 @@ const AdminStock = () => {
                 Create
             </button>
         </div>
-        // <div>
-
-        //     <AdminStockR />
-        //     <AdminStockCUD />
-        // </div>
     )
 }
 
