@@ -1,14 +1,14 @@
 const Item = require("../../models/Item.js");
 const Category = require('../../models/Category');
-// const Reviews = require('../../models/Category');
+const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
   let { nombre, categorias } = req.query;
   // console.log('categorias', categorias);
   try {
     let items = await Item.find()
-      .populate('categorias', ['nombre'])
-      .populate('reviews', ['comentario', 'rating']);
+      .populate('categories', ['name'])
+      .populate('reviews', ['coment', 'rating']);
 
     if (nombre) {
       items = items.filter(i => i.nombre.toLowerCase().includes(nombre.toLowerCase()));
@@ -35,17 +35,17 @@ const updateItem = async (req, res) => {
       }
     };
 
-    // let reviews;
-    // if(reviewsID) {
-    //   let getReviews = await Reviews.find({ _id: reviewsID }); 
-    //   if(getReviews) {
-    //     reviews = getreviews;
-    //   }
-    // };
+    let reviews;
+    if(reviewsID) {
+      let getReviews = await Reviews.find({ _id: reviewsID }); 
+      if(getReviews) {
+        reviews = getreviews;
+      }
+    };
 
     let edit = await Item.findByIdAndUpdate(id, {
-      nombre: nombre,
-      descripcion: descripcion,
+      name: name,
+      description: description,
       precio: precio,
       imagen: imagen,
       // reviews: reviews._id,
@@ -59,17 +59,17 @@ const updateItem = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const { nombre, descripcion, precio, imagen, reviews, categoria, stock, rating } = req.body;
+  const { name, descripcion, precio, imagen, reviews, categories, stock, rating } = req.body;
 
   try {
-	  let getCategory = await Category.find({nombre: categoria});
+	  let getCategory = await Category.find({name: categories});
     console.log('getCategory', getCategory);
 	let newItem = new Item({
-		nombre,
+		name,
 		descripcion,
 		precio,
 		imagen,
-		categoria: getCategory[0]._id,
+		categories: getCategory[0]._id,
 		stock,
     rating,
 		reviews
@@ -84,10 +84,8 @@ const createItem = async (req, res) => {
 
 const getItemById = async (req, res) => {
   const { id } = req.params;
-  
   try {
-    const item = await Item.findById(id)
-    .populate('categoria', ['nombre'])
+    const item = await Item.findById(id);
     res.json(item);
   } catch (error) {
     console.log(error);
@@ -141,7 +139,7 @@ const updateItemUser = async (req, res) => {
 
 module.exports = {
   getItems,
-  // getCategories,
+  getCategories,
   createItem,
   getItemById,
   updateItemUser,

@@ -22,7 +22,7 @@ const itemSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Reviews'
 	}],
-	categorias: [{
+	categoria: [{
 		type: Schema.Types.ObjectId,
 		ref:'Category',
 		required: true
@@ -33,7 +33,7 @@ const itemSchema = new Schema({
 	}
 }, {
 	versionKey: false,
-	timestamps: false
+	timestamps: true
 });
 
 // itemSchema.set('toJSON', {

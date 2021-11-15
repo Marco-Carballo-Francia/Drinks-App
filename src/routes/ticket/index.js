@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const ticketRouter = require('./ticket.routes');
+const ticketRouter = require('./ticket.routes.js');
 
 const router = Router();
 
