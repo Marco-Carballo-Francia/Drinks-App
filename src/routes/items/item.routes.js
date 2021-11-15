@@ -3,7 +3,6 @@ const {
     getItems, 
     createItem, 
     getItemById, 
-    getCategories, 
     updateItem
 } = require("./item.controller.js");
 

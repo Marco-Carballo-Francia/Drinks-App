@@ -54,7 +54,7 @@ export const getProductsDetails = (id) => async (dispatch) => {
 
 export const getCategories = () => async (dispatch) => {
     try {
-        let categories = await axios.get("/user/items/categories");
+        let categories = await axios.get("/categoria");
         return dispatch({
             type: GET_CATEGORIES,
             payload: categories.data

@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { getCategories, postCategory, updateCategory } = require('./category.controllers');
+const { getCategorias, postCategoria, updateCategoria, getCategoriasByName } = require('./category.controllers');
 
 const router = Router();
 
-router.get('/', getCategories);
-router.get("/categories", getCategories);
-router.post('/create', postCategory);
-router.put('/update/:id', updateCategory);
+// categoria
+router.get('/', getCategorias);
+router.get("/categoria/:nombre", getCategoriasByName);
+router.post('/create', postCategoria);
+router.put('/update/:id', updateCategoria);
 
 module.exports = router;
