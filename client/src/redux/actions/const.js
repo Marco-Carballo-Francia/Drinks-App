@@ -47,6 +47,7 @@ const DATOS_COMPRA = "DATOS_COMPRA";
 //ADMIN
 
 const CREATE_ITEM = "CREATE_ITEM";
+const DELETE_ITEM = "DELETE_ITEM";
 
 
 module.exports = {
@@ -76,5 +77,6 @@ module.exports = {
     CHANGE_USER_ROLE,
     GET_USERS,
     CREATE_ITEM,
-    EDIT_DATE_PROFILE
+    EDIT_DATE_PROFILE,
+    DELETE_ITEM,
 }

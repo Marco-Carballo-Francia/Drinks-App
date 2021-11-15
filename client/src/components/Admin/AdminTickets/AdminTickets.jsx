@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getTicketsAdmin } from "../../../redux/actions/actions";
 import TicketsPending from "./TicketsPending/TicketsPending";

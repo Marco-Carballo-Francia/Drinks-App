@@ -22,7 +22,8 @@ import {
     CHANGE_USER_ROLE,
     GET_USERS,
     CREATE_ITEM,
-    EDIT_DATE_PROFILE
+    EDIT_DATE_PROFILE,
+    DELETE_ITEM
 } from './const';
 
 
@@ -284,5 +285,18 @@ export const createItem = (item) => async (dispatch) => {
     }
     catch (error) {
         console.log(error)
+    }
+}
+
+export const deleteItem = (id) => async (dispatch) => {
+    try{
+        const deleteItem = (await axios.delete(/admin/delete/${id} )).data
+        return dispatch({
+            type: DELETE_ITEM,
+            payload: deleteItem
+        })
+    }
+    catch (err){
+        console.log(err)
     }
 }
