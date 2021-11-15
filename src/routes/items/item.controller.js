@@ -102,7 +102,7 @@ const getItemById = async (req, res) => {
     .populate('categorias', ['nombre'])
     .populate('reviews', ['comentario']);
 
-    if(item === null || item.length === 0)  return res.json(item)
+    if(item !== null || item.length !== 0)  return res.json(item)
     res.send('Hubo un problema para traer este producto');
   } catch (error) {
     console.log(error);
