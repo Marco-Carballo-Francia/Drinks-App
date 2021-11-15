@@ -19,7 +19,7 @@ const Checkout = () => {
   return (
     <Elements stripe={stripePromise}>
       <InfoTarjeta />
-      {/* <DatosCompra /> */}
+       <DatosCompra />
     </Elements>
   );
 };

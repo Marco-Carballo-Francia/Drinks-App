@@ -22,7 +22,7 @@ const itemSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Reviews'
 	}],
-	categoria: [{
+	categorias: [{
 		type: Schema.Types.ObjectId,
 		ref:'Category',
 		required: true
@@ -30,7 +30,17 @@ const itemSchema = new Schema({
 	stock: {
 		type: Number,
 		required: true
-	}
+	},
+	numReviews: {
+		cinco: { type: Number, default: 1 },
+		cuatro: { type: Number, default: 1 },
+		tres: { type: Number, default: 1 },
+		dos: { type: Number, default: 1 },
+		uno: { type: Number, default: 1 }
+	},
+	rating: {
+		type: String 
+	},
 }, {
 	versionKey: false,
 	timestamps: true

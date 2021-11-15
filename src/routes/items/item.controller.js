@@ -1,22 +1,22 @@
 const Item = require("../../models/Item.js");
 const Category = require('../../models/Category');
-// const Reviews = require('../../models/Category');
+const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
-  let { nombre, categorias } = req.query;
+  let { name, category } = req.query;
   // console.log('categorias', categorias);
+  console.log('category', category);
   try {
     let items = await Item.find()
-      .populate('categorias', ['nombre'])
-      .populate('reviews', ['comentario', 'rating']);
-    let ulti = items.length - 1;
-
-
-    if (nombre !== undefined) {
-      items = items.filter(i => i.nombre.toLowerCase().includes(nombre.toLowerCase()));
-    } else if (categoria) {
-      // console.log('categoriasItem', items[ulti].categorias);
-      items = items.filter(i => i.categorias === categoria); //Plantearlo con un for dentro del filter o ver como hacer
+    .populate('categorias', ['nombre'])
+    .populate('reviews', ['comentario', 'rating']);
+    // let ulti = items.length - 1;
+    
+    if (name !== "") {
+      items = items.filter(i => i.nombre.toLowerCase().includes(name.toLowerCase()));
+    } else if (category) {
+      console.log('categorias', items[0].categorias[0].nombre);
+      items = items.filter(i => i.categorias[0].nombre === category); //Plantearlo con un for dentro del filter o ver como hacer
     }
     res.json(items);
   } catch (err) {
@@ -35,7 +35,7 @@ const updateItem = async (req, res) => {
         // console.log('getCategoria', getCategoria);
         if(getCategoria !== null || getCategoria.length !== 0) categoriasID.push(getCategoria[0]._id);
         else return res.send(`No se encontro la categoria ${categorias[i]}`)
-      }
+      };
     };
 
     // let reviews;
@@ -230,5 +230,15 @@ module.exports = {
     // "name": "skoll",
 		// "descripcion": "Cerveza brasilera",
 		// "precio": "$150",
-		// "categories": "vinos",
+		// "categorias": "vinos",
 		// "stock": 120
+
+    // oid: vinos 618ebfe09ecc2e9e2370852a
+    // oid: cerveza 618ec0f39ecc2e9e23708531
+    // oid: destilados 618ec1019ecc2e9e23708533
+    // oid: vodka 618ec10b9ecc2e9e23708535
+    // oid: espumantes 618ec1159ecc2e9e23708537
+    // oid: sin alcohol 618ec11f9ecc2e9e23708539
+    // oid: combos 618fc1c4820bddc89394297f
+    //oid: whisky 6192a2f253d3919ca498af76
+    //oid: aperitivo 6192a3603c24ea140ca6f159

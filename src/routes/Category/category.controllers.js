@@ -1,47 +1,72 @@
 const Category = require("../../models/Category");
 
-
-const getCategories = async (req, res) => {
-    try {
-        let categories = await Category.find()
-            .populate('listItems', ['name']);
-        res.json(categories);
-    } catch(error) {
-        console.log(error);
-    }
+const getCategorias = async (req, res) => {
+  try {
+    let categorias = await Category.find();
+    // console.log('categorias', categorias);
+    if(categorias !== null || categorias.length !== 0) return res.json(categorias);
+    res.send('Problemas al traer las categorias');
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const postCategory = async (req, res) => {
-
-    const { name } = req.body;
+const getCategoriasByName = async (req, res) => {
+    const { nombre } = req.params;
     try {
+        if(nombre) {
+            let getCategoria = await Category.find({nombre: nombre});
 
+            if(getCategoria !== null || getCategoria.length !== 0) return res.json(getCategoria)
+            return res.send(`No se encontro la categoria ${nombre}`);
+        }
+        res.send('No estoy reciboendo nada por params');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const postCategoria = async (req, res) => {
+  const { nombre } = req.body;
+  try {
+    if (nombre) {
+      let verificacion = await Category.find({ nombre: nombre });
+
+      if (verificacion !== null || verificacion.length !== 0) {
         let newCategory = new Category({
-            name,
-            listItems: items._id
+          nombre,
         });
 
         newCategory = await newCategory.save();
-        res.json(newCategory);
-    } catch(error) {
-        console.log(error);
+        return res.json(newCategory);
+      }
+      return res.send(`La categoria ${nombre} ya existe`);
     }
+    res.send("Ingrese un nombre para su categoria");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-const updateCategory = async (req, res) => {
-    const { name } = req.body;
-    const { id } = req.params;
-    try {
-      let edit = await Category.findByIdAndUpdate(id, { name: name });
-      res.json(edit);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const updateCategoria = async (req, res) => {
+  const { nombre } = req.body;
+  const { id } = req.params;
+  try {
+    let verificacion = await Category.findbyId(id);
 
+    if(verificacion !== null || verificacion.length !== 0) {
+        let edit = await Category.findByIdAndUpdate(id, { nombre: nombre });
+        return res.json(edit);
+    }
+    res.send('Hubo un error al traer esta categoria');
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
-    getCategories,
-    postCategory,
-    updateCategory
-}
+  getCategorias,
+  postCategoria,
+  updateCategoria,
+  getCategoriasByName
+};

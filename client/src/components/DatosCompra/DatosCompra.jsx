@@ -11,25 +11,25 @@ const DatosCompra = () => {
    const [errors, setErrors] = useState({})
    const [modalIsOpen, setIsOpen] = useState(false);
    const [input, setInput] = useState({
-       name: "",
+       nombre: "",
        apellido: "",
        calle: "",
        altura: "",
        codigoPostal: "",
        telefono: "",
-       telefono2: ""
-   })
+       telefono2: "" 
+   }) 
 //-------------------------------------.-----------------------------
    const [errorName, setErrorName] = useState("");
 	function validateName(value) {
 		setInput({
 			...input,
-			name: value,
+			nombre: value,
 		})
 		if(!/^[a-zA-Z\s]*$/.test(value)) {
 			setErrorName("Solo Letras!");
 		}
-		else {
+		else {  
 			setErrorName("");
 		}
 	}
@@ -129,7 +129,7 @@ function validateTelefono2(value) {
      e.preventDefault();
      dispatch(datosDeCompra(input))
      setInput({
-        name: "",
+        nombre: "",
         apellido: "",
         calle: "",
         altura: "",
@@ -146,9 +146,9 @@ function validateTelefono2(value) {
             <div className={style.nombre}>
                 <input className={style.input}
                   type="text"
-                  value={input.name} 
+                  value={input.nombre} 
                   placeholder="Su Nombre"
-                  name="name" 
+                  name="nombre" 
                   required={true}
                  onChange={e => validateName(e.target.value)}/>
                {!errorName ? null : (<p className={style.error}>{errorName}</p>)}
