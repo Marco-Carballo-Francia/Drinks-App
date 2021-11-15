@@ -3,18 +3,18 @@ const Category = require('../../models/Category');
 const Reviews = require('../../models/Category');
 
 const getItems = async (req, res) => {
-  let { name, category } = req.query;
-  // console.log('category', category);
+  let { nombre, categorias } = req.query;
+  // console.log('categorias', categorias);
   try {
     let items = await Item.find()
       .populate('categories', ['name'])
       .populate('reviews', ['coment', 'rating']);
 
-    if (name) {
-      items = items.filter((i) => i.name.toLowerCase().includes(name.toLowerCase()));
-    } else if (category) {
+    if (nombre) {
+      items = items.filter(i => i.nombre.toLowerCase().includes(nombre.toLowerCase()));
+    } else if (categorias) {
       // console.log('items.categoria', items[0].numReviews);
-        items = items.filter((i) => i.categories === category); //no trae las categorias pq cambiamos el modelo, mismo error que en tickets
+        items = items.filter(i => i.categorias === categorias); //Plantearlo con un for dentro del filter o ver como hacer
     }
     res.json(items);
   } catch (err) {
@@ -23,16 +23,15 @@ const getItems = async (req, res) => {
 };
 
 const updateItem = async (req, res) => {
-  const { name, description, precio, imagen, reviewsID, category, stock } = req.body;
+  const { nombre, descripcion, precio, imagen, reviewsID, categorias, stock } = req.body;
   const { id } = req.params;
   try {
-    let categories;
-    if(category) {
-      let getCategory = await Category.find({ name: category });
-      if(getCategory) {
-        categories = getCategory;
-      } else {
-        
+    let categoriasID = [];
+    if(categorias) {
+      for (let i = 0; i < categorias.length; i++) {
+        let getCategoria = await Category.find({ nombre: categorias[i] });
+        if(getCategoria) categoriasID.push(getCategoria._id);
+        else return res.send(`No se encontro la categoria ${categorias[i]}`);
       }
     };
 
@@ -49,23 +48,11 @@ const updateItem = async (req, res) => {
       description: description,
       precio: precio,
       imagen: imagen,
-      reviews: reviews._id,
-      categories: categories._id,
+      // reviews: reviews._id,
+      categories: categoriasID,
       stock: stock
     });
     res.json(edit);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-
-const getCategories = async (req, res) => {
-  try {
-    let categories = await Item.find();
-    categories = categories.map((x) => x.category);
-    categories = [...new Set(categories)];
-    res.json(categories);
   } catch (error) {
     console.log(error);
   }
@@ -149,14 +136,6 @@ const updateItemUser = async (req, res) => {
   }
 };
 
-// const updateItemAdmin = async (req, res) => {
-// 	const {  } = req.body;
-// 	const { id } = req.params;
-// 	try {
-// 	}catch (error) {
-// 		console.log(error)
-// 	}
-// }
 
 module.exports = {
   getItems,
