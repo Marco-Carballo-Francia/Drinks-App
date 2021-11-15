@@ -139,7 +139,6 @@ const updateItemUser = async (req, res) => {
 
 module.exports = {
   getItems,
-  getCategories,
   createItem,
   getItemById,
   updateItemUser,

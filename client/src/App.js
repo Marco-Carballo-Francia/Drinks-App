@@ -28,7 +28,7 @@ import AdminUsers from './components/Admin/AdminUsers/AdminUsers';
 import AdminStock from './components/Admin/AdminStock/AdminStock';
 import Create from "./components/Admin/AdminStock/Create/Create";
 import Update from "./components/Admin/AdminStock/Update/Update";
-// import AdminTickets from './components/AdminTickets/AdminTickets';
+import AdminTickets from './components/Admin/AdminTickets/AdminTickets';
 
 
 function App() {

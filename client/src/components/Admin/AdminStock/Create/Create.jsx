@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import style from './DatosCompra.module.css';
+import style from './Create.module.css';
 import { createItem } from '../../../../redux/actions/actions.js';
 
 const Create = () => {
@@ -17,7 +17,6 @@ const Create = () => {
     const [errors, setErrors] = useState({});
 
 
-    let validateNumbers = /^[0-9]+$/;
 
     const validateNum = (e) => {
         let {name, value} = e.target;
