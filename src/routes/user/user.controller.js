@@ -108,7 +108,7 @@ const getUserByName = async (req, res) => {
 
     if (nombre && nombre !== "") {
       let getByName = getUser.filter((u) =>
-        u.nombre.toLowerCase().includes(nombre.toLowerCase())
+        u.nombre?.toLowerCase().includes(nombre?.toLowerCase())
       );
       return res.json(getByName);
     }
