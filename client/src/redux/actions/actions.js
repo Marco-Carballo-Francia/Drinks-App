@@ -290,7 +290,7 @@ export const createItem = (item) => async (dispatch) => {
 
 export const deleteItem = (id) => async (dispatch) => {
     try{
-        const deleteItem = (await axios.delete(/admin/delete/${id} )).data
+        const deleteItem = (await axios.delete(`/admin/delete/${id}`)).data
         return dispatch({
             type: DELETE_ITEM,
             payload: deleteItem

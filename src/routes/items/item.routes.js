@@ -11,7 +11,6 @@ const router = Router();
 
 //    /user/items
 router.get("/items", getItems);  // problemas para filtrar las categorias por cambios en el modelo
-router.get("/items/categories", getCategories);  //problemas para traer las categorias por cambios en el modelo
 // router.put("/items/update/:id", updateItemUser);
 router.post("/items", createItem);  //falta la parte ed la reviews, hay q relacionarlas
 router.get("/items/:id", getItemById); 

@@ -130,6 +130,7 @@ module.exports = {
   makePayment,
   getTicketsInPendAndPro,
   createTicket,
-  getUserTicketsByID,
+  // getUserTicketsByID,
   updateTickets,
+  getUserTickets
 };
