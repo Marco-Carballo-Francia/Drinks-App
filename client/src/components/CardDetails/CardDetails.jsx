@@ -38,7 +38,7 @@ function CardDetails(props) {
     return (
         <div className={style.ctnSuperior}>
             { 
-                product.name 
+                product.nombre 
                     ? 
                     (
                         <div className={style.ctnDetalles}>
@@ -46,11 +46,11 @@ function CardDetails(props) {
                                 <img className={style.img} src={product.imagen ? product.imagen : `${product}`} alt="img" />
                             </div>
                             <div className={style.ctnCompra}>
-                                <h1 className={style.titulo}> {product.name} </h1>
+                                <h1 className={style.titulo}> {product.nombre} </h1>
 
                                 <div className={style.Ctnprecio}>
                                     <h2 className={style.precio}> {product.precio} </h2>
-                                    <h2 className={style.p}>  {product.categoria?.charAt(0).toUpperCase() + product.categoria?.slice(1)} </h2>
+                                    {/* <h2 className={style.p}>  {product.categorias?.charAt(0).toUpperCase() + product.categorias?.slice(1)} </h2> */}
                                     <h2 className={style.p}><Rating rating={product.rating} numReviews={5} /></h2>
                                 </div>
                                 <div className={style.ctnDescripcion}>
