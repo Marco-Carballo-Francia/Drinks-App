@@ -204,10 +204,10 @@ export const datosDeCompra = (payload) => {
 
 export const getTicketsAdmin = () => async (dispatch) => {
     try {
-        const ticketsPending = (await axios.get(`/ticket/admin`)).data
+        const { data } = (await axios.get(`/ticket/state`))
         return dispatch({
             type: GET_TICKETS_ADMIN,
-            payload: ticketsPending
+            payload: data
         })
     }
     catch (error) {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminItems, setItem } from "../../../../../redux/actions/actions"
 import Loading from "../../../../../components/Loading/Loading";
 import StockUpdate from "../StockUpdate/StockUpdate";
+import style from "./StockItems.module.css";
 
 const StockItems = () => {
     const dispatch = useDispatch();
@@ -18,11 +19,11 @@ const StockItems = () => {
     }
 
     return (
-        <div>
+        <div className={style.container}>
            {
                  items 
                     ? items.map(x => (
-                        <button key={x._id} onClick={() => handleClick(x._id)}>
+                        <button className={style.boton} key={x._id} onClick={() => handleClick(x._id)}>
                             {x.nombre}
                         </button>
                     ))

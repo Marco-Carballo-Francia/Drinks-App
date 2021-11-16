@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getTicketsAdmin } from "../../../../redux/actions/actions";
 
 
 const TicketsPending = () => {
@@ -7,7 +8,9 @@ const TicketsPending = () => {
     const dispatch = useDispatch();
     const { ticketsPending } = useSelector((state) => state.admin)
 
-
+    useEffect(() => {
+        dispatch(getTicketsAdmin())
+    }, [])
 
     const handleClick = () => {
         dispatch({ type: "SET_TICKET", payload: ticketsPending[0] })

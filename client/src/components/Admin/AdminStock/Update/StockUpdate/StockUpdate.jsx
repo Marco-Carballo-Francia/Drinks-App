@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {deleteItem} from "../../../../../redux/actions/actions";
+import style from "./StockUpdate.module.css";
 
 const StockUpdate = () => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const StockUpdate = () => {
     }
 
     return (
-        <div>
+        <div className={style.container}>
             {
                  !edit 
                     ? <div>
