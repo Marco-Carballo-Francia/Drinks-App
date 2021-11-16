@@ -5,15 +5,15 @@ import {deleteItem} from "../../../../../redux/actions/actions";
 const StockUpdate = () => {
     const dispatch = useDispatch();
     const { item } = useSelector(state => state.admin);
-    const id =  "un id";
+    const id =  item.id;
 
     const [edit, setEdit] = useState(false);
     const [object, setObject] = useState({
-        name: "name",
-        precio: "precio",
-        descripcion: "descripcion",
-        imagen: "imagen",
-        categoria: "categoria"
+        nombre: item?.nombre,
+        precio: item?.precio,
+        descripcion: item?.descripcion,
+        imagen: item?.imagen,
+        categoria:"categoria"
     })
 
     const handleDelete = () => {
@@ -38,16 +38,16 @@ const StockUpdate = () => {
     return (
         <div>
             {
-                !edit 
+                 !edit 
                     ? <div>
-                        <span>{object.name}</span>
+                        <span>{object.nombre}</span>
                         <span>{object.precio}</span>
-                        <span>{object.description}</span>
+                        <span>{object.descripcion}</span>
                         <span>{object.imagen}</span>
                         <span>{object.categoria}</span>
                     </div>
-                    : <div>
-                        <input name="name" value={object.name} placeholder="Nombre..." onChange={handleChange} />
+                    :  <div>
+                        <input name="name" value={object.nombre} placeholder="Nombre..." onChange={handleChange} />
                         <input name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
                         <input name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
                         <input name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />

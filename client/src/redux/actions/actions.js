@@ -23,7 +23,9 @@ import {
     GET_USERS,
     CREATE_ITEM,
     EDIT_DATE_PROFILE,
-    DELETE_ITEM
+    DELETE_ITEM,
+    GET_ADMIN_ITEMS,
+    SET_ITEM
 } from './const';
 
 
@@ -298,5 +300,31 @@ export const deleteItem = (id) => async (dispatch) => {
     }
     catch (err){
         console.log(err)
+    }
+}
+
+export const getAdminItems = ({name, category}) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/items?name=${name ? name : ""}&category=${category ? category : ""}`)
+        return dispatch({
+            type: GET_ADMIN_ITEMS,
+            payload: data
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+export const setItem = (id) => async (dispatch) =>{
+    try{
+        const { data } = await axios.get(`/items/${id}`)
+        return dispatch ({
+            type: SET_ITEM,
+            payload: data
+        })
+    }
+    catch(error){
+        console.log(error)
     }
 }

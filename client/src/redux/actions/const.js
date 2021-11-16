@@ -48,7 +48,8 @@ const DATOS_COMPRA = "DATOS_COMPRA";
 
 const CREATE_ITEM = "CREATE_ITEM";
 const DELETE_ITEM = "DELETE_ITEM";
-
+const GET_ADMIN_ITEMS = "GET_ADMIN_ITEMS"
+const SET_ITEM = "SET_ITEM"
 
 module.exports = {
     GET_PRODUCTS,
@@ -79,4 +80,6 @@ module.exports = {
     CREATE_ITEM,
     EDIT_DATE_PROFILE,
     DELETE_ITEM,
+    GET_ADMIN_ITEMS,
+    SET_ITEM
 }
