@@ -1,22 +1,29 @@
 .cnt {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+  height: 200px;
+  display: grid;
+  align-items: start;
 }
 
 .form {
-  display: grid;
   width: 600px;
-  padding: 30px;
-  box-shadow: 0rem 1rem 2rem 1rem hsl(0 0% 0% / 20%);
 }
 
 .title {
-  font-weight: 800;
-  letter-spacing: 2px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   font-size: 25px;
   font-family: "Montserrat", sans-serif;
-  margin-bottom: 40px;
+  border-bottom: 1.5px solid black;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.total{
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .ctnBtn {
@@ -40,4 +47,3 @@
   background-color: rgb(207, 117, 0);
   color: rgb(255, 255, 255);
 }
-

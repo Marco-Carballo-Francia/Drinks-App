@@ -9,7 +9,7 @@ import { addCart } from "../../redux/actions/actions.js";
 const Card = (prod) => {
     let p = prod.prod
     const dispatch=useDispatch();
-    // const [clicked, setClicked] = useState(false);
+    // const [clicked, setClicked] = useState(false)
 
     function onClick(payload) {
         // setClicked(true);

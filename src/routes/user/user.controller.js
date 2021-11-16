@@ -145,7 +145,7 @@ const newAdmin = async (req, res) => {
 };
 
 const editUser = async (req, res, next) => {
-  const { nombre, apellido, direccion, telefono, documento, fechadenacimiento } = req.body;
+  const { nombre, apellido, direccion, telefono, documento, fechadenacimiento, piso, departamento, ciudad, estadoProvincia, codigoPostal } = req.body;
   console.log('ideBack', req.params._id)
   try {
     let edit = await User.findByIdAndUpdate(req.params.id, {
@@ -154,8 +154,12 @@ const editUser = async (req, res, next) => {
       telefono: telefono,
       documento: documento,
       direccion: direccion,
-      fechadenacimiento: fechadenacimiento
-
+      fechadenacimiento: fechadenacimiento,
+      piso: piso,
+      departamento: departamento,
+      ciudad: ciudad,
+      estadoProvincia: estadoProvincia,
+      codigoPostal: codigoPostal
     }, { new: true })
 
     // await edit.save();
@@ -167,16 +171,15 @@ const editUser = async (req, res, next) => {
   }
 };
 
-//  const getUserById = async (req, res) => {
-//     const { id } = req.params
-//     try {
-//         const getById = await User.findById(id);
-
-//         res.json(getById);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+const addFavorite = async (req, res) => {
+  const { id } = req.body
+  try {
+    const getById = await User.findById(id);
+    res.json(getById);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 //  const getUser = async (req, res) => {
 //     try {
@@ -200,4 +203,5 @@ module.exports = {
   newAdmin,
   getUserByName,
   editUser,
+  addFavorite
 };

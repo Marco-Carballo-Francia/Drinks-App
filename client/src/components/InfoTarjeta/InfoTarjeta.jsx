@@ -20,6 +20,7 @@ const InfoTarjeta = () => {
   const userId = user?.id
   const [loading, setLoading] = useState(false);
 
+  console.log('hola', cart)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -56,8 +57,8 @@ const InfoTarjeta = () => {
 
   return (
     <div className={style.cnt}>
+      <p className={style.title}>Datos de la tarjeta </p>
       <form onSubmit={handleSubmit} className={style.form}>
-        <p className={style.title}>Datos de la tarjeta </p>
         <CardElement
           options={{
             style: {
@@ -65,7 +66,7 @@ const InfoTarjeta = () => {
             },
           }} />
         <div className={style.ctnBtn}>
-          <p>{total}</p>
+          <p className={style.total}>TOTAL: ${total}</p>
           <button type="submit" disabled={!stripe} className={style.btn}>
             {
               loading ? (

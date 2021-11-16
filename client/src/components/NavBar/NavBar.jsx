@@ -53,7 +53,7 @@ const NavBar = () => {
                     ) : (
                         <>
                             <Link className={style.login} to='/login'>
-                                <button className={style.btns}>Loguearte</button>
+                                <button className={style.btns}>Iniciar Sección</button>
                             </Link>
                             <Link className={style.register} to='/register'>
                                 <button className={style.btns}>Registrarte</button>

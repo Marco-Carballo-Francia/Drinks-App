@@ -28,10 +28,22 @@ const UserSchema = new Schema({
         type: String,
     },
     direccion: {
-        type: String
+        type: String,
     },
-    telefono: {
-        type: String
+    piso: {
+        type: Number,
+    },
+    departamento: {
+        type: String,
+    },
+    estadoProvincia: {
+        type: String,
+    },
+    ciudad: {
+        type: String,
+    },
+    codigoPostal: {
+        type: Number,
     },
     fechadenacimiento: {
         type: String
@@ -40,6 +52,12 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    favoritos: [{
+        item: {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        }
+    }],
     itemList: [{
         item: {
             type: Schema.Types.ObjectId,

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const passport = require("passport");
-const { postUser, postLogin, profileAuthenticate, googleLogin, newAdmin, getUserByName, editUser } = require("./user.controller.js");
+const { postUser, postLogin, profileAuthenticate, googleLogin, newAdmin, getUserByName, editUser, addFavorite } = require("./user.controller.js");
 
 const router = Router();
 
@@ -14,5 +14,6 @@ router.put('/admin/update/:id', newAdmin);
 router.get('/admin/users', getUserByName);
 router.post('/user/google', googleLogin)
 router.patch('/user/edit/:id', editUser);
+router.put('/user/favorite', addFavorite);
 
 module.exports = router;
