@@ -26,7 +26,7 @@ const CarouselCombo = () => {
                     alt="First slide"
                 />
                 <Carousel.Caption className={style.ctntxt} >
-                    <h1>Sabias que?</h1>
+                    <h1 className={style.title}>Sabias que?</h1>
                     <p className={style.txt}>Tenemos muchos combos para que disfrutes justo a amigos</p>
                     <Link to="/category/combos" ><button value="combos" onClick={handleClick} className={style.btn}>Entrar</button> </Link>
                 </Carousel.Caption>
@@ -39,7 +39,7 @@ const CarouselCombo = () => {
                 />
 
                 <Carousel.Caption className={style.ctntxt}>
-                    <h1>Vinos tintos, blancos, rosados…?</h1>
+                    <h1 className={style.title}>Vinos tintos, blancos, rosados…?</h1>
                     <p className={style.txt}>Seleccione entre una gran variedad de vinos, de mucha calidad y algunos vinos que solo se elaboran en solo una parte del planeta</p>
                    <Link to="/category/vinos"> <button  value="vinos" onClick={handleClick} className={style.btn}>Entrar</button> </Link>
                 </Carousel.Caption>
@@ -52,7 +52,7 @@ const CarouselCombo = () => {
                 />
 
                 <Carousel.Caption className={style.ctntxt}>
-                    <h1>Amante del Whisky? </h1>
+                    <h1 className={style.title}>Amante del Whisky? </h1>
                     <p className={style.txt}>Nunca lo has probado y te quieres dar un capricho? No te preocupes… aquí podrás encontrar ese que tanto añoras.  </p>
                     <Link to="/category/whisky"><button value="whisky" onClick={handleClick} className={style.btn}>Entrar</button> </Link>
                 </Carousel.Caption>

@@ -9,13 +9,21 @@
 }
 
 .title {
-  text-align: center;
   font-weight: 500;
   letter-spacing: 0.5px;
   font-size: 25px;
   font-family: "Montserrat", sans-serif;
   border-bottom: 1.5px solid black;
   width: 350px;
+  margin: 0 auto;
+}
+
+.total{
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .ctnBtn {

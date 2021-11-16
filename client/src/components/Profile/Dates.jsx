@@ -34,7 +34,6 @@ function Dates() {
         ciudad: ''
     });
 
-
     const handleOnChange = e => {
         setValues({
             ...values,
@@ -110,8 +109,7 @@ function Dates() {
 
     return (
         <div>
-            <div className={style.ctn} >
-
+            <div >
                 <div className={style.data}>
                     <h3 className={style.titlePrin}>Mis datos <BsPencilSquare onClick={openModal} className={style.icon} /></h3>
 
@@ -122,7 +120,6 @@ function Dates() {
                 </div>
 
                 <div className={style.ctnDetail} >
-
                     <div>
                         <div className={style.data}>
                             <p className={style.title1} >Nombre:</p>
@@ -195,138 +192,148 @@ function Dates() {
             >
                 <form className={style.form} >
                     <p className={style.titleEditar}><b>Editar Datos</b></p>
-                    <div className={style.username}>
-                        <label className={style.title}>Nombre</label>
-                        <input className={style.input}
-                            name='nombre'
-                            type="text"
-                            placeholder={user?.nombre ? user?.nombre : user?.user?.nombre}
-                            value={values.nombre}
-                            onChange={handleOnChange}
-                        />
-                        {/* <p className={style.error}>{errors.nombre}</p> */}
+
+                    <div className={style.ctnNameApe}>
+                        <div className={style.username}>
+                            <label className={style.title}>Nombre</label>
+                            <input className={style.input}
+                                name='nombre'
+                                type="text"
+                                placeholder={user?.nombre ? user?.nombre : user?.user?.nombre}
+                                value={values.nombre}
+                                onChange={handleOnChange}
+                            />
+                        </div>
+
+                        <div className={style.apellido}>
+                            <label className={style.title}>Apellido</label>
+                            <input className={style.input}
+                                name='apellido'
+                                type="text"
+                                placeholder={user?.apellido ? user?.apellido : user?.user?.apellido}
+                                value={values.apellido}
+                                onChange={handleOnChange}
+                            />
+                            {/* <p className={style.error}>{errors.apellido}</p> */}
+                        </div>
+                    </div>
+                    <div className={style.ctnDocFecha}>
+                        <div className={style.documento}>
+                            <label className={style.title}>Documento</label>
+                            <input className={style.input}
+                                name='documento'
+                                type='text'
+                                placeholder={user?.documento ? user?.documento : user?.user?.documento}
+                                onChange={handleOnChange}
+                                value={values.documento}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
+
+                        <div className={style.documento}>
+                            <label className={style.title}>Fecha de nacimiento</label>
+                            <input className={style.input}
+                                name='fechadenacimiento'
+                                type='text'
+                                placeholder={user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento}
+                                onChange={handleOnChange}
+                                value={values.fechadenacimiento}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
                     </div>
 
-                    <div className={style.apellido}>
-                        <label className={style.title}>Apellido</label>
-                        <input className={style.input}
-                            name='apellido'
-                            type="text"
-                            placeholder={user?.apellido ? user?.apellido : user?.user?.apellido}
-                            value={values.apellido}
-                            onChange={handleOnChange}
-                        />
-                        {/* <p className={style.error}>{errors.apellido}</p> */}
+                    <div className={style.ctnDirPisoDep}>
+                        <div className={style.direccion}>
+                            <label className={style.title}>Direccion</label>
+                            <input className={style.inputDireccion}
+                                name='direccion'
+                                type='text'
+                                placeholder={user?.direccion ? user?.direccion : user?.user?.direccion}
+                                onChange={handleOnChange}
+                                value={values.direccion}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
+
+
+
+                        <div className={style.piso}>
+                            <label className={style.title}>Piso</label>
+                            <input className={style.inputPiso}
+                                name='piso'
+                                type='text'
+                                placeholder={user?.piso ? user?.piso : user?.user?.piso}
+                                onChange={handleOnChange}
+                                value={values.piso}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
+
+                        <div className={style.departamento}>
+                            <label className={style.title}>Departamento</label>
+                            <input className={style.inputDepartamento}
+                                name='departamento'
+                                type='text'
+                                placeholder={user?.departamento ? user?.departamento : user?.user?.departamento}
+                                onChange={handleOnChange}
+                                value={values.departamento}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
                     </div>
 
-                    <div className={style.telefono}>
-                        <label className={style.title}>Telefono</label>
-                        <input className={style.input}
-                            name='telefono'
-                            type="text"
-                            placeholder={user?.telefono ? user?.telefono : user?.user?.telefono}
-                            value={values.telefono}
-                            onChange={handleOnChange}
-                        />
-                        {/* <p className={style.error}>{errors.email}</p> */}
+                    <div className={style.ctnNameApe}>
+                        <div className={style.documento}>
+                            <label className={style.title}>Estado/Provincia</label>
+                            <input className={style.input}
+                                name='estadoProvincia'
+                                type='text'
+                                placeholder={user?.estadoProvincia ? user?.estadoProvincia : user?.user?.estadoProvincia}
+                                onChange={handleOnChange}
+                                value={values.estadoProvincia}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
+
+                        <div className={style.documento}>
+                            <label className={style.title}>Ciudad</label>
+                            <input className={style.input}
+                                name='ciudad'
+                                type='text'
+                                placeholder={user?.ciudad ? user?.ciudad : user?.user?.ciudad}
+                                onChange={handleOnChange}
+                                value={values.ciudad}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
                     </div>
 
-                    <div className={style.documento}>
-                        <label className={style.title}>Documento</label>
-                        <input className={style.input}
-                            name='documento'
-                            type='text'
-                            placeholder={user?.documento ? user?.documento : user?.user?.documento}
-                            onChange={handleOnChange}
-                            value={values.documento}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
+                    <div className={style.ctnNameApe}>
+                        <div className={style.documento}>
+                            <label className={style.title}>Codigo Postal</label>
+                            <input className={style.input}
+                                name='codigoPostal'
+                                type='text'
+                                placeholder={user?.codigoPostal ? user?.codigoPostal : user?.user?.codigoPostal}
+                                onChange={handleOnChange}
+                                value={values.codigoPostal}
+                            />
+                            {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        </div>
 
-                    <div className={style.documento}>
-                        <label className={style.title}>Fecha de nacimiento</label>
-                        <input className={style.input}
-                            name='fechadenacimiento'
-                            type='text'
-                            placeholder={user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento}
-                            onChange={handleOnChange}
-                            value={values.fechadenacimiento}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                        <div className={style.telefono}>
+                            <label className={style.title}>Telefono</label>
+                            <input className={style.input}
+                                name='telefono'
+                                type="text"
+                                placeholder={user?.telefono ? user?.telefono : user?.user?.telefono}
+                                value={values.telefono}
+                                onChange={handleOnChange}
+                            />
+                            {/* <p className={style.error}>{errors.email}</p> */}
+                        </div>
                     </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Direccion</label>
-                        <input className={style.input}
-                            name='direccion'
-                            type='text'
-                            placeholder={user?.direccion ? user?.direccion : user?.user?.direccion}
-                            onChange={handleOnChange}
-                            value={values.direccion}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Piso</label>
-                        <input className={style.input}
-                            name='piso'
-                            type='text'
-                            placeholder={user?.piso ? user?.piso : user?.user?.piso}
-                            onChange={handleOnChange}
-                            value={values.piso}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Departamento</label>
-                        <input className={style.input}
-                            name='departamento'
-                            type='text'
-                            placeholder={user?.departamento ? user?.departamento : user?.user?.departamento}
-                            onChange={handleOnChange}
-                            value={values.departamento}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Estado/Provincia</label>
-                        <input className={style.input}
-                            name='estadoProvincia'
-                            type='text'
-                            placeholder={user?.estadoProvincia ? user?.estadoProvincia : user?.user?.estadoProvincia}
-                            onChange={handleOnChange}
-                            value={values.estadoProvincia}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Ciudad</label>
-                        <input className={style.input}
-                            name='ciudad'
-                            type='text'
-                            placeholder={user?.ciudad ? user?.ciudad : user?.user?.ciudad}
-                            onChange={handleOnChange}
-                            value={values.ciudad}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
-                    <div className={style.documento}>
-                        <label className={style.title}>Codigo Postal</label>
-                        <input className={style.input}
-                            name='codigoPostal'
-                            type='text'
-                            placeholder={user?.codigoPostal ? user?.codigoPostal : user?.user?.codigoPostal}
-                            onChange={handleOnChange}
-                            value={values.codigoPostal}
-                        />
-                        {/* <p className={style.error}>{errors.contraseña}</p> */}
-                    </div>
-
 
 
                     <div className={style.ctnBtns}>

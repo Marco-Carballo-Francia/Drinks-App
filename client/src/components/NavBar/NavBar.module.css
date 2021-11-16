@@ -21,6 +21,7 @@
 }
 
 .linkCart {
+  margin-right: 10px;
   height: 35px;
   width: 35px;
   color: #ffffff;
@@ -31,23 +32,19 @@
 }
 
 .btns {
-  margin-left: 20px;
-  padding: 0.4em;
   color: white;
-  border: 1px solid rgb(255, 255, 255);
+  border: none;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 12px;
   letter-spacing: 1px;
   background-color: #00000000;
   cursor: pointer;
-  width: 100px;
 }
 
 .btns:hover {
   background-color: rgba(255, 255, 255, 0);
   color: rgb(207, 117, 0);
-  border: 1px solid rgb(207, 117, 0);
 }
 
 .userImg {
@@ -61,8 +58,7 @@
   color: white;
   margin: 0 auto;
   font-weight: 600;
-  font-size: 13px;
-  margin-left: 10px;
+  font-size: 14px;
   margin-right: 10px;
 }
 
@@ -84,7 +80,7 @@
   letter-spacing: 1px;
   background-color: #00000000;
   cursor: pointer;
-  width: 60px;
+  width: 80px;
 }
 
 .logout:hover {

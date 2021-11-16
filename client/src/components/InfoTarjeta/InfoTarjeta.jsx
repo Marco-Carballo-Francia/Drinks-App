@@ -66,7 +66,7 @@ const InfoTarjeta = () => {
             },
           }} />
         <div className={style.ctnBtn}>
-          <p>{total}</p>
+          <p className={style.total}>TOTAL: ${total}</p>
           <button type="submit" disabled={!stripe} className={style.btn}>
             {
               loading ? (
