@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import style from './Styles/Dates.module.css'
 import { BsPencilSquare } from "react-icons/bs";
 import Modal from 'react-modal';
-import { editDateProfile } from '../../redux/actions/actions'
+import { editDateProfile } from '../../redux/actions/actions';
+import Alert from 'react-bootstrap/Alert'
 
 function Dates() {
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.user);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [show, setShow] = useState(false);
+
 
     const id = user?._id ? user?._id : user?.user?._id;
 
@@ -80,6 +83,11 @@ function Dates() {
 
         dispatch(editDateProfile(id, obj));
         closeModal()
+        setShow()
+        setTimeout(() => {
+            setShow(false)
+        }, 2000);
+
         setValues({
             nombre: '',
             apellido: '',
@@ -120,7 +128,7 @@ function Dates() {
                 </div>
 
                 <div className={style.ctnDetail} >
-                    <div>
+                    <div className={style.ctnText}>
                         <div className={style.data}>
                             <p className={style.title1} >Nombre:</p>
                             <p className={style.user}>{user?.nombre ? user?.nombre : user?.user?.nombre} </p>
@@ -152,7 +160,7 @@ function Dates() {
                         </div>
                     </div>
 
-                    <div>
+                    <div className={style.ctnText}>
                         <div className={style.data}>
                             <p className={style.title1} >Direccion:</p>
                             <p className={style.user}>{user?.direccion ? user?.direccion : user?.user?.direccion} </p>
@@ -183,6 +191,7 @@ function Dates() {
                         </div>
                     </div>
                 </div>
+                <Alert show={show} variant="success" className={style.alert}> Datos completos  </Alert>
             </div>
 
             <Modal
