@@ -37,9 +37,9 @@ function CardDetails(props) {
 
     return (
         <div className={style.ctnSuperior}>
-            { 
-                product.nombre 
-                    ? 
+            {
+                product.nombre
+                    ?
                     (
                         <div className={style.ctnDetalles}>
                             <div>
@@ -69,18 +69,19 @@ function CardDetails(props) {
                                 </div>
 
                                 <div>
-                                    <button className={style.comprar}>Comprar</button>
+                                    <button onClick={() => onClick(product)} className={style.comprar}>Agregar al carrito</button>
+
                                 </div>
                                 <div>
-                                    <button onClick={()=> onClick()} className={style.añadir}>Agregar al carrito</button>
+                                    <button className={style.añadir}>Agregar a favoritos</button>
                                 </div>
                             </div>
                         </div>
                     )
-                    : 
-                    ( <Loading /> )
+                    :
+                    (<Loading />)
             }
-           
+
             <div className={style.review}>
                 <Review id={id} />
             </div>

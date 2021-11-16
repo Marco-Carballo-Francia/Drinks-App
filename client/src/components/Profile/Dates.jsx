@@ -25,7 +25,13 @@ function Dates() {
         apellido: '',
         telefono: '',
         documento: '',
-        fechadenacimiento: ''
+        fechadenacimiento: '',
+        direccion: '',
+        piso: '',
+        departamento: '',
+        codigoPostal: '',
+        estadoProvincia: '',
+        ciudad: ''
     });
 
 
@@ -39,20 +45,38 @@ function Dates() {
     const handleOnSumit = e => {
         e.preventDefault()
         let obj = {}
-        if (values.nombre.length > 1) {
+        if (values.nombre.length > 0) {
             obj.nombre = values.nombre
         }
-        if (values.apellido.length > 1) {
+        if (values.apellido.length > 0) {
             obj.apellido = values.apellido
         }
-        if (values.telefono.length > 1) {
+        if (values.telefono.length > 0) {
             obj.telefono = values.telefono
         }
-        if (values.documento.length > 1) {
+        if (values.documento.length > 0) {
             obj.documento = values.documento
         }
-        if (values.fechadenacimiento.length > 1) {
+        if (values.fechadenacimiento.length > 0) {
             obj.fechadenacimiento = values.fechadenacimiento
+        }
+        if (values.codigoPostal.length > 0) {
+            obj.codigoPostal = values.codigoPostal
+        }
+        if (values.direccion.length > 0) {
+            obj.direccion = values.direccion
+        }
+        if (values.piso.length > 0) {
+            obj.piso = values.piso
+        }
+        if (values.departamento.length > 0) {
+            obj.departamento = values.departamento
+        }
+        if (values.estadoProvincia.length > 0) {
+            obj.estadoProvincia = values.estadoProvincia
+        }
+        if (values.ciudad.length > 0) {
+            obj.ciudad = values.ciudad
         }
 
         dispatch(editDateProfile(id, obj));
@@ -62,7 +86,13 @@ function Dates() {
             apellido: '',
             telefono: '',
             documento: '',
-            fechadenacimiento: ''
+            fechadenacimiento: '',
+            direccion: '',
+            piso: '',
+            departamento: '',
+            codigoPostal: '',
+            estadoProvincia: '',
+            ciudad: ''
         });
     }
 
@@ -86,35 +116,76 @@ function Dates() {
                     <h3 className={style.titlePrin}>Mis datos <BsPencilSquare onClick={openModal} className={style.icon} /></h3>
 
                 </div>
+
                 <div className={style.data}>
                     <img className={style.img} src={user?.imagen ? user?.imagen : user?.imagen?.imagen} />
                 </div>
 
-                <div className={style.data}>
-                    <p className={style.title1} >Nombre:</p>
-                    <p className={style.user}>{user?.nombre ? user?.nombre : user?.user?.nombre} </p>
-                </div>
-                <div className={style.data}>
-                    <p className={style.title1} >Apellido:</p>
-                    <p className={style.user}>{user?.apellido ? user?.apellido : user?.user?.apellido} </p>
-                </div>
-                <div className={style.data}>
-                    <p className={style.title1} >Email:</p>
-                    <p className={style.user}>{user?.email ? user?.email : user?.user?.email}</p>
-                </div>
-                <div className={style.data}>
-                    <p className={style.title1} >Documento:</p>
-                    <p className={style.user}>{user?.documento ? user?.documento : user?.user?.documento} </p>
-                </div>
-                <div className={style.data}>
-                    <p className={style.title1} >Telefono:</p>
-                    <p className={style.user}>{user?.telefono ? user?.telefono : user?.user?.telefono} </p>
-                </div>
-                <div className={style.data}>
-                    <p className={style.title1} >Fecha de nacimiento:</p>
-                    <p className={style.user}>{user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento} </p>
-                </div>
+                <div className={style.ctnDetail} >
 
+                    <div>
+                        <div className={style.data}>
+                            <p className={style.title1} >Nombre:</p>
+                            <p className={style.user}>{user?.nombre ? user?.nombre : user?.user?.nombre} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Apellido:</p>
+                            <p className={style.user}>{user?.apellido ? user?.apellido : user?.user?.apellido} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Email:</p>
+                            <p className={style.user}>{user?.email ? user?.email : user?.user?.email}</p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Documento:</p>
+                            <p className={style.user}>{user?.documento ? user?.documento : user?.user?.documento} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Telefono:</p>
+                            <p className={style.user}>{user?.telefono ? user?.telefono : user?.user?.telefono} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Fecha de nacimiento:</p>
+                            <p className={style.user}>{user?.fechadenacimiento ? user?.fechadenacimiento : user?.user?.fechadenacimiento} </p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className={style.data}>
+                            <p className={style.title1} >Direccion:</p>
+                            <p className={style.user}>{user?.direccion ? user?.direccion : user?.user?.direccion} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Piso:</p>
+                            <p className={style.user}>{user?.piso ? user?.piso : user?.user?.piso} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Departamento:</p>
+                            <p className={style.user}>{user?.departamento ? user?.departamento : user?.user?.departamento} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Estado/Provincia:</p>
+                            <p className={style.user}>{user?.estadoProvincia ? user?.estadoProvincia : user?.user?.estadoProvincia} </p>
+                        </div>
+                        <div className={style.data}>
+                            <p className={style.title1} >Ciudad:</p>
+                            <p className={style.user}>{user?.ciudad ? user?.ciudad : user?.user?.ciudad} </p>
+                        </div>
+
+                        <div className={style.data}>
+                            <p className={style.title1} >Codigo Postal:</p>
+                            <p className={style.user}>{user?.codigoPostal ? user?.codigoPostal : user?.user?.codigoPostal} </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <Modal
@@ -183,6 +254,79 @@ function Dates() {
                         />
                         {/* <p className={style.error}>{errors.contraseña}</p> */}
                     </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Direccion</label>
+                        <input className={style.input}
+                            name='direccion'
+                            type='text'
+                            placeholder={user?.direccion ? user?.direccion : user?.user?.direccion}
+                            onChange={handleOnChange}
+                            value={values.direccion}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Piso</label>
+                        <input className={style.input}
+                            name='piso'
+                            type='text'
+                            placeholder={user?.piso ? user?.piso : user?.user?.piso}
+                            onChange={handleOnChange}
+                            value={values.piso}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Departamento</label>
+                        <input className={style.input}
+                            name='departamento'
+                            type='text'
+                            placeholder={user?.departamento ? user?.departamento : user?.user?.departamento}
+                            onChange={handleOnChange}
+                            value={values.departamento}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Estado/Provincia</label>
+                        <input className={style.input}
+                            name='estadoProvincia'
+                            type='text'
+                            placeholder={user?.estadoProvincia ? user?.estadoProvincia : user?.user?.estadoProvincia}
+                            onChange={handleOnChange}
+                            value={values.estadoProvincia}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Ciudad</label>
+                        <input className={style.input}
+                            name='ciudad'
+                            type='text'
+                            placeholder={user?.ciudad ? user?.ciudad : user?.user?.ciudad}
+                            onChange={handleOnChange}
+                            value={values.ciudad}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
+                    <div className={style.documento}>
+                        <label className={style.title}>Codigo Postal</label>
+                        <input className={style.input}
+                            name='codigoPostal'
+                            type='text'
+                            placeholder={user?.codigoPostal ? user?.codigoPostal : user?.user?.codigoPostal}
+                            onChange={handleOnChange}
+                            value={values.codigoPostal}
+                        />
+                        {/* <p className={style.error}>{errors.contraseña}</p> */}
+                    </div>
+
 
 
                     <div className={style.ctnBtns}>

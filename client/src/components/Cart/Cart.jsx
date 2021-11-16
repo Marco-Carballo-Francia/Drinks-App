@@ -40,9 +40,9 @@ const Cart = () => {
   }
 
   const handleClick = () => {
-    if(user !== null) {
+    if (user !== null) {
       dispatch(setTotal(totalCart(cart)));
-      history.push('/pago');
+      history.push('/checkout');
     } else {
       history.push('/login');
     }
@@ -79,9 +79,7 @@ const Cart = () => {
           </p>
         </div>
         <div>
-          <Link to="/checkout">
-            <button onClick={handleClick} className={style.btn}>PAGAR</button>
-            </Link>
+          <button onClick={handleClick} className={style.btn}>PAGAR</button>
         </div>
       </div>
     </div>
