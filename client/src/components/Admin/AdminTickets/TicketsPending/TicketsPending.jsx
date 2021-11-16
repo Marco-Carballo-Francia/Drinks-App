@@ -32,7 +32,7 @@ const TicketsPending = () => {
                                 <div className={styles.ticket} key={t._id}>
                                     <h2>Fecha: {t.fecha}</h2>
                                     <h2>Usuario: {t.user.nombre}</h2>
-                                    <h3>Estado: {t.state}</h3>
+                                    <h3>Estado: {t.estado}</h3>
                                 </div>
                             )
                         })

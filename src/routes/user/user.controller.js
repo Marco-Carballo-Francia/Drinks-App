@@ -85,7 +85,7 @@ const postLogin = async (req, res) => {
         const body = { id: user._id, email: user.email };
         const token = jwt.sign({ user: body }, "top_secret");
 
-        return res.json({ user });
+        return res.json(user);
       });
     } catch (error) {
       console.log(error);

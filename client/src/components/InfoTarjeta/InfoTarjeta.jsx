@@ -17,7 +17,7 @@ const InfoTarjeta = () => {
   const elements = useElements();
   const { cart, total } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const userId = user?.id
+  const userId = user?._id
   const [loading, setLoading] = useState(false);
 
   console.log('hola', cart)
@@ -27,6 +27,7 @@ const InfoTarjeta = () => {
       type: "card",
       card: elements.getElement(CardElement),
     })
+    console.log("paymentMethod", paymentMethod)
     setLoading(true);
     if (!error) {
       const id = paymentMethod.id;
