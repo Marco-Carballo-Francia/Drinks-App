@@ -8,7 +8,6 @@ const TicketSchema = new Schema({
   },
   numOrden: {
     type: Number,
-    required: true,
   },
   items: [
     {
@@ -44,5 +43,11 @@ const TicketSchema = new Schema({
     required: true,
   },
 });
+
+TicketSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.numOrden = returnedObject._id
+  }
+})
 
 module.exports = model("Ticket", TicketSchema);

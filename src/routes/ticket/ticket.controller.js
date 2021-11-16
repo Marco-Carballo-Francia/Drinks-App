@@ -27,9 +27,9 @@ const makePayment = async (req, res) => {
 
 const createTicket = async (req, res) => {
   let { payment, cart, userId } = req.body;
+  console.log(payment);
   try {
     let user = await User.findById(userId);
-
     let itemCart = [];
     for (let i = 0; i < cart.length; i++) {
       let itemDB = await Item.findById(cart[i]._id);
@@ -48,6 +48,7 @@ const createTicket = async (req, res) => {
       precioTotal: payment.amount,
       user: user._id,
       direccion: "Av Siempreviva 123",
+      metodoPago: payment.payment_method
     };
     newTicket = new Ticket(newTicket);
     newTicket = await newTicket.save();
@@ -107,6 +108,7 @@ const updateTickets = async (req, res) => {
 const getUserTickets = async (req, res) => {
   const { id } = req.params;
   try {
+    // let user = await User.findById(id)
     let userTickets = await Ticket.find()
       .populate("user")
       .populate("items.item");
@@ -121,7 +123,7 @@ const getUserTickets = async (req, res) => {
       (x) => splitt(JSON.stringify(x.user._id)) === id.toString()
     );
 
-    res.json(tickets);
+    res.json(userTickets);
   } catch (error) {
     console.log(error);
   }
