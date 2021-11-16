@@ -1,7 +1,8 @@
-import { GET_ADMIN_ITEMS, GET_TICKETS_ADMIN, DELETE_TICKET, CHANGE_TICKET_STATUS, GET_USERS } from "../actions/const.js";
+import { GET_ADMIN_ITEMS, GET_TICKETS_ADMIN, DELETE_TICKET, CHANGE_TICKET_STATUS, GET_USERS, SET_ITEM } from "../actions/const.js";
 
 const initialState = {
     items: [],
+    item: {},
     ticketsPending: [],
     ticket: {},
     ticketsReady: [],
@@ -19,7 +20,8 @@ export function adminReducer (state = initialState, action ) {
         case GET_TICKETS_ADMIN:
             return{
                 ...state,
-                ticketsPending: action.payload,
+                ticketsPending: action.payload.pending,
+                ticketsProcessing: action.payload.processing
             }
         case DELETE_TICKET:
             return {
@@ -37,6 +39,27 @@ export function adminReducer (state = initialState, action ) {
             return {
                 ...state,
                 users: action.payload
+            }
+        case SET_ITEM:
+            return{
+                ...state,
+                item: action.payload
+            }
+        case "SET_TICKET":
+            return {
+                ...state,
+                ticket: action.payload
+            }
+        case "SET_USER":
+            let u = state.users.filter(x => x._id === action.payload)
+            return {
+                ...state,
+                user: u[0]
+            }
+        case "DELETE_TICKET":
+            return {
+                ...state,
+                ticket: null
             }
         default:
             return state;

@@ -65,8 +65,8 @@ const getTicketsInPendAndPro = async (req, res) => {
       .populate("user", ["nombre"]);
 
     let sortTicketsPending = userTicketsPending.sort((a, b) => {
-      if (a.fecha > b.fecha) return -1;
-      if (a.fecha < b.fecha) return 1;
+      if (a.fecha > b.fecha) return 1;
+      if (a.fecha < b.fecha) return -1;
     });
 
     let userTicketsProcessing = await Ticket.find({ state: "Processing" })
@@ -77,11 +77,11 @@ const getTicketsInPendAndPro = async (req, res) => {
       if (a.fecha > b.fecha) return -1;
       if (a.fecha < b.fecha) return 1;
     });
-
     const ticketsObj = {
       pending: sortTicketsPending,
       processing: sortTicketsProcessing,
     };
+    // console.log(ticketsObj)
     res.json(ticketsObj);
   } catch (error) {
     console.log(error);

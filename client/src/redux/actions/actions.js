@@ -23,7 +23,9 @@ import {
     GET_USERS,
     CREATE_ITEM,
     EDIT_DATE_PROFILE,
-    DELETE_ITEM
+    DELETE_ITEM,
+    GET_ADMIN_ITEMS,
+    SET_ITEM
 } from './const';
 
 
@@ -202,10 +204,10 @@ export const datosDeCompra = (payload) => {
 
 export const getTicketsAdmin = () => async (dispatch) => {
     try {
-        const ticketsPending = (await axios.get(`/ticket/admin`)).data
+        const { data } = (await axios.get(`/ticket/state`))
         return dispatch({
             type: GET_TICKETS_ADMIN,
-            payload: ticketsPending
+            payload: data
         })
     }
     catch (error) {
@@ -300,3 +302,33 @@ export const deleteItem = (id) => async (dispatch) => {
         console.log(err)
     }
 }
+
+export const getAdminItems = ({name, category}) => async (dispatch) => {
+    try {
+        const { data } = await axios.get(`/items?name=${name ? name : ""}&category=${category ? category : ""}`)
+        return dispatch({
+            type: GET_ADMIN_ITEMS,
+            payload: data
+        })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+export const setItem = (id) => async (dispatch) =>{
+    try{
+        const { data } = await axios.get(`/items/${id}`)
+        return dispatch ({
+            type: SET_ITEM,
+            payload: data
+        })
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+// export const setUser = (id) => async (dispatch) => {
+    
+// }
