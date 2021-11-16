@@ -20,7 +20,8 @@ export function adminReducer (state = initialState, action ) {
         case GET_TICKETS_ADMIN:
             return{
                 ...state,
-                ticketsPending: action.payload,
+                ticketsPending: action.payload.pending,
+                ticketsProcessing: action.payload.processing
             }
         case DELETE_TICKET:
             return {
@@ -43,6 +44,22 @@ export function adminReducer (state = initialState, action ) {
             return{
                 ...state,
                 item: action.payload
+            }
+        case "SET_TICKET":
+            return {
+                ...state,
+                ticket: action.payload
+            }
+        case "SET_USER":
+            let u = state.users.filter(x => x._id === action.payload)
+            return {
+                ...state,
+                user: u[0]
+            }
+        case "DELETE_TICKET":
+            return {
+                ...state,
+                ticket: null
             }
         default:
             return state;

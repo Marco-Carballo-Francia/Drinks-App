@@ -19,15 +19,19 @@ const UsersList = () => {
         dispatch(getUsers({ nombre: value }))
     }
 
+    const handleClick = (id) => {
+        dispatch({type: "SET_USER", payload: id})
+    }
+
     return (
             <div>
             <input type="text" value={input} onChange={(e) => handleChange(e)} />
             <div>
                 {
                     users?.map(x => (
-                        <div>
-                            <span>{x.nombre}</span>
-                        </div>
+                        <button onClick={() => handleClick(x._id)}>
+                            <span>{x.email}</span>
+                        </button>
                     ))
                 }
             </div>

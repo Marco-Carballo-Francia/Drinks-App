@@ -15,7 +15,7 @@ const AdminTickets = () => {
     return (
         <div>
              <TicketsPending />
-             <TicketProcess />
+             {/*<TicketProcess />*/}
         </div>
     )
 }
