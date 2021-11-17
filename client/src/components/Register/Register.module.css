@@ -67,7 +67,7 @@
   padding: 0.5em 1.5em;
   border: 0;
   color: rgb(255, 255, 255);
-  font-family: inherit;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: 1px;
@@ -85,9 +85,22 @@
 }
 
 .titleModal {
+  color: #0c9400;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  margin: 0 auto;
+}
+
+.texto {
+  color: #000000;
+  text-align: center;
+  margin: 20px 0px 20px 0px;
+  font-weight: 300;
   letter-spacing: 1px;
-  font-size: 22px;
-  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .ctnText {
@@ -95,24 +108,30 @@
   padding: 20px;
 }
 
+.icon {
+  color: #0c9400;
+  font-size: 50px;
+}
+
 .btnAceptar {
-  margin-top: 20px;
-  padding: 0.4em;
-  color: white;
-  border: 1px solid rgb(255, 255, 255);
-  font-family: inherit;
-  font-weight: 600;
+  margin-top: 10px;
+  width: 200px;
+  padding: 0.5em 1.5em;
+  border: 2px solid #0c9400;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   font-size: 14px;
-  letter-spacing: 2px;
-  background-color: #000000;
+  letter-spacing: 1px;
+  background-color: #0c9400;
   cursor: pointer;
-  width: 100px;
 }
 
 .btnAceptar:hover {
-  background-color: rgba(255, 255, 255, 0);
-  color: rgb(207, 117, 0);
-  border: 1px solid rgb(207, 117, 0);
+  background-color: #ffffff;
+  border: 2px solid #0c9400;
+  color: #0c9400;
+  font-weight: 600;
 }
 
 .error {

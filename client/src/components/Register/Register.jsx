@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { registerLocal } from '../../redux/actions/actions';
 import { Link, useHistory } from "react-router-dom";
 import Modal from 'react-modal';
+import { BsCheck2Square } from "react-icons/bs";
 
 const Register = () => {
     const dispatch = useDispatch()
@@ -135,8 +136,8 @@ const Register = () => {
             right: 'auto',
             bottom: 'auto',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: '#000000',
-            color: 'rgb(255, 255, 255)',
+            backgroundColor: '#ffffff',
+            padding: '30px',
         },
     };
 
@@ -245,7 +246,8 @@ const Register = () => {
                         contentLabel="Example Modal"
                     >
                         <div className={style.ctnText} >
-                            <h2 className={style.titleModal} >El usuario se ha registrado correctamente</h2>
+                            <h2 className={style.titleModal} > Felicitaciones! <BsCheck2Square className={style.icon} /> </h2>
+                            <p className={style.texto}> Su registro fue realizado correctamente</p>
                             <button className={style.btnAceptar} onClick={handleOnClick} >Aceptar</button>
                         </div>
                     </Modal>

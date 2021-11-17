@@ -52,24 +52,24 @@ const StockUpdate = () => {
             {
                  !edit 
                     ? <div>
-                        <span>{item.nombre}</span>
-                        <span>{item.precio}</span>
-                        <span>{item.descripcion}</span>
-                        <span>{item.imagen}</span>
+                        <p>Nombre: {item.nombre}</p>
+                        <p>Precio:{item.precio}</p>
+                        <p>Descripcion{item.descripcion}</p>
+                        <p>Imagen{item.imagen}</p>
                     </div>
                     :  <div>
-                        <input name="nombre" value={object.nombre} placeholder="Nombre..." onChange={handleChange} />
-                        <input name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
-                        <input name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
-                        <input name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />
+                        <input className={style.input} name="nombre" value={object.nombre} placeholder="Nombre..." onChange={handleChange} />
+                        <input className={style.input} name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
+                        <textarea className={style.textarea} name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
+                        <input className={style.input} name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />
                     </div>
             }
-            <div>
-                <button onClick={handleDelete}>DELETE</button>
+            <div  className={style.ctnBtnsModal}>
+                <button className={style.btnModal}  onClick={handleDelete}>DELETE</button>
                 { 
                     !edit 
-                        ? <button disabled={!item.nombre} onClick={handleEdit}>EDIT</button> 
-                        : <button onClick={() => setEdit(false)}>CANCEL</button>
+                        ? <button className={style.btnModal} disabled={!item.nombre} onClick={handleEdit}>EDIT</button> 
+                        : <button className={style.btnModal} onClick={() => setEdit(false)}>CANCEL</button>
                 }
             </div>
         </div>
