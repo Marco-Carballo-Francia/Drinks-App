@@ -1,6 +1,4 @@
 import React from "react";
-import StockItems from "./Update/StockItems/StockItems";
-import StockUpdate from "./Update/StockUpdate/StockUpdate";
 import { useHistory } from "react-router-dom";
 
 const AdminStock = () => {
@@ -14,10 +12,10 @@ const AdminStock = () => {
     return (
         <div>
             <button name="update" onClick={handleClick}>
-                Update
+                Editar
             </button>
             <button name="create" onClick={handleClick}>
-                Create
+                Crear
             </button>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {changeTicketStatus} from "../../../../redux/actions/actions"
+import {changeTicketStatus} from "../../../../../redux/actions/actions"
 
 const TicketsReady = () => {
 
@@ -19,11 +19,12 @@ const TicketsReady = () => {
                         {
                             ticketsReady.map(x => {
                                 const { id } = x.id;
-                                return 
+                                return (
                                     <div key={id}>
                                         <span>{id}</span>
                                         <button onClick={(id) => handleClick(id)}>Finalizar</button>
                                     </div>
+                                )
                             })
                         }
                         </div> 

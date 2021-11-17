@@ -7,6 +7,7 @@ import style from './NavBar.module.css';
 import iconHome from '../../Iconos/icon-Home.png';
 import { BsCart2 } from "react-icons/bs";
 import { checkout } from '../../redux/actions/actions';
+import AdminButton from "../Admin/AdminButton/AdminButton"
 
 
 const NavBar = () => {
@@ -34,6 +35,7 @@ const NavBar = () => {
                 <img className={style.imgIcono} src={iconHome} alt="icono de home" />
             </Link>
             <div >
+            {/* <AdminButton/> */}
                 <SearchBar />
                 <Categories />
             </div>

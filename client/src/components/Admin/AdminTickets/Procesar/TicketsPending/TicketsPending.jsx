@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTicketsAdmin } from "../../../../redux/actions/actions";
-import Loading from "../../../Loading/Loading";
+import { getTicketsAdmin } from "../../../../../redux/actions/actions";
+import Loading from "../../../../Loading/Loading";
 import styles from "./TicketsPending.module.css";
 import TicketProcess from "../TicketProcess/TicketProcess";
 
