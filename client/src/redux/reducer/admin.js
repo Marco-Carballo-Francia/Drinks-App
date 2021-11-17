@@ -2,7 +2,7 @@ import { GET_ADMIN_ITEMS, GET_TICKETS_ADMIN, DELETE_TICKET, CHANGE_TICKET_STATUS
 
 const initialState = {
     items: [],
-    item: {},
+    item: null,
     ticketsPending: [],
     ticket: {},
     ticketsReady: [],

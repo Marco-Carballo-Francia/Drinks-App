@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {deleteItem} from "../../../../../redux/actions/actions";
 import style from "./StockUpdate.module.css";
+import Loading from "../../../../Loading/Loading";
 
 const StockUpdate = () => {
     const dispatch = useDispatch();
@@ -47,29 +48,47 @@ const StockUpdate = () => {
         setEdit(true);
     }
 
+    const handleSave = () => {
+        // acá va el dispatch que debería hacer un put en el item con la info actualizada
+    }
+
     return (
         <div className={style.container}>
-            {
-                 !edit 
-                    ? <div>
-                        <span>{item.nombre}</span>
-                        <span>{item.precio}</span>
-                        <span>{item.descripcion}</span>
-                        <span>{item.imagen}</span>
-                    </div>
-                    :  <div>
-                        <input name="nombre" value={object.nombre} placeholder="Nombre..." onChange={handleChange} />
-                        <input name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
-                        <input name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
-                        <input name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />
-                    </div>
+            {   
+                !edit 
+                    ?   <div>
+                            {
+                            !item 
+                                ?   <h3>Seleccioná un item de la lista.</h3>
+                                :   <div>
+                                        <span><strong>Producto: </strong>{item.nombre}</span><br />
+                                        <span><strong>Precio: </strong>{item.precio}</span><br />
+                                        <span><strong>Descripcion: </strong>{item.descripcion}</span><br />
+                                        <img src={item.imagen} alt="imagen del producto" />
+                                    </div>
+                            }
+                        </div>
+                    :   <div>
+                            <input name="nombre" value={object.nombre} placeholder="Nombre..." onChange={handleChange} />
+                            <input name="precio" value={object.precio} placeholder="Precio..." onChange={handleChange} />
+                            <input name="descripcion" value={object.descripcion} placeholder="Descripcion..." onChange={handleChange} />
+                            <input name="imagen" value={object.imagen} placeholder="Imagen..." onChange={handleChange} />
+                            <div>
+                                <span>Unidades en stock: (acá iría el item.qty)</span>
+                                <input type="number" min="0" />
+                            </div>
+                        </div>
             }
             <div>
-                <button onClick={handleDelete}>DELETE</button>
+                {   
+                    !edit
+                        ? <button onClick={handleDelete}>ELIMINAR</button>
+                        : <button onClick={handleSave}>GUARDAR</button>
+                }
                 { 
                     !edit 
-                        ? <button disabled={!item.nombre} onClick={handleEdit}>EDIT</button> 
-                        : <button onClick={() => setEdit(false)}>CANCEL</button>
+                        ? <button disabled={!item} onClick={handleEdit}>EDITAR</button> 
+                        : <button onClick={() => setEdit(false)}>CANCELAR</button>
                 }
             </div>
         </div>

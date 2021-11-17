@@ -6,6 +6,7 @@ import StockUpdate from "../StockUpdate/StockUpdate";
 import style from "./StockItems.module.css";
 
 const StockItems = () => {
+
     const dispatch = useDispatch();
     const { items } = useSelector(state => state.admin);
 
@@ -18,9 +19,18 @@ const StockItems = () => {
         dispatch(setItem(id))
     }
 
+    const [input, setInput] = useState("");
+
+    const handleChange = (e) => {
+        setInput(e.target.value);
+        dispatch(getAdminItems({name: e.target.value}));
+    }
+
     return (
         <div className={style.container}>
-           {
+            <input type="text" value={input} onChange={handleChange}/>
+            <div>   
+                {
                  items 
                     ? items.map(x => (
                         <button className={style.boton} key={x._id} onClick={() => handleClick(x._id)}>
@@ -28,7 +38,8 @@ const StockItems = () => {
                         </button>
                     ))
                     : ( <Loading /> ) 
-            }
+                }
+            </div>
         </div>
     )
 }
