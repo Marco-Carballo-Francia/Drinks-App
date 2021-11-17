@@ -62,7 +62,11 @@ const UserSchema = new Schema({
         item: {
             type: Schema.Types.ObjectId,
             ref: 'Item'
-        }
+        },
+        qtyCart: {
+            type: Number,
+            default: 1
+        },
     }],
     ticketHistory: [{
         ticket: {

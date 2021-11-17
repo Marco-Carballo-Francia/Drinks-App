@@ -26,17 +26,21 @@ const makePayment = async (req, res) => {
 };
 
 const createTicket = async (req, res) => {
-  let { payment, cart, userId } = req.body;
+  let { payment, userId, direccion } = req.body;
   console.log(payment);
   try {
-    let user = await User.findById(userId);
+    let user = await User.findById(userId)
+    .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+    .populate('ticketHistory');
+    let cart = user.itemList;
+
     let itemCart = [];
     for (let i = 0; i < cart.length; i++) {
-      let itemDB = await Item.findById(cart[i]._id);
-      let qty = cart[i].qty;
+      let itemDB = await Item.findById(cart[i].item);
+      let qty = cart[i].qtyCart;
       let obj = {
         item: itemDB,
-        qty: qty,
+        qty: qty
       };
       itemCart.push(obj);
     }
@@ -47,7 +51,7 @@ const createTicket = async (req, res) => {
       items: itemCart,
       precioTotal: payment.amount,
       user: user._id,
-      direccion: "Av Siempreviva 123",
+      direccion: direccion,
       metodoPago: payment.payment_method
     };
     newTicket = new Ticket(newTicket);

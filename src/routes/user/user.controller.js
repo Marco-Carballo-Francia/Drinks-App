@@ -104,7 +104,9 @@ const profileAuthenticate = (req, res) => {
 const getUserByName = async (req, res) => {
   const { nombre } = req.query;
   try {
-    let getUser = await User.find();
+    let getUser = await User.find()
+      .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+      .populate('ticketHistory');
 
     if (nombre && nombre !== "") {
       let getByName = getUser.filter((u) =>
@@ -145,31 +147,144 @@ const newAdmin = async (req, res) => {
 };
 
 const editUser = async (req, res, next) => {
-  const { nombre, apellido, direccion, telefono, documento, fechadenacimiento, piso, departamento, ciudad, estadoProvincia, codigoPostal } = req.body;
-  console.log('ideBack', req.params._id)
+  const {
+    nombre,
+    apellido,
+    direccion,
+    telefono,
+    documento,
+    fechadenacimiento,
+    piso,
+    departamento,
+    ciudad,
+    estadoProvincia,
+    codigoPostal,
+    itemCart,
+    decrement
+  } = req.body;
+  console.log('ideBack', req.params.id);
+  console.log('itemCart', itemCart);
   try {
-    let edit = await User.findByIdAndUpdate(req.params.id, {
-      nombre: nombre,
-      apellido: apellido,
-      telefono: telefono,
-      documento: documento,
-      direccion: direccion,
-      fechadenacimiento: fechadenacimiento,
-      piso: piso,
-      departamento: departamento,
-      ciudad: ciudad,
-      estadoProvincia: estadoProvincia,
-      codigoPostal: codigoPostal
-    }, { new: true })
+    let qty = 0;
+    let obj = {};
+    console.log('itemCart.qtyCart', itemCart.qtyCart);
+    if (itemCart) {
+      qty = itemCart.qtyCart;
+      obj = {
+        item: itemCart.item,
+        qtyCart: qty,
+      };
+    }
+    console.log('obj', obj);
+    let user = await User.findById(req.params.id)
+      .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+      .populate('ticketHistory');
 
-    // await edit.save();
+    function splitt(string) {
+      let id = string.split('"');
+      let dividido = id[1];
+      return dividido;
+    }
+    let bool = false;
 
-    if (edit) res.json(edit);
-    else res.send("not found");
+    console.log('bool', bool);
+    console.log('user', user);
+    if (user) {
+      for (let i = 0; i < user.itemList.length; i++) {
+        console.log('user.itemList[i].item', user.itemList[i].item);
+        if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
+        if (bool) {
+          if (decrement) {
+            if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
+          }else {
+            user.itemList[i].qtyCart++;
+          }
+
+          let save = await user.save();
+
+          let update = await User.findById(save._id)
+            .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+            .populate('ticketHistory');
+
+          return res.json(update);
+        }
+      }
+      let edit = await User.findByIdAndUpdate(user._id, {
+        nombre: nombre,
+        apellido: apellido,
+        telefono: telefono,
+        documento: documento,
+        direccion: direccion,
+        fechadenacimiento: fechadenacimiento,
+        piso: piso,
+        departamento: departamento,
+        ciudad: ciudad,
+        estadoProvincia: estadoProvincia,
+        codigoPostal: codigoPostal,
+        itemList: [...user.itemList, obj]
+      }, { new: true });
+
+      let save = await edit.save();
+
+      let update = await User.findById(save._id)
+        .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+        .populate('ticketHistory');
+
+      if (update) return res.json(update);
+      else return res.send("No se encontro la actualizacion");
+    }
+    res.send('Hubo un error al traer el Usuario');
   } catch (error) {
     console.log(error);
   }
 };
+
+const deleteX = async (req, res) => {
+  const { userId, itemsId } = req.body;
+  try {
+    let user = await User.findById(userId);
+
+    function splitt(string) {
+      let id = string?.split('"');
+      let dividido = id[1];
+      return dividido;
+    }
+    console.log("user.itemList", user.itemList)
+    let delet = user.itemList.filter(i => splitt(JSON.stringify(i.item)) !== itemsId.toString());
+    
+    let put = await User.findByIdAndUpdate(userId, {
+      itemList: delet
+    }, {new: true});
+
+    let save = await put.save();
+
+    let update = await User.findById(save._id)
+    .populate('itemList.item');
+    res.json(update);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteAll = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    let user = await User.findById(userId)
+    .populate('itemList.item');
+
+    let put = await User.findByIdAndUpdate(userId, {
+      itemList: []
+    }, {new: true});
+
+    let save = await put.save();
+
+    let update = await User.findById(save._id)
+    .populate('itemList.item');
+    res.json(update);
+  } catch (error) {
+    conole.log(error);
+  }
+}
 
 const addFavorite = async (req, res) => {
   const { id } = req.body
@@ -181,16 +296,16 @@ const addFavorite = async (req, res) => {
   }
 }
 
-//  const getUser = async (req, res) => {
-//     try {
-//         const getDB = await User.find().populate('itemList');
-
-//         if(!getDB)  return res.status(404).send('No se encontro nada en User');
-//         return res.json(getDB);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+const getUserByID = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    let user = await User.findById(userId)
+    .populate('itemList.item', ['nombre', 'precio', 'imagen']);
+    res.json(user.itemList);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // getUserById,
 // getUser
@@ -203,5 +318,8 @@ module.exports = {
   newAdmin,
   getUserByName,
   editUser,
-  addFavorite
+  addFavorite,
+  getUserByID,
+  deleteX,
+  deleteAll
 };
