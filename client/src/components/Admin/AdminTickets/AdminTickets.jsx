@@ -1,21 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getTicketsAdmin } from "../../../redux/actions/actions";
-import TicketsPending from "./TicketsPending/TicketsPending";
-import TicketProcess from "./TicketProcess/TicketProcess";
+import React from "react";
+import { useHistory } from "react-router";
+
 
 const AdminTickets = () => {
+    const history = useHistory();
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getTicketsAdmin())
-    }, [dispatch])
+    const handleClick = (e) => {
+        history.push(`/admin/tickets/${e.target.name}`)
+    }
 
     return (
         <div>
-             <TicketsPending />
-             {/*<TicketProcess />*/}
+            <button name="procesar" onClick={handleClick}>Procesar</button>
+            <button name="finalizar" onClick={handleClick}>Confirmar</button>
         </div>
     )
 }

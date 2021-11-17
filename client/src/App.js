@@ -29,6 +29,8 @@ import AdminStock from './components/Admin/AdminStock/AdminStock';
 import Create from "./components/Admin/AdminStock/Create/Create";
 import Update from "./components/Admin/AdminStock/Update/Update";
 import AdminTickets from './components/Admin/AdminTickets/AdminTickets';
+import TicketsPending from './components/Admin/AdminTickets/Procesar/TicketsPending/TicketsPending';
+import TicketsReady from './components/Admin/AdminTickets/Finalizar/TicketsReady/TicketsReady';
 
 
 function App() {
@@ -41,6 +43,9 @@ function App() {
       <Route exact path='/category/:category' component={Cards} />
       <Route exact path="/" component={Home} />
       <Route path="/detail/:id" component={CardDetails} />
+
+
+
       {/* Profile */}
       <Route exact path ="/profile" component={ProfilePrincipal} />
       <Route path="/checkout" component={Checkout} />
@@ -55,6 +60,8 @@ function App() {
       <Route path="/admin/stock/create" component={Create} />
       <Route path="/admin/stock/update" component={Update} />
       <Route path="/admin/tickets" component={AdminTickets} />
+      <Route path="/admin/tickets/procesar" component={TicketsPending}/>
+     {/*  <Route path="/admin/tickets/confirmar" component={TicketsReady}/> //falta el back para probar esto  */}
       
     </div>
   );
