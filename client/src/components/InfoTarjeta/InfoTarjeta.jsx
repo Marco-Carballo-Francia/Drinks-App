@@ -9,9 +9,14 @@ import {
 } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import { createTicket } from "../../redux/actions/actions";
+import { useHistory } from "react-router-dom";
+import Modal from 'react-modal';
+import { BsCheck2Square } from "react-icons/bs";
+
 
 
 const InfoTarjeta = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
@@ -19,8 +24,15 @@ const InfoTarjeta = () => {
   const { user } = useSelector((state) => state.user);
   const userId = user?._id
   const [loading, setLoading] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
-  console.log('hola', cart)
+  const openModal = () => {
+    setIsOpen(false);
+  }
+
+  const handleOrdenes = () => history.push('/profile');
+  const handleSeguirComprando = () => history.push('/');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -34,8 +46,21 @@ const InfoTarjeta = () => {
       dispatch(createTicket({ id, amount: total, cart, userId }));
       elements.getElement(CardElement).clear();
       setLoading(false);
+      setIsOpen(true)
       dispatch({ type: "RESET_CART" })
     }
+  };
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#ffffff',
+      padding: '30px',
+    },
   };
 
   const inputStyle = {
@@ -68,7 +93,7 @@ const InfoTarjeta = () => {
           }} />
         <div className={style.ctnBtn}>
           <p className={style.total}>TOTAL: ${total}</p>
-          <button type="submit" disabled={!stripe} className={style.btn}>
+          <button type="submit" onClick={openModal} disabled={!stripe} className={style.btn}>
             {
               loading ? (
                 <div >
@@ -79,6 +104,23 @@ const InfoTarjeta = () => {
           </button>
         </div>
       </form>
+
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className={style.ctnModalTexto}>
+          <h1 className={style.titleModal}> Felicitaciones! <BsCheck2Square className={style.icon} /></h1>
+        </div>
+        <p className={style.texto}>La compra se realizo con exito, ahora podes:</p>
+        <div className={style.ctnBtnsModal}>
+          <button className={style.btnModal} onClick={handleSeguirComprando} > Seguir Comprando </button>
+          <button className={style.btnModal} onClick={handleOrdenes} >Ver ordenes</button>
+        </div>
+
+      </Modal>
+
     </div>
   );
 };

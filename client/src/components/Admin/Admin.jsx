@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import style from './Admin.module.css';
 
 const Admin = () => {
     const history = useHistory();
@@ -9,14 +10,14 @@ const Admin = () => {
     }
 
     return (
-        <div>
-            <button name="stock" onClick={handleClick}>
+        <div className={style.ctnSup}>
+            <button className={style.btn} name="stock" onClick={handleClick}>
                 Stock
             </button>
-            <button name="tickets" onClick={handleClick}>
+            <button className={style.btn} name="tickets" onClick={handleClick}>
                 Tickets
             </button>
-            <button name="users" onClick={handleClick}>
+            <button className={style.btn} name="users" onClick={handleClick}>
                 Users
             </button>
         </div>
