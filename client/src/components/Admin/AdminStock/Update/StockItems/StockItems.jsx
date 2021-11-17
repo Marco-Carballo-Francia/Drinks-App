@@ -12,6 +12,7 @@ const StockItems = () => {
     const dispatch = useDispatch();
     const { items } = useSelector(state => state.admin);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [input, setInput] = useState("");
 
     useEffect(() => {
         dispatch(getAdminItems({})
@@ -26,11 +27,14 @@ const StockItems = () => {
         setIsOpen(false);
     }
 
-
-
     const handleClick = (id) => {
         dispatch(setItem(id))
         openModal()
+    }
+
+    const handleChange = (e) => {
+        setInput(e.target.value);
+        dispatch(getAdminItems({name: e.target.value}));
     }
 
     const customStyles = {
@@ -47,6 +51,7 @@ const StockItems = () => {
 
     return (
         <div className={style.ctnTabla} >
+            <input type="text" value={input} onChange={handleChange}/>
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
