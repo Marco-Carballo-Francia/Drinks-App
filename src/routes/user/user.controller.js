@@ -159,11 +159,12 @@ const editUser = async (req, res, next) => {
     ciudad,
     estadoProvincia,
     codigoPostal,
-    itemCart,
+    itemCart,  
     decrement
   } = req.body;
   console.log('ideBack', req.params.id);
   console.log('itemCart', itemCart);
+  console.log("decrement", decrement);
   try {
     let qty = 0;
     let obj = {};
@@ -194,7 +195,7 @@ const editUser = async (req, res, next) => {
         console.log('user.itemList[i].item', user.itemList[i].item);
         if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
         if (bool) {
-          if (decrement) {
+          if (qty < 1) {
             if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
           }else {
             user.itemList[i].qtyCart++;
@@ -240,7 +241,8 @@ const editUser = async (req, res, next) => {
 };
 
 const deleteX = async (req, res) => {
-  const { userId, itemsId } = req.body;
+  const {itemsId} = req.body;
+  const {userId} =req.params;
   try {
     let user = await User.findById(userId);
 
@@ -250,6 +252,8 @@ const deleteX = async (req, res) => {
       return dividido;
     }
     console.log("user.itemList", user.itemList)
+    console.log("itemsId", itemsId)
+    console.log("userId", userId)
     let delet = user.itemList.filter(i => splitt(JSON.stringify(i.item)) !== itemsId.toString());
     
     let put = await User.findByIdAndUpdate(userId, {
@@ -257,9 +261,8 @@ const deleteX = async (req, res) => {
     }, {new: true});
 
     let save = await put.save();
-
-    let update = await User.findById(save._id)
-    .populate('itemList.item');
+    let update = await User.findById(save._id).populate('itemList.item');
+    console.log(update);
     res.json(update);
   } catch (error) {
     console.log(error);
@@ -267,7 +270,7 @@ const deleteX = async (req, res) => {
 };
 
 const deleteAll = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   try {
     let user = await User.findById(userId)
     .populate('itemList.item');
@@ -280,7 +283,7 @@ const deleteAll = async (req, res) => {
 
     let update = await User.findById(save._id)
     .populate('itemList.item');
-    res.json(update);
+    res.json(update.itemList);
   } catch (error) {
     conole.log(error);
   }
@@ -297,7 +300,8 @@ const addFavorite = async (req, res) => {
 }
 
 const getUserByID = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
+  console.log("userId", userId)
   try {
     let user = await User.findById(userId)
     .populate('itemList.item', ['nombre', 'precio', 'imagen']);

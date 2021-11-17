@@ -7,17 +7,27 @@ import Rating from '../Rating/Rating';
 import { addCart } from "../../redux/actions/actions.js";
 
 const Card = (prod) => {
+
+     const cart = useSelector((state) => state.cart.cart);
+     const user = useSelector(state => state.user.user);
+     const id= user?._id;
     let p = prod.prod
     const dispatch=useDispatch();
     // const [clicked, setClicked] = useState(false)
 
-    function onClick(payload) {
+    function onClick() {
         // setClicked(true);
-        dispatch(addCart(payload));
+        let item=p._id;
+        let itemCart={
+            item: item,
+            qtyCart: 1
+        }
+        console.log(itemCart);
+        dispatch(addCart(itemCart, id));
     }
 
     function addDefaultSrc(ev) {
-        ev.target.src = img;
+        ev.target.src = img; 
     };
 
     return (
@@ -37,7 +47,7 @@ const Card = (prod) => {
             </Link>
             
             <div >
-                <button onClick={()=> onClick(p)} className={style.btn}>Agregar al carrito</button>
+                <button onClick={()=> onClick()} className={style.btn}>Agregar al carrito</button>
             </div>
         </div>
     );
