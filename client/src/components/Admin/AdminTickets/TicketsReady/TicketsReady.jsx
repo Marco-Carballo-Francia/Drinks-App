@@ -1,33 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {changeTicketStatus} from "../../../../redux/actions/actions"
+import {changeTicketStatus, getTicketsAdmin} from "../../../../redux/actions/actions"
 
 const TicketsReady = () => {
 
-    const { ticketsReady } = useSelector(state => state.admin)
+    const { ticketsProcessing } = useSelector(state => state.admin)
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(getTicketsAdmin());
+    }, [dispatch]);
+
     const handleClick = (id) => {
-        dispatch(changeTicketStatus({status: "finished", id})) // va al back y cambia el status del ticket a finalizado (o loqsea)
-    }
+        dispatch(changeTicketStatus({changeState: true, id})); // va al back y cambia el status del ticket a finalizado (o loqsea)
+    };
 
     return (
         <div>
             {
-                ticketsReady?.length 
+                ticketsProcessing?.length 
                     ?   <div>
                         {
-                            ticketsReady.map(x => {
-                                const { id } = x.id;
-                                return 
+                            ticketsProcessing.map(x => {
+                                const  id  = x._id;
+                                return (
                                     <div key={id}>
                                         <span>{id}</span>
-                                        <button onClick={(id) => handleClick(id)}>Finalizar</button>
+                                        <button onClick={() => handleClick(id)}>Finalizar</button>
                                     </div>
+                                )
                             })
                         }
                         </div> 
-                    : <span>no hay tickets ready</span>
+                    : <span>no hay tickets listos para finalizar</span>
             }
         </div>
     )

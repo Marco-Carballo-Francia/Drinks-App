@@ -4,6 +4,7 @@ const initialState = {
     items: [],
     item: {},
     ticketsPending: [],
+    ticketsProcessing: [],
     ticket: {},
     ticketsReady: [],
     user: {},
@@ -29,11 +30,11 @@ export function adminReducer (state = initialState, action ) {
                 ticket: null
             }
         case CHANGE_TICKET_STATUS:
-            const { tickets } = action.payload;
+        
             return {
                 ...state,
-                ticketsPending: tickets.pending,
-                ticketsReady: tickets.processing
+                ticketsPending: action.payload.pending,
+                ticketsProcessing: action.payload.processing
             }
         case GET_USERS:
             return {

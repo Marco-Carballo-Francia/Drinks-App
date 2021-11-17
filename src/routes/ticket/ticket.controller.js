@@ -120,10 +120,10 @@ const updateTickets = async (req, res) => {
           }, { new: true });
         let save = await ticketUp.save();
     
-        let update = await Ticket.findById(save._id)
+        /* let update = await Ticket.findById(save._id)
         .populate("items.item", ["nombre", "precio"])
         .populate("user", ["nombre"]);
-        return res.json(update);
+        return res.json(update); */
       }
       if(changeState && getTicket.estado === 'Processing') {
         let ticketUp = await Ticket.findByIdAndUpdate(
@@ -131,13 +131,15 @@ const updateTickets = async (req, res) => {
             estado: 'Finished' 
           }, { new: true });
         let save = await ticketUp.save();
-    
-        let update = await Ticket.findById(save._id)
+        
+        /* let update = await Ticket.findById(save._id)
         .populate("items.item", ["nombre", "precio"])
         .populate("user", ["nombre"]);
-        return res.json(update);
+        return res.json(update); */
       }
-      return res.json(getTicket);
+      const subRequest = await axios.get('http://localhost:4000/ticket/state')
+      return subRequest.data
+      /* return res.json(getTicket); */
     }
     res.send('No se encontro el ticket solicitado');
   } catch (err) {

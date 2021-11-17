@@ -1,13 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeTicketStatus, getTicketsAdmin } from "../../../../redux/actions/actions";
+import TicketsReady from "../TicketsReady/TicketsReady";
 
 const TicketProcess = () => {
     const dispatch = useDispatch();
     const { ticket } = useSelector(state => state.admin);
     
     const handleClick = () => {
-        dispatch(changeTicketStatus({state: "processing", id: ticket._id}))
+        dispatch(changeTicketStatus({changeState: true, id: ticket._id}))
         dispatch({type: "DELETE_TICKET"})
         dispatch(getTicketsAdmin());
     }
@@ -26,6 +27,7 @@ const TicketProcess = () => {
                         )
                         : <div>Nada para procesar</div>
                 }
+                <TicketsReady/>
             </div>
             <button disabled={!ticket} onClick={handleClick}>ENVIAR A PROCESAR</button>
         </div>
