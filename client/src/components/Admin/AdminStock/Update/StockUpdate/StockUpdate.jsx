@@ -47,6 +47,10 @@ const StockUpdate = () => {
         setEdit(true);
     }
 
+    const handleSave = () => {
+        // acá va el dispatch que debería hacer un put en el item con la info actualizada
+    }
+
     return (
         <div className={style.container}>
             {
@@ -65,11 +69,15 @@ const StockUpdate = () => {
                     </div>
             }
             <div  className={style.ctnBtnsModal}>
-                <button className={style.btnModal}  onClick={handleDelete}>DELETE</button>
+                {   
+                    !edit
+                        ? <button className={style.btnModal} onClick={handleDelete}>ELIMINAR</button>
+                        : <button className={style.btnModal} onClick={handleSave}>GUARDAR</button>
+                }
                 { 
                     !edit 
-                        ? <button className={style.btnModal} disabled={!item.nombre} onClick={handleEdit}>EDIT</button> 
-                        : <button className={style.btnModal} onClick={() => setEdit(false)}>CANCEL</button>
+                        ? <button className={style.btnModal} disabled={!item} onClick={handleEdit}>EDITAR</button> 
+                        : <button className={style.btnModal} onClick={() => setEdit(false)}>CANCELAR</button>
                 }
             </div>
         </div>
