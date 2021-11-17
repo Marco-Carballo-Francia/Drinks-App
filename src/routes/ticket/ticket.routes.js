@@ -3,6 +3,7 @@ const { makePayment, getTicketsInPendAndPro, createTicket, getUserTickets, updat
 
 const router = Router();
 
+//  /ticket
 router.get("/user/:id", getUserTickets);
 router.get("/state", getTicketsInPendAndPro);
 router.put("/state/update/:id", updateTickets);

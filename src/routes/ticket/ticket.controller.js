@@ -26,17 +26,21 @@ const makePayment = async (req, res) => {
 };
 
 const createTicket = async (req, res) => {
-  let { payment, cart, userId } = req.body;
+  let { payment, userId, direccion } = req.body;
   console.log(payment);
   try {
-    let user = await User.findById(userId);
+    let user = await User.findById(userId)
+    .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+    .populate('ticketHistory');
+    let cart = user.itemList;
+
     let itemCart = [];
     for (let i = 0; i < cart.length; i++) {
-      let itemDB = await Item.findById(cart[i]._id);
-      let qty = cart[i].qty;
+      let itemDB = await Item.findById(cart[i].item);
+      let qty = cart[i].qtyCart;
       let obj = {
         item: itemDB,
-        qty: qty,
+        qty: qty
       };
       itemCart.push(obj);
     }
@@ -47,7 +51,7 @@ const createTicket = async (req, res) => {
       items: itemCart,
       precioTotal: payment.amount,
       user: user._id,
-      direccion: "Av Siempreviva 123",
+      direccion: direccion,
       metodoPago: payment.payment_method
     };
     newTicket = new Ticket(newTicket);
@@ -61,8 +65,8 @@ const createTicket = async (req, res) => {
 
 const getTicketsInPendAndPro = async (req, res) => {
   try {
-    let userTicketsPending = await Ticket.find({ state: "Pending" })
-      .populate("items", ["name", "precio"])
+    let userTicketsPending = await Ticket.find({ estado: "Pending" })
+      .populate("items.item", ["nombre"])
       .populate("user", ["nombre"]);
 
     let sortTicketsPending = userTicketsPending.sort((a, b) => {
@@ -70,17 +74,27 @@ const getTicketsInPendAndPro = async (req, res) => {
       if (a.fecha < b.fecha) return -1;
     });
 
-    let userTicketsProcessing = await Ticket.find({ state: "Processing" })
-      .populate("items")
-      .populate("user", "nombre");
+    let userTicketsProcessing = await Ticket.find({ estado: "Processing" })
+      .populate("items.item", ['nombre'])
+      .populate("user", ["nombre"]);
 
     let sortTicketsProcessing = userTicketsProcessing.sort((a, b) => {
-      if (a.fecha > b.fecha) return -1;
-      if (a.fecha < b.fecha) return 1;
+      if (a.fecha > b.fecha) return 1;
+      if (a.fecha < b.fecha) return -1;
+    });
+
+    let userTicketsFinished = await Ticket.find({ estado: "Finished" })
+      .populate("items.item", ['nombre'])
+      .populate("user", ["nombre"]);
+
+    let sortTicketsFinished = userTicketsFinished.sort((a, b) => {
+      if (a.fecha > b.fecha) return 1;
+      if (a.fecha < b.fecha) return -1;
     });
     const ticketsObj = {
       pending: sortTicketsPending,
       processing: sortTicketsProcessing,
+      finished: sortTicketsFinished
     };
     // console.log(ticketsObj)
     res.json(ticketsObj);
@@ -91,15 +105,41 @@ const getTicketsInPendAndPro = async (req, res) => {
 
 const updateTickets = async (req, res) => {
   const { id } = req.params; //id del ticket
-  const { changeState } = req.body; //valor que recivo para cambiar el state
+  const { changeState } = req.body; //valor que recivo para cambiar el state, recivo true
+  console.log('ID', id);
   try {
-    let update = await Ticket.findOneAndUpdate(
-      { _id: id },
-      { $set: { state: changeState } },
-      { new: true }
-    );
-    update = update.save();
-    res.json(update);
+    let getTicket = await Ticket.findById(id)
+    .populate("items.item", ["nombre", "precio"])
+    .populate("user", ["nombre"]);
+    console.log('getTicket.estado', getTicket.estado);
+    if(getTicket !== null) {
+      if(changeState && getTicket.estado === 'Pending') {
+        let ticketUp = await Ticket.findByIdAndUpdate(
+          id, { 
+            estado: 'Processing' 
+          }, { new: true });
+        let save = await ticketUp.save();
+    
+        let update = await Ticket.findById(save._id)
+        .populate("items.item", ["nombre", "precio"])
+        .populate("user", ["nombre"]);
+        return res.json(update);
+      }
+      if(changeState && getTicket.estado === 'Processing') {
+        let ticketUp = await Ticket.findByIdAndUpdate(
+          id, { 
+            estado: 'Finished' 
+          }, { new: true });
+        let save = await ticketUp.save();
+    
+        let update = await Ticket.findById(save._id)
+        .populate("items.item", ["nombre", "precio"])
+        .populate("user", ["nombre"]);
+        return res.json(update);
+      }
+      return res.json(getTicket);
+    }
+    res.send('No se encontro el ticket solicitado');
   } catch (err) {
     console.log(err);
   }
