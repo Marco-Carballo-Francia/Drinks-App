@@ -11,7 +11,9 @@ const {
     addFavorite,
     getUserByID,
     deleteX,
-    deleteAll
+    deleteAll,
+    deleteFavoritos,
+    getFavoritos
 } = require("./user.controller.js");
 
 const router = Router();
@@ -26,7 +28,9 @@ router.put('/admin/update/:id', newAdmin);
 router.get('/admin/users', getUserByName);
 router.post('/user/google', googleLogin);
 router.patch('/user/edit/:id', editUser);
-router.put('/user/favorite', addFavorite);
+router.get('/user/favoritos', getFavoritos);
+router.put('/user/add/favoritos', addFavorite);
+router.put('/user/delete/favoritos', deleteFavoritos);  
 router.put('/user/deleteX/:userId', deleteX);
 router.put('/user/deleteAll/:userId', deleteAll);
 
