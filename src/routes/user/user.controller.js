@@ -220,7 +220,6 @@ const editUser = async (req, res) => {
           }
         }
       }
-     } 
       let edit = await User.findByIdAndUpdate(user._id, {
         nombre: nombre,
         apellido: apellido,
@@ -243,7 +242,7 @@ const editUser = async (req, res) => {
         .populate('ticketHistory');
 
       if (update) return res.json(update);
-      else return res.send("No se encontro la actualizacion");
+      else return res.send("No se encontro la actualizacion"); 
     }
     res.send('Hubo un error al traer el Usuario');
   } catch (error) {
