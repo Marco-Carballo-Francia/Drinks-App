@@ -8,10 +8,6 @@ const AdminTickets = () => {
 
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     dispatch(getTicketsAdmin())
-    // }, [])
-
     return (
         <div>
              <TicketsPending />
