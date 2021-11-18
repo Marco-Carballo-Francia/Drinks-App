@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCart, setTotal } from "../../redux/actions/actions.js";
+import { getCart, setTotal, deleteCartAll } from "../../redux/actions/actions.js";
 import style from "./Cart.module.css";
 import Card from "./Card.js";
 
@@ -12,6 +12,11 @@ const Cart = () => {
   let userId= user?._id;
   console.log("userid", cart)
   const history = useHistory();
+
+
+  function borrar(){
+    dispatch(deleteCartAll(userId))
+  }
   
 
   function totalCart(array) {
@@ -74,7 +79,9 @@ const Cart = () => {
           })
         ) : (
           <p></p>
-        )}
+        )
+      }
+      {cart.length>1 ? <button onClick={()=>borrar()} className={style.borrar}>Limpiar</button> : null}
       </div>
       <div className={style.containerTotal}>
         <div className={style.preciFinal}>
@@ -84,6 +91,7 @@ const Cart = () => {
         </div>
         <div>
           <button onClick={handleClick} className={style.btn}>PAGAR</button>
+          
         </div>
       </div>
     </div>
