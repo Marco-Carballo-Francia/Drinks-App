@@ -6,7 +6,6 @@ const AdminUsers = () => {
     return (
         <div>
             <UsersList/> 
-            <UserDetail/>
         </div>
     )
 }

@@ -162,13 +162,11 @@ const editUser = async (req, res) => {
     itemCart,
     decrement
   } = req.body;
-  console.log('ideBack', req.params.id);
-  console.log('itemCart', itemCart);
-  console.log("decrement", decrement);
+  
   try {
     let qty = 0;
     let obj = {};
-    console.log('itemCart.qtyCart', itemCart.qtyCart);
+
     if (itemCart) {
       qty = itemCart.qtyCart;
       obj = {
@@ -176,7 +174,6 @@ const editUser = async (req, res) => {
         qtyCart: qty,
       };
     }
-    console.log('obj', obj);
     let user = await User.findById(req.params.id)
       .populate('itemList.item', ['nombre', 'precio', 'imagen'])
       .populate('ticketHistory');
@@ -188,8 +185,7 @@ const editUser = async (req, res) => {
     }
     let bool = false;
 
-    console.log('bool', bool);
-    console.log('user', user);
+    
     if (user) {
       if (itemCart) {
         for (let i = 0; i < user.itemList.length; i++) {
@@ -201,6 +197,18 @@ const editUser = async (req, res) => {
             } else {
               user.itemList[i].qtyCart++;
             }
+//       if(itemCart){
+
+//       for (let i = 0; i < user.itemList.length; i++) {
+//         if(user.itemList.length>1){
+//           if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
+//         }
+//         if (bool) {
+//           if (qty < 1) {
+//             if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
+//           }else {
+//             user.itemList[i].qtyCart++;
+//           }
 
             let save = await user.save();
 
@@ -212,6 +220,7 @@ const editUser = async (req, res) => {
           }
         }
       }
+     } 
       let edit = await User.findByIdAndUpdate(user._id, {
         nombre: nombre,
         apellido: apellido,

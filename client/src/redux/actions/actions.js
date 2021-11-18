@@ -155,12 +155,12 @@ export const deleteCartOne = (itemsId, userId) => async (dispatch) =>{
 }
 
 
-export const deleteCartAll = (userId, itemId) => async (dispatch) =>{
+export const deleteCartAll = (userId) => async (dispatch) =>{
     try{
-        let res = await axios.put(`/users/user/deleteAll/${userId}`, itemId ).data 
+        let res = await axios.put(`/users/user/deleteAll/${userId}`) 
         return dispatch({
             type: DELETE_CART_ALL,
-            payload: res
+            payload: res.data
         })
     }
     catch(error){

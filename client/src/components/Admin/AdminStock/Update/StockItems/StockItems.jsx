@@ -4,8 +4,9 @@ import { getAdminItems, setItem } from "../../../../../redux/actions/actions"
 import Loading from "../../../../../components/Loading/Loading";
 import StockUpdate from "../StockUpdate/StockUpdate";
 import style from "./StockItems.module.css";
-import { BsPencilSquare, BsXCircle } from "react-icons/bs";
+import { BsPencilSquare} from "react-icons/bs";
 import Modal from 'react-modal';
+import Table from 'react-bootstrap/Table'
 
 const StockItems = () => {
     const dispatch = useDispatch();
@@ -45,19 +46,19 @@ const StockItems = () => {
             bottom: 'auto',
             transform: 'translate(-50%, -50%)',
             backgroundColor: '#000000',
-            padding: '30px',
+            padding: '10px 40px 10px 40px',
         },
     };
 
     return (
         <div>
-            
+
             <div className={style.ctnInput}>
                 <p className={style.textImput}> Buscar por nombre</p>
                 <input className={style.imput} type="text" value={input} onChange={handleChange} />
             </div>
             <div className={style.ctnTabla} >
-                <table>
+                <Table striped bordered hover>
                     <thead>
                         <tr>
                             <th className={style.table1} >Imagen</th>
@@ -70,7 +71,7 @@ const StockItems = () => {
                     <tbody>
                         {
                             !items.length
-                                ? (<div className={style.spiner}> <Loading /></div>)
+                                ? (<Loading />)
                                 : items ? items.map(x => {
                                     return (
                                         <tr className={style.font}>
@@ -84,13 +85,13 @@ const StockItems = () => {
                                 }) : null
                         }
                     </tbody>
-                </table>
+                </Table>
                 <Modal
                     isOpen={modalIsOpen}
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <button className={style.btnx} onClick={closeModal}> <BsXCircle className={style.x} /></button>
+                    <button className={style.x} onClick={closeModal}>x</button>
                     <StockUpdate />
                 </Modal>
             </div>
