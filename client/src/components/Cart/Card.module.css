@@ -3,7 +3,7 @@
   justify-content: space-around;
   flex-direction: row;
   margin: 50px;
-  width: 600px;
+  width: 700px;
   height: 60px;
   text-align: center;
   top: 0px;
@@ -63,4 +63,32 @@
 	padding: 0px;
 	display:flex;
 	justify-content: flex-end;
+}
+
+
+.statebuttons{
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+
+.increment{
+  margin-right: 1rem;
+  height: 20px;
+  width: 20px;
+  border: 0;
+  color: black;
+  text-align:center;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  border: 0.2px solid black;
+  
+  
+}
+
+
+.increment:hover {
+  background-color: black;
+  color: white;
 }

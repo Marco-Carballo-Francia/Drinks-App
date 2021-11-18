@@ -17,7 +17,7 @@ const {
 const router = Router();
 
 //   /users
-router.get('/user', getUserByID);
+router.get('/user/:userId', getUserByID);
 router.post('/user/register', passport.authenticate("register", { session: false }), postUser);
 router.post('/user/login', postLogin);
 router.get('/user/profile', passport.authenticate('jwt', { session: false }), profileAuthenticate);
@@ -27,8 +27,8 @@ router.get('/admin/users', getUserByName);
 router.post('/user/google', googleLogin);
 router.patch('/user/edit/:id', editUser);
 router.put('/user/favorite', addFavorite);
-router.put('/user/deleteX', deleteX);
-router.put('/user/deleteAll', deleteAll);
+router.put('/user/deleteX/:userId', deleteX);
+router.put('/user/deleteAll/:userId', deleteAll);
 
 
 module.exports = router;

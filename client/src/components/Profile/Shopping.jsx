@@ -38,7 +38,7 @@ function Shopping() {
                     <tr>
                         <td>{x._id}</td>
                         <td>{x.fecha}</td>
-                        <td>{x.items.map(i => <p>{i.item.nombre}</p>)}</td>
+                        <td>{x.items.map(i => <p>{i.item?.nombre}</p>)}</td>
                         <td>{x.estado}</td>
                         <th>{x.direccion}</th>
                         <th>$ {x.precioTotal}</th>

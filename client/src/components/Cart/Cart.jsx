@@ -8,15 +8,18 @@ import Card from "./Card.js";
 const Cart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
-  const user = useSelector(state => state.user.user);
+  const user = useSelector((state) => state.user.user);
+  let userId= user?._id;
+  console.log("userid", cart)
   const history = useHistory();
+  
 
   function totalCart(array) {
     let total = 0;
     for (var i = 0; i < array?.length; i++) {
-      console.log(array[i]?.precio);
-      let neto = price(array[i]?.precio);
-      let bruto = neto * array[i]?.qty;
+     
+      let neto = array[i]?.item ? price(array[i]?.item?.precio): 0;
+      let bruto = neto? neto * array[i]?.qtyCart :0;
       total = total + bruto;
     }
     return total;
@@ -49,22 +52,23 @@ const Cart = () => {
   }
 
   useEffect(() => {
-    dispatch(getCart());
-  }, [dispatch]);
+   return  dispatch(getCart(userId));
+  }, [dispatch, cart.length]);
 
   return (
     <div className={style.container}>
+   
       <div className={style.cards}>
         {cart?.length ? (
           cart.map((p) => {
             return (
               <Card
-                id={p._id}
-                name={p.name}
-                image={p.imagen}
-                rating={p.rating}
-                precio={price(p.precio)}
-                qty={p.qty}
+                id={p.item?._id}
+                name={p.item?.nombre}
+                image={p.item?.imagen}
+                rating={p.item?.rating}
+                precio={p.item?.precio ? price(p.item.precio) : null}
+                qty={p?.qtyCart}
               />
             );
           })
@@ -75,7 +79,7 @@ const Cart = () => {
       <div className={style.containerTotal}>
         <div className={style.preciFinal}>
           <p className={style.total}>
-            <b>TOTAL: </b> $ {totalCart(cart)}
+            <b>TOTAL: </b> $ { cart ? totalCart(cart): null}
           </p>
         </div>
         <div>
