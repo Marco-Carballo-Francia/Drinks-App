@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import style from './Create.module.css';
 import { createItem } from '../../../../redux/actions/actions.js';
 
@@ -12,11 +12,11 @@ const Create = () => {
         descripcion: "",
         precio: "",
         imagen: "",
-        categoria: "",
+        categoria:[],
     })
     const [errors, setErrors] = useState({});
 
-
+    const {categories} = useSelector(state => state.products)
 
     const validateNum = (e) => {
         let {name, value} = e.target;
@@ -43,6 +43,16 @@ const Create = () => {
             [e.target.name]: e.target.value
         })
     }
+   
+
+    const handleSelect = (e) =>{
+        if (!input.categoria.includes(e.target.value))
+        setInput({
+            ...input,
+            categoria: [...input.categoria, e.target.value]
+        })
+    }
+
 
 
     const hadleClick = () => {
@@ -99,13 +109,26 @@ const Create = () => {
 
                 <div className={style.category}>
                     <label className={style.title}>Categoria</label>
-                    <input className={style.input}
+                    <select onChange={handleSelect}>
+                            <option value="categorias">Categorias</option>
+                            {
+                                categories?.map((e) => {
+                                    return <option>{e.nombre}</option>
+                                })
+                            }
+                        </select>
+                        <div>
+                            {input.categoria?.map(e =>
+                                <div>{e}</div>
+                            )}
+                        </div>
+                 {/*    <input className={style.input}
                         name="categoria"
                         type="text"
                         placeholder="Categoria del producto..."
                         value={input.categoria}
-                        onChange={handleOnChange}
-                    />
+                        onChange={handleOnChange} */}
+                    
                 </div>
                 <button className={style.btn} onClick={hadleClick}>Crear</button>
             </form>

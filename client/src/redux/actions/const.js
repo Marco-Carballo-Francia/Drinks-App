@@ -52,6 +52,7 @@ const CREATE_ITEM = "CREATE_ITEM";
 const DELETE_ITEM = "DELETE_ITEM";
 const GET_ADMIN_ITEMS = "GET_ADMIN_ITEMS"
 const SET_ITEM = "SET_ITEM"
+const UPDATE_ITEM = "UPDATE_ITEM"
 
 module.exports = {
     GET_PRODUCTS,
@@ -85,5 +86,6 @@ module.exports = {
     GET_ADMIN_ITEMS,
     SET_ITEM,
     DELETE_CART_ALL,
-    DELETE_CART_ONE
+    DELETE_CART_ONE,
+    UPDATE_ITEM
 }

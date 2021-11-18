@@ -27,7 +27,8 @@ import {
     GET_ADMIN_ITEMS,
     SET_ITEM,
     DELETE_CART_ALL,
-    DELETE_CART_ONE
+    DELETE_CART_ONE,
+    UPDATE_ITEM,
 } from './const';
 
 
@@ -379,4 +380,16 @@ export const setItem = (id) => async (dispatch) =>{
     }
 }
 
+
+export const updateItem = ({id, object}) => async (dispatch) => {
+    try {
+        const {data} = await axios.put(`/items/update/${id}`, object)
+        return dispatch({
+            type: UPDATE_ITEM,
+            payload: data
+        }) 
+    } catch (error) {
+        console.log(error) 
+    }
+}
  
