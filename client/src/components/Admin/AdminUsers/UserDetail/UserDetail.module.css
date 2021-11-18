@@ -1,8 +1,26 @@
-.btn{
-    background-color: seashell;
-    border-color: 1px solid black;
-    border-radius: 5px;
+.btn {
+  margin: 0 auto;
+  width: 200px;
+  padding: 0.5em 1.5em;
+  border: 1px solid rgb(207, 117, 0);
+  color: rgb(207, 117, 0);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #000000;
+  cursor: pointer;
 }
+
 .btn:hover {
-    transform: translate(5px);
+  background-color: rgb(207, 117, 0);
+  color: rgb(255, 255, 255);
+}
+
+.txt{
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 40px;
 }
