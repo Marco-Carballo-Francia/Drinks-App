@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../../redux/actions/actions";
 import style from "./UsersList.module.css";
+import Modal from 'react-modal';
+import UserDetail from '../UserDetail/UserDetail';
+import Table from 'react-bootstrap/Table'
 
 const UsersList = () => {
-    
+    const [modalIsOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState();
     const dispatch = useDispatch();
     const { users } = useSelector(state => state.admin);
-    
+
     useEffect(() => {
         dispatch(getUsers({}))
     }, [dispatch])
@@ -20,20 +23,66 @@ const UsersList = () => {
     }
 
     const handleClick = (id) => {
-        dispatch({type: "SET_USER", payload: id})
+        dispatch({ type: "SET_USER", payload: id })
+        openModal()
+    }
+    const openModal = () => {
+        setIsOpen(true);
     }
 
+    const closeModal = () => {
+        setIsOpen(false);
+    }
+
+    const customStyles = {
+        content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            transform: 'translate(-50%, -50%)',
+            backgroundColor: '#000000',
+            padding: '0px 40px 20px 40px',
+            color: '#ffffff'
+        },
+    };
+
     return (
-            <div>
+        <div className={style.ctnTabla}>
             <input type="text" value={input} onChange={(e) => handleChange(e)} />
             <div>
-                {
-                    users?.map(x => (
-                        <button onClick={() => handleClick(x._id)}>
-                            <span>{x.email}</span>
-                        </button>
-                    ))
-                }
+                <Table striped bordered hover >
+                    <thead>
+                        <tr>
+                            <th className={style.table1}  >Nombre</th>
+                            <th className={style.table1} >Email</th>
+                            <th className={style.table1} >Estado</th>
+                            <th className={style.table1} >Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            users?.map(x => (
+                                <tr>
+                                    <td className={style.table2} >{x.nombre}</td>
+                                    <td className={style.table2} >{x.email}</td>
+                                    <td className={style.table2} >{x.admin}</td>
+                                    <td ><button className={style.btn} onClick={() => handleClick(x._id)}> Hacer Admin</button> </td>
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </Table>
+                <Modal
+                    isOpen={modalIsOpen}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <button className={style.btnx} onClick={closeModal}> x</button>
+                    <h2 className={style.title}>El usuario esta a punto de ser Admin</h2>
+                    < UserDetail />
+                </Modal>
+
             </div>
         </div>
     )
