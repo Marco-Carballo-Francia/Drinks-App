@@ -12,6 +12,9 @@ function CardDetails(props) {
 
     const dispatch = useDispatch();
     const product = useSelector((state) => state.products.product);
+    const user = useSelector(state => state.user.user);
+    let userId= user?._id;
+
     const { id } = props.match.params;
 
     useEffect(() => {
@@ -28,7 +31,13 @@ function CardDetails(props) {
     })
 
     function onClick(payload) {
-        dispatch(addCart(payload));
+       let item=id;
+        let itemCart={
+            item: item,
+            qtyCart: 1
+        }
+        
+        dispatch(addCart(itemCart, userId));
     }
 
     // const handleAddToCart = (product) => {

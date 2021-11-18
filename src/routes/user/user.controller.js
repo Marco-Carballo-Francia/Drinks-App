@@ -159,16 +159,13 @@ const editUser = async (req, res, next) => {
     ciudad,
     estadoProvincia,
     codigoPostal,
-    itemCart,  
-    decrement
+    itemCart
   } = req.body;
-  console.log('ideBack', req.params.id);
-  console.log('itemCart', itemCart);
-  console.log("decrement", decrement);
+  
   try {
     let qty = 0;
     let obj = {};
-    console.log('itemCart.qtyCart', itemCart.qtyCart);
+
     if (itemCart) {
       qty = itemCart.qtyCart;
       obj = {
@@ -176,7 +173,6 @@ const editUser = async (req, res, next) => {
         qtyCart: qty,
       };
     }
-    console.log('obj', obj);
     let user = await User.findById(req.params.id)
       .populate('itemList.item', ['nombre', 'precio', 'imagen'])
       .populate('ticketHistory');
@@ -188,9 +184,9 @@ const editUser = async (req, res, next) => {
     }
     let bool = false;
 
-    console.log('bool', bool);
-    console.log('user', user);
+    
     if (user) {
+      if(itemCart){
       for (let i = 0; i < user.itemList.length; i++) {
         console.log('user.itemList[i].item', user.itemList[i].item);
         if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
@@ -210,6 +206,7 @@ const editUser = async (req, res, next) => {
           return res.json(update);
         }
       }
+     } 
       let edit = await User.findByIdAndUpdate(user._id, {
         nombre: nombre,
         apellido: apellido,
