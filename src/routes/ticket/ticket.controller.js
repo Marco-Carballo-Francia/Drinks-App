@@ -30,8 +30,8 @@ const createTicket = async (req, res) => {
   console.log(payment);
   try {
     let user = await User.findById(userId)
-    .populate('itemList.item', ['nombre', 'precio', 'imagen'])
-    .populate('ticketHistory');
+      .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+      .populate('ticketHistory');
     let cart = user.itemList;
 
     let itemCart = [];
@@ -109,35 +109,40 @@ const updateTickets = async (req, res) => {
   console.log('ID', id);
   try {
     let getTicket = await Ticket.findById(id)
-    .populate("items.item", ["nombre", "precio"])
-    .populate("user", ["nombre"]);
+      .populate("items.item", ["nombre", "precio"])
+      .populate("user", ["nombre"]);
     console.log('getTicket.estado', getTicket.estado);
-    if(getTicket !== null) {
-      if(changeState && getTicket.estado === 'Pending') {
-        let ticketUp = await Ticket.findByIdAndUpdate(
-          id, { 
+    if (getTicket !== null && changeState) {
+      let ticketUp
+      switch(getTicket.estado) {
+        case 'Pending':
+          ticketUp = await Ticket.findByIdAndUpdate(
+            id, {
             estado: 'Processing' 
           }, { new: true });
-        let save = await ticketUp.save();
-    
-        /* let update = await Ticket.findById(save._id)
-        .populate("items.item", ["nombre", "precio"])
-        .populate("user", ["nombre"]);
-        return res.json(update); */
-      }
-      if(changeState && getTicket.estado === 'Processing') {
-        let ticketUp = await Ticket.findByIdAndUpdate(
-          id, { 
-            estado: 'Finished' 
+          await ticketUp.save();
+          break;
+        case 'Processing':
+          ticketUp = await Ticket.findByIdAndUpdate(
+            id, {
+            estado: 'Finished'
           }, { new: true });
-        let save = await ticketUp.save();
-        
+          await ticketUp.save();
+          break;
+        default:
+          break;
+      }
         /* let update = await Ticket.findById(save._id)
         .populate("items.item", ["nombre", "precio"])
         .populate("user", ["nombre"]);
         return res.json(update); */
-      }
+      
+        /* let update = await Ticket.findById(save._id)
+        .populate("items.item", ["nombre", "precio"])
+        .populate("user", ["nombre"]);
+        return res.json(update); */
       const subRequest = await axios.get('http://localhost:4000/ticket/state')
+      console.log('todo', subRequest.data)
       return subRequest.data
       /* return res.json(getTicket); */
     }
@@ -154,7 +159,7 @@ const getUserTickets = async (req, res) => {
     let userTickets = await Ticket.find()
       .populate("user")
       .populate("items.item");
-  
+
     function splitt(string) {
       let id = string.split('"');
       let dividido = id[1];

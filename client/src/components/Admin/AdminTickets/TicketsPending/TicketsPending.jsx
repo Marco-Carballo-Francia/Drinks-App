@@ -15,35 +15,34 @@ const TicketsPending = () => {
     }, [dispatch])
 
     const handleClick = () => {
-        dispatch({ type: "SET_TICKET", payload: ticketsPending[0] })
+        dispatch({ type: "SET_TICKET", payload: ticketsPending[0] });
+        dispatch(getTicketsAdmin());
     }
 
     return (
         <div className={styles.container}>
             <div>
-            {
-                ticketsPending.length 
-                ? 
-                
-                    <div>
-                    {
-                        ticketsPending.map((t) => {
-                            return (
-                                <div className={styles.ticket} key={t._id}>
-                                    <h2>Fecha: {t.fecha}</h2>
-                                    <h2>Usuario: {t.user.nombre}</h2>
-                                    <h3>Estado: {t.estado}</h3>
-                                </div>
-                            )
-                        })
-                    }
-                    </div>
-                
-                :
-                (
-                    <Loading />
-                )
-            }
+                {
+                    ticketsPending.length
+                        ?
+                        <div>
+                            {
+                                ticketsPending.map((t) => {
+                                    return (
+                                        <div className={styles.ticket} key={t._id}>
+                                            <h2>Fecha: {t.fecha}</h2>
+                                            <h2>Usuario: {t.user.nombre}</h2>
+                                            <h3>Estado: {t.estado}</h3>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        (
+                            <Loading />
+                        )
+                }
             </div>
             <div>
                 <button onClick={handleClick}>▶</button>

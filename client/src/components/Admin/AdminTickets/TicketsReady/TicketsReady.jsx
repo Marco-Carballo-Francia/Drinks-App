@@ -9,10 +9,11 @@ const TicketsReady = () => {
 
     useEffect(() => {
         dispatch(getTicketsAdmin());
-    }, [dispatch]);
+    }, [dispatch, ticketsProcessing]);
 
     const handleClick = (id) => {
         dispatch(changeTicketStatus({changeState: true, id})); // va al back y cambia el status del ticket a finalizado (o loqsea)
+        dispatch(getTicketsAdmin());
     };
 
     return (
@@ -22,7 +23,7 @@ const TicketsReady = () => {
                     ?   <div>
                         {
                             ticketsProcessing.map(x => {
-                                const  id  = x._id;
+                                const id = x._id;
                                 return (
                                     <div key={id}>
                                         <span>{id}</span>
