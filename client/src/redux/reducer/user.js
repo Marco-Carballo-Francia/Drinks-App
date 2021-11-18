@@ -8,10 +8,13 @@ const initialState = {
 export function userReducer(state = initialState, action) {
   switch (action.type) {
     case AUTH:
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      return {
+      localStorage.setItem("user", JSON.stringify(action.payload));
+/*       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+ */      return {
         ...state,
+
         user: localStorage.setItem("profile", JSON.stringify({ ...action?.data }))
+
       };
     case LOGOUT:
       localStorage.clear(); //limpia la localstorage, entonces el useEffect del navBar va a comprobar que  user=null

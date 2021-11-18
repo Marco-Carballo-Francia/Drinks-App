@@ -56,6 +56,9 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Item'
     }],
+    telefono: {
+        type: Number
+    },
     itemList: [{
         item: {
             type: Schema.Types.ObjectId,

@@ -162,7 +162,7 @@ const editUser = async (req, res) => {
     itemCart,
     decrement
   } = req.body;
-  
+  // console.log('itemCart', itemCart);
   try {
     let qty = 0;
     let obj = {};
@@ -185,17 +185,17 @@ const editUser = async (req, res) => {
     }
     let bool = false;
 
-    
+
     if (user) {
  /*     if (itemCart) {
         for (let i = 0; i < user.itemList.length; i++) {
-          console.log('user.itemList[i].item', user.itemList[i].item);
+          // console.log('user.itemList[i].item', user.itemList[i].item);
           if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
           if (bool) {
             if (qty < 1) {
               if (user.itemList[i].qtyCart > 1) user.itemList[i].qtyCart--;
             } else {
-              user.itemList[i].qtyCart++;
+              user.itemList[i].qtyCart++
             }*/
        if(itemCart){
        for (let i = 0; i < user.itemList.length; i++) {
@@ -208,7 +208,6 @@ const editUser = async (req, res) => {
            }else {
              user.itemList[i].qtyCart++;
           }
-
             let save = await user.save();
 
             let update = await User.findById(save._id)
@@ -241,7 +240,7 @@ const editUser = async (req, res) => {
         .populate('ticketHistory');
 
       if (update) return res.json(update);
-      else return res.send("No se encontro la actualizacion"); 
+      else return res.send("No se encontro la actualizacion");
     }
     res.send('Hubo un error al traer el Usuario');
   } catch (error) {
@@ -260,9 +259,9 @@ const deleteX = async (req, res) => {
       let dividido = id[1];
       return dividido;
     }
-    console.log("user.itemList", user.itemList)
-    console.log("itemsId", itemsId)
-    console.log("userId", userId)
+    // console.log("user.itemList", user.itemList)
+    // console.log("itemsId", itemsId)
+    // console.log("userId", userId)
     let delet = user.itemList.filter(i => splitt(JSON.stringify(i.item)) !== itemsId.toString());
 
     let put = await User.findByIdAndUpdate(userId, {
@@ -271,7 +270,7 @@ const deleteX = async (req, res) => {
 
     let save = await put.save();
     let update = await User.findById(save._id).populate('itemList.item');
-    console.log(update);
+    // console.log(update);
     res.json(update);
   } catch (error) {
     console.log(error);
@@ -298,19 +297,9 @@ const deleteAll = async (req, res) => {
   }
 }
 
-const addFavorite = async (req, res) => {
-  const { id } = req.body
-  try {
-    const getById = await User.findById(id);
-    res.json(getById);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 const getUserByID = async (req, res) => {
   const { userId } = req.params;
-  console.log("userId===getUser", userId)
+  // console.log("userId===getUser", userId)
   try {
     let user = await User.findById(userId)
       .populate('itemList.item', ['nombre', 'precio', 'imagen']);
@@ -327,33 +316,62 @@ const getFavoritos = async (req, res) => {
       .populate('itemList.item')
       .populate('favoritos');
 
-    if (user !== null || User.length !== 0) {
-      if (user.favoritos !== null || user.favoritos.length !== 0) return res.json(user.favoritos);
-      return res.send('No tienes productos en tu lista de favoritos');
-    }
+    if (user !== null) return res.json(user.favoritos);
     res.status(404).send('No se encontro el usuario');
   } catch (error) {
     console.log(error);
   }
 }
-const createFavoritos = async (req, res) => {
+
+const addFavorite = async (req, res) => {
   const { userId } = req.params;
   const { itemId } = req.body;
   try {
+    if (userId && itemId) {
+      let addFavorite = await User.findByIdAndUpdate(user._id, {
+        favoritos: item._id
+      }, { new: true });
 
+      let save = await addFavorite.save();
+      let update = await User.findById(save._id)
+        .populate('favoritos');
+
+      return res.json(update.favoritos);
+    }
+    res.send('algunos de los campos no fueron pasados correctamente');
   } catch (error) {
     console.log(error);
   }
 }
+
 const deleteFavoritos = async (req, res) => {
   const { userId } = req.params;
   const { itemId } = req.body;
   try {
+    let user = await User.findById(userId);
 
+    function splitt(string) {
+      let id = string?.split('"');
+      let dividido = id[1];
+      return dividido;
+    }
+
+    let delet = user.favoritos.filter(i => splitt(JSON.stringify(i.item)) !== itemId.toString());
+
+    let put = await User.findByIdAndUpdate(userId, {
+      itemList: delet
+    }, { new: true });
+
+    let save = await put.save();
+    let update = await User.findById(save._id)
+    .populate('favoritos');
+    // console.log(update);
+    res.json(update);
   } catch (error) {
     console.log(error);
   }
 }
+
 
 module.exports = {
   postLogin,
@@ -366,5 +384,7 @@ module.exports = {
   addFavorite,
   getUserByID,
   deleteX,
-  deleteAll
+  deleteAll,
+  deleteFavoritos,
+  getFavoritos
 };

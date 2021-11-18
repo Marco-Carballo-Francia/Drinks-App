@@ -7,10 +7,15 @@ import style from './NavBar.module.css';
 import iconHome from '../../Iconos/icon-Home.png';
 import { BsCart2 } from "react-icons/bs";
 import { checkout } from '../../redux/actions/actions';
+import Modal from 'react-bootstrap/Modal'
+import AdminButton from '../Admin/AdminButton/AdminButton';
 
 
 const NavBar = () => {
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const location = useLocation();
     const history = useHistory();
     const dispatch = useDispatch();
@@ -28,6 +33,14 @@ const NavBar = () => {
         history.push("/");
     }
 
+    const handleClick = () =>{
+        if (user) {
+            history.push("/carrito")
+        } else {
+            handleShow()
+        }
+    }
+
     return (
         <div className={style.NavBar}>
             <Link to='/'>
@@ -38,9 +51,23 @@ const NavBar = () => {
                 <Categories />
             </div>
             <div className={style.ctnRegis}>
-                <Link to='/carrito'>
-                    <BsCart2 className={style.linkCart} />
-                </Link>
+                <AdminButton/>
+                <BsCart2 onClick={handleClick} className={style.linkCart} />
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>No estas registrado o logueado</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Logueate o registrate para poder entrar al carrito</Modal.Body>
+                    <Modal.Footer>
+                        <button variant="secondary" onClick={handleClose}>
+                            Ok
+                        </button>
+                        <button variant="primary" onClick={handleClose}>
+                            Cancelar
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+
                 {
                     user !== null ? (
                         <>
