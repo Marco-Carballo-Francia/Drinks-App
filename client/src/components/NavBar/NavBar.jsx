@@ -19,14 +19,14 @@ const NavBar = () => {
     const location = useLocation();
     const history = useHistory();
     const dispatch = useDispatch();
-    // const [user, setUser] = useState(JSON.parse(localStorage.getItem('user'))) //busco el usuario que guarde en la localstorage EN EL REDUCER
+    const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem('profile'))) //busco el usuario que guarde en la localstorage EN EL REDUCER
     const { user } = useSelector(state => state.user);
 
-    useEffect(() => {
-        dispatch(checkout());
-    }, [user, dispatch])
+    useEffect( () => {
+        localStorage.setItem("profile", JSON.stringify(user));
+    }, [usuario])
 
-
+    console.log("usuario nav",user)
     const logout = () => {
         dispatch({ type: "LOGOUT" });
         dispatch(checkout());

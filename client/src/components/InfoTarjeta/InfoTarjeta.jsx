@@ -8,7 +8,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
-import { createTicket } from "../../redux/actions/actions";
+import { createTicket, deleteCartAll } from "../../redux/actions/actions";
 import { useHistory } from "react-router-dom";
 import Modal from 'react-modal';
 import { BsCheck2Square } from "react-icons/bs";
@@ -31,8 +31,12 @@ const InfoTarjeta = () => {
     setIsOpen(false);
   }
 
-  const handleOrdenes = () => history.push('/profile');
-  const handleSeguirComprando = () => history.push('/');
+  const handleOrdenes = () => {
+    dispatch(deleteCartAll(userId))
+    history.push('/profile')};
+  const handleSeguirComprando = () =>{ 
+    dispatch(deleteCartAll(userId))
+    history.push('/')};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +52,7 @@ const InfoTarjeta = () => {
       elements.getElement(CardElement).clear();
       setLoading(false);
       setIsOpen(true)
-      dispatch({ type: "RESET_CART" })
+      
     }
   };
 
