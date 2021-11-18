@@ -53,7 +53,7 @@ const Create = () => {
         <div className={style.Register}>
             <form className={style.form}>
                 <div className={style.nombre}>
-                    <label>Nombre</label>
+                    <label className={style.title}>Nombre</label>
                     <input className={style.input}
                         name="nombre"
                         type="text"
@@ -62,8 +62,9 @@ const Create = () => {
                         onChange={handleOnChange}
                     />
                 </div>
+
                 <div className={style.descripcion}>
-                    <label>Descripcion</label>
+                    <label className={style.title}>Descripcion</label>
                     <input className={style.input}
                         name="descripcion"
                         type="text"
@@ -72,9 +73,10 @@ const Create = () => {
                         onChange={handleOnChange}
                     />
                 </div>
+
                 <div className={style.precio}>
-                    <label>Precio</label>
-                    <input className={style.input}
+                    <label className={style.title}>Precio</label>
+                    <input className={style.inputPrecio}
                         name="precio"
                         type="text"
                         placeholder="Precio del producto..."
@@ -83,8 +85,9 @@ const Create = () => {
                     />
                     <p className={style.error}>{errors.precio}</p>
                 </div>
-                <div className={style.img}>
-                    <label>Imagen</label>
+
+                <div className={style.imagen}>
+                    <label className={style.title}>Imagen</label>
                     <input className={style.input}
                         name="imagen"
                         type="text"
@@ -93,8 +96,9 @@ const Create = () => {
                         onChange={handleOnChange}
                     />
                 </div>
+
                 <div className={style.category}>
-                    <label>Categoria</label>
+                    <label className={style.title}>Categoria</label>
                     <input className={style.input}
                         name="categoria"
                         type="text"
@@ -103,7 +107,7 @@ const Create = () => {
                         onChange={handleOnChange}
                     />
                 </div>
-                <button onClick={hadleClick}>Crear</button>
+                <button className={style.btn} onClick={hadleClick}>Crear</button>
             </form>
         </div>
 

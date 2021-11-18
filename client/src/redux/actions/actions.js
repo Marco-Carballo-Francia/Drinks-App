@@ -26,6 +26,8 @@ import {
     DELETE_ITEM,
     GET_ADMIN_ITEMS,
     SET_ITEM,
+    DELETE_CART_ALL,
+    DELETE_CART_ONE
 } from './const';
 
 
@@ -96,25 +98,73 @@ export const rateProduct = ({ number, id }) => async (dispatch) => {
     }
 }
 
-export const addCart = (payload, cantidad) => {
-    return {
-        type: ADD_CART,
-        cantidad: cantidad,
-        payload
+export const addCart = (itemCart, id) => async (dispatch)=> {
+    try{
+
+        let res= await axios.patch(`/users/user/edit/${id}`, {itemCart} )
+        console.log(res.data);
+        return dispatch({
+            type: ADD_CART,
+            payload: res.data
+        })
+
+    }
+    catch(error){
+        console.log(error)
     }
 }
 
-export const getCart = () => {
-    return {
-        type: GET_CART
-    }
-};
+export const getCart = (userId) => async (dispatch) =>{
+    
+        try{
+            let res = await axios.get(`/users/user/${userId}`)
+            console.log(res.data);
+            return dispatch({
+                type: GET_CART,
+                payload: res.data
+            })
+        }   
+
+
+        catch(error){
+            console.log(error);
+        }
+}
 
 
 export const deleteCartItem = (id) => {
     return {
         type: DELETE_CART_ITEM,
         payload: id
+    }
+}
+
+
+export const deleteCartOne = (itemsId, userId) => async (dispatch) =>{
+    try{
+        console.log("find", itemsId)
+        let res = await axios.put(`/users/user/deleteX/${userId}`, {itemsId} )
+        return dispatch({
+            type: DELETE_CART_ONE,
+            payload: res.data
+        })
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+
+export const deleteCartAll = (userId, itemId) => async (dispatch) =>{
+    try{
+        let res = await axios.put(`/users/user/deleteAll/${userId}`, itemId ).data 
+        return dispatch({
+            type: DELETE_CART_ALL,
+            payload: res
+        })
+    }
+    catch(error){
+        console.log(error);
     }
 }
 

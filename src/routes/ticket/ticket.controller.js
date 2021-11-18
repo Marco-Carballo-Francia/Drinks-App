@@ -164,7 +164,7 @@ const getUserTickets = async (req, res) => {
       (x) => splitt(JSON.stringify(x.user._id)) === id.toString()
     );
 
-    res.json(userTickets);
+    res.json(tickets);
   } catch (error) {
     console.log(error);
   }
