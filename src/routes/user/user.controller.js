@@ -187,9 +187,11 @@ const editUser = async (req, res, next) => {
     
     if (user) {
       if(itemCart){
+
       for (let i = 0; i < user.itemList.length; i++) {
-        console.log('user.itemList[i].item', user.itemList[i].item);
-        if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
+        if(user.itemList.length>1){
+          if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
+        }
         if (bool) {
           if (qty < 1) {
             if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
