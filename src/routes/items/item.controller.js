@@ -25,7 +25,7 @@ const getItems = async (req, res) => {
 };
 
 const updateItem = async (req, res) => {
-  const { nombre, descripcion, precio, imagen, reviewsID, categorias, stock } = req.body;
+  const { nombre, descripcion, precio, imagen, reviewsObj, categorias, stock } = req.body;
   const { id } = req.params;
   try {
     let categoriasID = [];
@@ -65,7 +65,15 @@ const updateItem = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const { nombre, descripcion, precio, imagen, reviews, categorias, stock, rating } = req.body;
+  const { 
+    nombre, 
+    descripcion, 
+    precio, 
+    imagen, 
+    reviews, 
+    categorias, 
+    stock
+  } = req.body;
   try {
     let getItemByName = await Item.find({nombre: nombre});
     // console.log('getItemNombre', getItemByName[0].nombre);
@@ -116,11 +124,11 @@ const updateRating = async (req, res) => {
     let itemByID = await Item.findById(id)
       .populate('categorias', ['nombre'])
       .populate('reviews', ['comentario', 'user']);
-    console.log('itemByID', itemByID);
+    // console.log('itemByID', itemByID);
 
     if (itemByID !== null || itemByID.length !== 0) {
       let { cinco, cuatro, tres, dos, uno } = item.numRating;
-      console.log('cinco', cinco);
+      // console.log('cinco', cinco);
       let changed;
       let count;
       switch(numero) {
@@ -150,7 +158,7 @@ const updateRating = async (req, res) => {
       let multi = (5 * cinco)+(4 * cuatro)+(3 * tres)+(2 * dos)+(1 * uno)
       let sum = cinco + cuatro + tres + dos + uno
       const newRating = multi / sum;
-      console.log('newRating', newRating);
+      // console.log('newRating', newRating);
   
       let update = await Item.findByIdAndUpdate(id, {
         rating: newRating,
@@ -161,10 +169,21 @@ const updateRating = async (req, res) => {
       let itemUpdate = await Item.findById(update._id)
         .populate('categorias', ['nombre'])
         .populate('reviews', ['comentario', 'user']);
-      console.log('itemUpdate', itemUpdate);
+      // console.log('itemUpdate', itemUpdate);
       return res.json(itemUpdate);
     }
     res.send('Hubo un error al traer el producto');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const deleteItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    let deleted = await Item.findByIdAndDelete(id);
+    // console.log('deleted', deleted);
+    res.send(`Se elimino correctamente el producto ${deleted.nombre}`);
   } catch (error) {
     console.log(error);
   }
@@ -221,13 +240,14 @@ module.exports = {
   createItem,
   getItemById,
   updateRating,
-  updateItem
+  updateItem,
+  deleteItem
 };
 
 
 
 
-    // "name": "skoll",
+    // "nombre": "skoll",
 		// "descripcion": "Cerveza brasilera",
 		// "precio": "$150",
 		// "categorias": "vinos",

@@ -146,7 +146,7 @@ const newAdmin = async (req, res) => {
   }
 };
 
-const editUser = async (req, res, next) => {
+const editUser = async (req, res) => {
   const {
     nombre,
     apellido,
@@ -159,7 +159,8 @@ const editUser = async (req, res, next) => {
     ciudad,
     estadoProvincia,
     codigoPostal,
-    itemCart
+    itemCart,
+    decrement
   } = req.body;
   
   try {
@@ -186,26 +187,37 @@ const editUser = async (req, res, next) => {
 
     
     if (user) {
-      if(itemCart){
+      if (itemCart) {
+        for (let i = 0; i < user.itemList.length; i++) {
+          console.log('user.itemList[i].item', user.itemList[i].item);
+          if (splitt(JSON.stringify(user.itemList[i].item._id)) === obj.item.toString()) bool = true;
+          if (bool) {
+            if (qty < 1) {
+              if (user.itemList[i].qtyCart > 1) user.itemList[i].qtyCart--;
+            } else {
+              user.itemList[i].qtyCart++;
+            }
+//       if(itemCart){
 
-      for (let i = 0; i < user.itemList.length; i++) {
-        if(user.itemList.length>1){
-          if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
-        }
-        if (bool) {
-          if (qty < 1) {
-            if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
-          }else {
-            user.itemList[i].qtyCart++;
+//       for (let i = 0; i < user.itemList.length; i++) {
+//         if(user.itemList.length>1){
+//           if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
+//         }
+//         if (bool) {
+//           if (qty < 1) {
+//             if (user.itemList[i].qtyCart > 1)  user.itemList[i].qtyCart--;
+//           }else {
+//             user.itemList[i].qtyCart++;
+//           }
+
+            let save = await user.save();
+
+            let update = await User.findById(save._id)
+              .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+              .populate('ticketHistory');
+
+            return res.json(update);
           }
-
-          let save = await user.save();
-
-          let update = await User.findById(save._id)
-            .populate('itemList.item', ['nombre', 'precio', 'imagen'])
-            .populate('ticketHistory');
-
-          return res.json(update);
         }
       }
      } 
@@ -240,8 +252,8 @@ const editUser = async (req, res, next) => {
 };
 
 const deleteX = async (req, res) => {
-  const {itemsId} = req.body;
-  const {userId} =req.params;
+  const { itemsId } = req.body;
+  const { userId } = req.params;
   try {
     let user = await User.findById(userId);
 
@@ -254,10 +266,10 @@ const deleteX = async (req, res) => {
     console.log("itemsId", itemsId)
     console.log("userId", userId)
     let delet = user.itemList.filter(i => splitt(JSON.stringify(i.item)) !== itemsId.toString());
-    
+
     let put = await User.findByIdAndUpdate(userId, {
       itemList: delet
-    }, {new: true});
+    }, { new: true });
 
     let save = await put.save();
     let update = await User.findById(save._id).populate('itemList.item');
@@ -272,16 +284,16 @@ const deleteAll = async (req, res) => {
   const { userId } = req.params;
   try {
     let user = await User.findById(userId)
-    .populate('itemList.item');
+      .populate('itemList.item');
 
     let put = await User.findByIdAndUpdate(userId, {
       itemList: []
-    }, {new: true});
+    }, { new: true });
 
     let save = await put.save();
 
     let update = await User.findById(save._id)
-    .populate('itemList.item');
+      .populate('itemList.item');
     res.json(update.itemList);
   } catch (error) {
     conole.log(error);
@@ -300,18 +312,50 @@ const addFavorite = async (req, res) => {
 
 const getUserByID = async (req, res) => {
   const { userId } = req.params;
-  console.log("userId", userId)
+  console.log("userId===getUser", userId)
   try {
     let user = await User.findById(userId)
-    .populate('itemList.item', ['nombre', 'precio', 'imagen']);
+      .populate('itemList.item', ['nombre', 'precio', 'imagen']);
     res.json(user.itemList);
   } catch (error) {
     console.log(error);
   }
 }
 
-// getUserById,
-// getUser
+const getFavoritos = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    let user = await User.findById(userId)
+      .populate('itemList.item')
+      .populate('favoritos');
+
+    if (user !== null || User.length !== 0) {
+      if (user.favoritos !== null || user.favoritos.length !== 0) return res.json(user.favoritos);
+      return res.send('No tienes productos en tu lista de favoritos');
+    }
+    res.status(404).send('No se encontro el usuario');
+  } catch (error) {
+    console.log(error);
+  }
+}
+const createFavoritos = async (req, res) => {
+  const { userId } = req.params;
+  const { itemId } = req.body;
+  try {
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+const deleteFavoritos = async (req, res) => {
+  const { userId } = req.params;
+  const { itemId } = req.body;
+  try {
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
   postLogin,

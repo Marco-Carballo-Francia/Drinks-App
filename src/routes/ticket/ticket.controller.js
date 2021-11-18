@@ -140,7 +140,7 @@ const updateTickets = async (req, res) => {
       res.json(data)
       /* return res.json(getTicket); */
     }
-    res.send('No se encontro el ticket solicitado');
+    res.sattus(404).send('No se encontro el ticket solicitado');
   } catch (err) {
     console.log(err);
   }
