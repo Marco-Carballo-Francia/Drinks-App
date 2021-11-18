@@ -28,7 +28,6 @@ import {
     SET_ITEM,
     DELETE_CART_ALL,
     DELETE_CART_ONE
-
 } from './const';
 
 
@@ -266,12 +265,12 @@ export const getTicketsAdmin = () => async (dispatch) => {
     }
 }
 
-export const changeTicketStatus = (info) => async (dispatch) => {
+export const changeTicketStatus = ({changeState, id}) => async (dispatch) => {
     try {
-        const tickets = (await axios.put(`/ticket/status`, info)).data
+        const tickets = await axios.put(`/ticket/state/update/${id}`, {changeState})
         return dispatch({
             type: CHANGE_TICKET_STATUS,
-            payload: tickets // esto tiene que venir como un objeto { pending: [{}, {}...], processing: [{}, {}...] }
+            payload: tickets.data // esto tiene que venir como un objeto { pending: [{}, {}...], processing: [{}, {}...] }
         })
     }
     catch (error) {
@@ -380,6 +379,4 @@ export const setItem = (id) => async (dispatch) =>{
     }
 }
 
-// export const setUser = (id) => async (dispatch) => {
-    
-// }
+ 
