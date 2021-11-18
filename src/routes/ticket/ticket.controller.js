@@ -26,11 +26,11 @@ const makePayment = async (req, res) => {
 };
 
 const createTicket = async (req, res) => {
-  let { payment, userId, direccion } = req.body;
-  console.log(payment);
+  let { payment, userId } = req.body;
+  console.log(req.body);
   try {
     let user = await User.findById(userId)
-    .populate('itemList.item', ['nombre', 'precio', 'imagen'])
+    .populate('itemList.item', ['nombre', 'precio', 'imagen', 'direccion'])
     .populate('ticketHistory');
     let cart = user.itemList;
 
@@ -46,12 +46,12 @@ const createTicket = async (req, res) => {
     }
     // console.log("qTY", cart[0].qty)
     itemCart = await Promise.all(itemCart);
-    // console.log('itemcart', itemCart);
+    console.log('itemcart', itemCart);
     let newTicket = {
       items: itemCart,
       precioTotal: payment.amount,
       user: user._id,
-      direccion: direccion,
+      direccion: user.direccion,
       metodoPago: payment.payment_method
     };
     newTicket = new Ticket(newTicket);

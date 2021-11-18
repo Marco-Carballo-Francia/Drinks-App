@@ -13,8 +13,7 @@ const DatosCompra = () => {
    const [input, setInput] = useState({
        nombre: "",
        apellido: "",
-       calle: "",
-       altura: "",
+       direccion: "",
        codigoPostal: "",
        telefono: "",
        telefono2: "" 
@@ -52,7 +51,7 @@ const DatosCompra = () => {
 	function validateCalle(value) {
 		setInput({
 			...input,
-			calle: value,
+			direccion: value,
 		})
 		if(!/^[a-zA-Z\s]*$/.test(value)) {
 			setErrorCalle("solo letras");
@@ -131,8 +130,7 @@ function validateTelefono2(value) {
      setInput({
         nombre: "",
         apellido: "",
-        calle: "",
-        altura: "",
+        direccion: "",
         codigoPostal: "",
         telefono: "",
      })
@@ -166,22 +164,12 @@ function validateTelefono2(value) {
             <div className={style.direccion}>
                 <input  className={style.input}
                 type="text" 
-                value={input.calle} 
+                value={input.direccion} 
                 placeholder="Su calle" 
                 name="calle" 
                 required={true}
                 onChange={e => validateCalle(e.target.value)}/>
                 {!errorCalle ? null : (<p className={style.error}>{errorCalle}</p>)} 
-                <input  className={style.input}
-                type="text" 
-                value={input.altura} 
-                placeholder="ingrese la altura de la calle"
-                name="altura" 
-                maxLength="4"
-                required={true}
-                onChange={e => {validateAltura(e.target.value)}}/>
-                {!errorAltura ? null : (<p className={style.error}>{errorAltura}</p>)}
-            </div>
             <div className={style.codigo}>
                 <input  className={style.input} 
                 type="text" 
