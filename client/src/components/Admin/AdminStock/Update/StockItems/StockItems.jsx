@@ -4,7 +4,6 @@ import { getAdminItems, setItem } from "../../../../../redux/actions/actions"
 import Loading from "../../../../../components/Loading/Loading";
 import StockUpdate from "../StockUpdate/StockUpdate";
 import style from "./StockItems.module.css";
-import Table from 'react-bootstrap/Table';
 import { BsPencilSquare, BsXCircle } from "react-icons/bs";
 import Modal from 'react-modal';
 
@@ -34,8 +33,9 @@ const StockItems = () => {
 
     const handleChange = (e) => {
         setInput(e.target.value);
-        dispatch(getAdminItems({name: e.target.value}));
+        dispatch(getAdminItems({ name: e.target.value }));
     }
+
 
     const customStyles = {
         content: {
@@ -50,43 +50,50 @@ const StockItems = () => {
     };
 
     return (
-        <div className={style.ctnTabla} >
-            <input type="text" value={input} onChange={handleChange}/>
-            <Table striped bordered hover size="sm">
-                <thead>
-                    <tr>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th >Precio</th>
-                        <th >Descripcion</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        items
-                            ? items.map(x => {
-                                return (
-                                    <tr className={style.font}>
-                                        <td ><img className={style.img} src={x.imagen} alt="" /></td>
-                                        <td>{x.nombre}</td>
-                                        <td>{x.precio}</td>
-                                        <td > {x.descripcion}</td>
-                                        <td><BsPencilSquare className={style.icon} key={x._id} onClick={() => handleClick(x._id)} /></td>
-                                    </tr>
-                                )
-                            }) : null
-                    }
-                </tbody>
-            </Table>
-            <Modal
-                isOpen={modalIsOpen}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                <button className={style.btnx} onClick={closeModal}> <BsXCircle className={style.x} /></button>
-                <StockUpdate />
-            </Modal>
+        <div>
+            
+            <div className={style.ctnInput}>
+                <p className={style.textImput}> Buscar por nombre</p>
+                <input className={style.imput} type="text" value={input} onChange={handleChange} />
+            </div>
+            <div className={style.ctnTabla} >
+                <table>
+                    <thead>
+                        <tr>
+                            <th className={style.table1} >Imagen</th>
+                            <th className={style.table1}>Nombre</th>
+                            <th className={style.table1}>Precio</th>
+                            <th className={style.table1} >Descripcion</th>
+                            <th className={style.table1}>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            !items.length
+                                ? (<div className={style.spiner}> <Loading /></div>)
+                                : items ? items.map(x => {
+                                    return (
+                                        <tr className={style.font}>
+                                            <td className={style.table2} ><img className={style.img} src={x.imagen} alt="" /></td>
+                                            <td className={style.table2}>{x.nombre}</td>
+                                            <td className={style.table2}>{x.precio}</td>
+                                            <td className={style.table2}> {x.descripcion}</td>
+                                            <td className={style.table2}><BsPencilSquare className={style.icon} key={x._id} onClick={() => handleClick(x._id)} /></td>
+                                        </tr>
+                                    )
+                                }) : null
+                        }
+                    </tbody>
+                </table>
+                <Modal
+                    isOpen={modalIsOpen}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <button className={style.btnx} onClick={closeModal}> <BsXCircle className={style.x} /></button>
+                    <StockUpdate />
+                </Modal>
+            </div>
         </div>
     )
 }

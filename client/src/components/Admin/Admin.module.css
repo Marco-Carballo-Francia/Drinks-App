@@ -1,21 +1,27 @@
-.ctnSup{
-    display: flex;
-    justify-content:space-evenly;
-    margin-top: 2%;
+.ctnSup {
+  display: flex;
+  margin-top: 1%;
+  align-items: flex-start;
+  margin-left: 40px;
 }
 
-.btn{
-    color: rgb(0, 0, 0);
-    border: none;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-    letter-spacing: 1px;
-    background-color: #00000000;
-    cursor: pointer
+.btn {
+  margin-left: 15px;
+  color: rgb(0, 0, 0);
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background-color: #00000000;
+  cursor: pointer;
 }
 
 .btn:hover {
   background-color: rgba(255, 255, 255, 0);
+  color: rgb(207, 117, 0);
+}
+
+.btn:focus {
   color: rgb(207, 117, 0);
 }

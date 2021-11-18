@@ -10,17 +10,23 @@ const Admin = () => {
     }
 
     return (
+
+
         <div className={style.ctnSup}>
             <button className={style.btn} name="stock" onClick={handleClick}>
-                Stock
+                Productos en Stock
+            </button>
+            <button className={style.btn} name="create" onClick={handleClick}>
+                Crear Producto
             </button>
             <button className={style.btn} name="tickets" onClick={handleClick}>
-                Tickets
+                Ordenes
             </button>
             <button className={style.btn} name="users" onClick={handleClick}>
-                Users
+                Usuarios
             </button>
         </div>
+
     )
 }
 
