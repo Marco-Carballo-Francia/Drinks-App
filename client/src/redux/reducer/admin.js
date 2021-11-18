@@ -8,7 +8,8 @@ const initialState = {
     ticket: {},
     ticketsReady: [],
     user: {},
-    users: []
+    users: [],
+    averga: ""
 } 
  
 export function adminReducer (state = initialState, action ) {
@@ -30,11 +31,10 @@ export function adminReducer (state = initialState, action ) {
                 ticket: null
             }
         case CHANGE_TICKET_STATUS:
-        
             return {
                 ...state,
                 ticketsPending: action.payload.pending,
-                ticketsProcessing: action.payload.processing
+                ticketsProcessing: action.payload.processing,
             }
         case GET_USERS:
             return {

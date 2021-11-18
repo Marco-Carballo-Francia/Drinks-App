@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTicketsAdmin } from "../../../../redux/actions/actions";
+import { getTicketsAdmin, changeTicketStatus } from "../../../../redux/actions/actions";
 import Loading from "../../../Loading/Loading";
 import styles from "./TicketsPending.module.css";
 import TicketProcess from "../TicketProcess/TicketProcess";
@@ -8,11 +8,12 @@ import TicketProcess from "../TicketProcess/TicketProcess";
 const TicketsPending = () => {
 
     const dispatch = useDispatch();
-    const { ticketsPending } = useSelector((state) => state.admin)
 
     useEffect(() => {
         dispatch(getTicketsAdmin())
-    }, [dispatch])
+    }, [])
+
+    const { ticketsPending } = useSelector((state) => state.admin)
 
     const handleClick = () => {
         dispatch({ type: "SET_TICKET", payload: ticketsPending[0] })
@@ -24,7 +25,6 @@ const TicketsPending = () => {
             {
                 ticketsPending.length 
                 ? 
-                
                     <div>
                     {
                         ticketsPending.map((t) => {
@@ -38,7 +38,6 @@ const TicketsPending = () => {
                         })
                     }
                     </div>
-                
                 :
                 (
                     <Loading />

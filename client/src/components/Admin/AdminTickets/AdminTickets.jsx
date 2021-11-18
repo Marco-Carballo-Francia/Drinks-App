@@ -8,9 +8,9 @@ const AdminTickets = () => {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getTicketsAdmin())
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(getTicketsAdmin())
+    // }, [])
 
     return (
         <div>
