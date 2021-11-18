@@ -1,7 +1,7 @@
 import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL, EDIT_DATE_PROFILE } from "../actions/const.js";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('profile')),
   tickets: [],
 };
 
@@ -11,7 +11,7 @@ export function userReducer(state = initialState, action) {
       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
       return {
         ...state,
-        user: action?.data,
+        user: localStorage.setItem("profile", JSON.stringify({ ...action?.data }))
       };
     case LOGOUT:
       localStorage.clear(); //limpia la localstorage, entonces el useEffect del navBar va a comprobar que  user=null
