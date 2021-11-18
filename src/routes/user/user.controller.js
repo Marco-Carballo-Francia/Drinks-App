@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const User = require("../../models/User");
 const config = require("../../config.js");
+const Item = require("../../models/Item");
 
 const client = new OAuth2Client(config.GOOGLE_CLIENT_ID);
 
@@ -299,16 +300,6 @@ const deleteAll = async (req, res) => {
   }
 }
 
-const addFavorite = async (req, res) => {
-  const { id } = req.body
-  try {
-    const getById = await User.findById(id);
-    res.json(getById);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 const getUserByID = async (req, res) => {
   const { userId } = req.params;
   console.log("userId===getUser", userId)
@@ -341,6 +332,15 @@ const createFavoritos = async (req, res) => {
   const { userId } = req.params;
   const { itemId } = req.body;
   try {
+    let user = await User.findById(userId)
+
+    if(user !== null) {
+      let item = await Item.findById(itemId)
+
+      if (item !== null) {
+        let 
+      }
+    }
 
   } catch (error) {
     console.log(error);
