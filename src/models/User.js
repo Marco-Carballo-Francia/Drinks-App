@@ -53,10 +53,8 @@ const UserSchema = new Schema({
         default: false
     },
     favoritos: [{
-        item: {
-            type: Schema.Types.ObjectId,
-            ref: 'Item'
-        }
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
     }],
     itemList: [{
         item: {

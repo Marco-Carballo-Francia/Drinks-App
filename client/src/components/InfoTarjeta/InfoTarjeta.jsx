@@ -22,7 +22,8 @@ const InfoTarjeta = () => {
   const elements = useElements();
   const { cart, total } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const userId = user?._id
+  const userId = user?._id;
+  const direccion = user?.direccion;
   const [loading, setLoading] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -43,7 +44,7 @@ const InfoTarjeta = () => {
     setLoading(true);
     if (!error) {
       const id = paymentMethod.id;
-      dispatch(createTicket({ id, amount: total, cart, userId }));
+      dispatch(createTicket({ id, amount: total, cart, userId, direccion }));
       elements.getElement(CardElement).clear();
       setLoading(false);
       setIsOpen(true)
