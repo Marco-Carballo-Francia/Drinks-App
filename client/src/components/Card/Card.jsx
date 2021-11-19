@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import img from '../../Iconos/image-default-Card.jpeg';
 import Rating from '../Rating/Rating';
-import { addCart } from "../../redux/actions/actions.js";
+import { addCart, addFavoritos } from "../../redux/actions/actions.js";
 import Modal from 'react-bootstrap/Modal';
 import { BsCheck2Square } from "react-icons/bs";
 
@@ -17,8 +17,11 @@ const Card = (prod) => {
     const handleShow2 = () => setShow2(true);
     const cart = useSelector((state) => state.cart.cart);
     const user = useSelector(state => state.user.user);
+    // const items = useSelector(state => state.products.products)
     const id = user?._id;
+    console.log('id en el card', id);
     let p = prod.prod
+    console.log('item', p);
     const dispatch = useDispatch();
     // const [clicked, setClicked] = useState(false)
 
@@ -33,7 +36,7 @@ const Card = (prod) => {
             setTimeout(handleClose1, 3000);
         } else {
             handleShow2();
-            setTimeout(handleClose2, 1000);    
+            setTimeout(handleClose2, 1000);
             dispatch(addCart(itemCart, id));
         }
         console.log(itemCart);
@@ -43,10 +46,15 @@ const Card = (prod) => {
         ev.target.src = img;
     };
 
-
+    const handleClick = () => {
+        dispatch(addFavoritos(id, p._id))
+    }
 
     return (
         <div className={style.Card}>
+            <div>
+                <button onclick={handleClick}>Icono</button>
+            </div>
             <Link className={style.link} to={`/detail/${p._id}`}>
                 <div >
                     <img onError={addDefaultSrc} className={style.image} src={p.imagen} alt="img no encontrada" />
@@ -62,7 +70,11 @@ const Card = (prod) => {
             </Link>
 
             <div >
-                <button onClick={() => onClick()} className={style.btn}>Agregar al carrito</button>
+                {
+                    !p.stock
+                        ? <p>Sin stock</p>
+                        : <button onClick={() => onClick()} className={style.btn}>Agregar al carrito</button>
+                }
             </div>
             <Modal show={show1} onHide={handleClose1}>
                 <Modal.Header closeButton>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../../../redux/actions/actions";
+import { getUsers, changeUserRole } from "../../../../redux/actions/actions";
 import style from "./UsersList.module.css";
 import Modal from 'react-modal';
 import UserDetail from '../UserDetail/UserDetail';
@@ -10,7 +10,7 @@ const UsersList = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [input, setInput] = useState();
     const dispatch = useDispatch();
-    const { users } = useSelector(state => state.admin);
+    const { users, user } = useSelector(state => state.admin);
 
     useEffect(() => {
         dispatch(getUsers({}))
@@ -66,8 +66,8 @@ const UsersList = () => {
                                 <tr>
                                     <td className={style.table2} >{x.nombre}</td>
                                     <td className={style.table2} >{x.email}</td>
-                                    <td className={style.table2} >{x.admin}</td>
-                                    <td ><button className={style.btn} onClick={() => handleClick(x._id)}> Hacer Admin</button> </td>
+                                    <td className={style.table2} >{x.admin ? "Admin" : "User"}</td>
+                                    <td ><button className={style.btn} onClick={() => handleClick(x._id)}>{x.admin? "Quitar Admin" : "Hacer Admin"}</button> </td>
                                 </tr>
                             ))
                         }
@@ -79,8 +79,8 @@ const UsersList = () => {
                     contentLabel="Example Modal"
                 >
                     <button className={style.btnx} onClick={closeModal}> x</button>
-                    <h2 className={style.title}>El usuario esta a punto de ser Admin</h2>
-                    < UserDetail />
+                    <h2 className={style.title}>El usuario esta a punto de convertirse en: {user?.admin ? "User" : "Admin"}</h2>
+                    <UserDetail closeModal={closeModal}/>
                 </Modal>
 
             </div>

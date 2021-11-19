@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import style from './DatosCompra.module.css';
 import { useDispatch, useSelector } from "react-redux";
 import {datosDeCompra} from "../../redux/actions/actions.js";
@@ -169,7 +169,8 @@ function validateTelefono2(value) {
                 name="calle" 
                 required={true}
                 onChange={e => validateCalle(e.target.value)}/>
-                {!errorCalle ? null : (<p className={style.error}>{errorCalle}</p>)} 
+                {!errorCalle ? null : (<p className={style.error}>{errorCalle}</p>)}
+            </div> 
             <div className={style.codigo}>
                 <input  className={style.input} 
                 type="text" 
@@ -196,4 +197,4 @@ function validateTelefono2(value) {
     )
 }
 
-export default DatosCompra;
+export default DatosCompra; */

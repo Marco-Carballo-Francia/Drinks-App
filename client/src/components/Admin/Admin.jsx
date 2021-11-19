@@ -22,6 +22,9 @@ const Admin = () => {
                 <button className={style.btn} name="create" onClick={handleClick}>
                     Crear Producto
                 </button>
+                <button className={style.btn} name="category" onClick={handleClick}>
+                    Categorías
+                </button>
                 <button className={style.btn} name="tickets" onClick={handleClick}>
                     Ordenes
                 </button>
