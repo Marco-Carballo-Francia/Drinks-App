@@ -388,7 +388,7 @@ export const updateItem = ({id, object}) => async (dispatch) => {
             type: UPDATE_ITEM,
             payload: data
         })
-        return dispatch(getAdminItems()); 
+        return dispatch(getAdminItems({})); 
     } catch (error) {
         console.log(error) 
     }
