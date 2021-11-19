@@ -32,7 +32,7 @@ const Admin = () => {
                     Usuarios
                 </button>
             </div>
-            {!click ? <h1>Bienvenido {user?.nombre} a tu panel de administrador!</h1> : null}
+            {!click ? <h1 className={style.title}>Bienvenido {user?.nombre} a tu panel de administrador!</h1> : null}
         </div>
 
     )

@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from './Create.module.css';
 import { createItem } from '../../../../redux/actions/actions.js';
+import Modal from 'react-bootstrap/Modal';
+import { BsCheck2Square } from "react-icons/bs";
 
 const Create = () => {
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
@@ -58,6 +62,8 @@ const Create = () => {
 
     const hadleClick = () => {
         dispatch(createItem(input))
+        handleShow();
+        setTimeout(handleClose, 3000);
     }
 
     const handleX = () => {
@@ -66,7 +72,6 @@ const Create = () => {
 
     return (
         <div className={style.Register}>
-            <button onClick={handleX}>X</button>
             <form className={style.form}>
                 <div className={style.nombre}>
                     <label className={style.title}>Nombre</label>
@@ -125,8 +130,8 @@ const Create = () => {
                 </div>
                 <div className={style.category}>
                     <label className={style.title}>Categoria</label>
-                    <select onChange={handleSelect}>
-                            <option value="categorias">Categorias</option>
+                    <select className={style.input} onChange={handleSelect}>
+                            <option  value="categorias">Categorias</option>
                             {
                                 categories?.map((e) => {
                                     return <option>{e.nombre}</option>
@@ -148,6 +153,12 @@ const Create = () => {
                 </div>
                 <button className={style.btn} onClick={hadleClick}>Crear</button>
             </form>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header className={style.modalHead} closeButton1>
+                    <h1 className={style.titleModal}>EFelicitacones!<BsCheck2Square className={style.iconModal} /></h1>
+                </Modal.Header>
+                <p className={style.textModal}>El producto se creo correctamente</p>
+            </Modal>
         </div>
 
     )

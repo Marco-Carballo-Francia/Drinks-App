@@ -89,9 +89,7 @@ function CardDetails(props) {
                                        
                                     }
                                 </div>
-                                <div>
-                                    <button className={style.añadir}>Agregar a favoritos</button>
-                                </div>
+                    
                             </div>
 
                             <Modal show={show1} onHide={handleClose1}>

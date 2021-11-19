@@ -1,0 +1,15 @@
+.btn {
+    color: white;
+    border: none;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 1px;
+    background-color: #00000000;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(207, 117, 0);
+  }

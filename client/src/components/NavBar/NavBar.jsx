@@ -47,11 +47,11 @@ const NavBar = () => {
                 <img className={style.imgIcono} src={iconHome} alt="icono de home" />
             </Link>
             <div >
-                <SearchBar />
+                <SearchBar />   
                 <Categories />
             </div>
             <div className={style.ctnRegis}>
-                <AdminButton />
+                
                 <BsCart2 onClick={handleClick} className={style.linkCart} />
 
                 <Modal show={show} onHide={handleClose}>
@@ -66,8 +66,11 @@ const NavBar = () => {
                         <>
                             <Link className={style.link} to='/profile'>  <p className={style.nameUser}>Hola, {
                                 user?.nombre ? user?.nombre : user?.user?.nombre
-                            }</p>
+                                
+                            } </p>
+                            <AdminButton />
                             </Link>
+                            
                             <button onClick={logout} className={style.logout}>Salir</button>
                         </>
                     ) : (
@@ -80,6 +83,7 @@ const NavBar = () => {
                             </Link>
                         </>
                     )}
+                       
             </div>
         </div>
     );

@@ -101,7 +101,7 @@ const Cart = () => {
         <div>
         {cart.length >=1 ?
           <button onClick={handleClick} disabled={cart.length<1} className={style.btn}>PAGAR</button>
-          : <Link to="/"><button className={style.btn}>Agregá</button></Link>
+          : <Link to="/"><button className={style.btn}>Agregar</button></Link>
         }
           
         </div>
