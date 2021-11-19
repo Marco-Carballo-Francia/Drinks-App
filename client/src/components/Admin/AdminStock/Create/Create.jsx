@@ -12,7 +12,8 @@ const Create = () => {
         descripcion: "",
         precio: "",
         imagen: "",
-        categoria:[],
+        stock: 0,
+        categorias:[],
     })
     const [errors, setErrors] = useState({});
 
@@ -46,10 +47,10 @@ const Create = () => {
    
 
     const handleSelect = (e) =>{
-        if (!input.categoria.includes(e.target.value))
+        if (!input.categorias.includes(e.target.value))
         setInput({
             ...input,
-            categoria: [...input.categoria, e.target.value]
+            categorias: [...input.categorias, e.target.value]
         })
     }
 
@@ -59,8 +60,13 @@ const Create = () => {
         dispatch(createItem(input))
     }
 
+    const handleX = () => {
+
+    }
+
     return (
         <div className={style.Register}>
+            <button onClick={handleX}>X</button>
             <form className={style.form}>
                 <div className={style.nombre}>
                     <label className={style.title}>Nombre</label>
@@ -106,7 +112,17 @@ const Create = () => {
                         onChange={handleOnChange}
                     />
                 </div>
-
+                <div className={style.imagen}>
+                    <label className={style.title}>Stock: </label>
+                    <input className={style.input}
+                        name="stock"
+                        type="number"
+                        min="0"
+                        placeholder="Stock del producto..."
+                        value={input.stock}
+                        onChange={handleOnChange}
+                    />
+                </div>
                 <div className={style.category}>
                     <label className={style.title}>Categoria</label>
                     <select onChange={handleSelect}>
@@ -118,7 +134,7 @@ const Create = () => {
                             }
                         </select>
                         <div>
-                            {input.categoria?.map(e =>
+                            {input.categorias?.map(e =>
                                 <div>{e}</div>
                             )}
                         </div>

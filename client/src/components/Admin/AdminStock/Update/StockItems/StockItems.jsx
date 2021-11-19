@@ -25,6 +25,7 @@ const StockItems = () => {
 
     const closeModal = () => {
         setIsOpen(false);
+        dispatch(getAdminItems({}))
     }
 
     const handleClick = (id) => {
@@ -91,8 +92,7 @@ const StockItems = () => {
                     style={customStyles}
                     contentLabel="Example Modal"
                 >
-                    <button className={style.x} onClick={closeModal}>x</button>
-                    <StockUpdate />
+                    <StockUpdate closeModal={closeModal}/>
                 </Modal>
             </div>
         </div>

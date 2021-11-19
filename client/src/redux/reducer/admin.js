@@ -9,7 +9,6 @@ const initialState = {
     ticketsReady: [],
     user: {},
     users: [],
-    averga: ""
 } 
  
 export function adminReducer (state = initialState, action ) {

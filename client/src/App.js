@@ -28,6 +28,13 @@ import AdminUsers from './components/Admin/AdminUsers/AdminUsers';
 import AdminStock from './components/Admin/AdminStock/AdminStock';
 import Create from "./components/Admin/AdminStock/Create/Create";
 import AdminTickets from './components/Admin/AdminTickets/AdminTickets';
+import AdminCategorias from './components/Admin/AdminCategorias/AdminCategorias';
+
+// Favoritos
+
+import Favoritos from "./components/Favoritos/Favoritos"
+
+
 
 
 function App() {
@@ -52,8 +59,14 @@ function App() {
       <Route path="/admin/users" component={AdminUsers} />
       <Route path="/admin/stock" component={AdminStock} />
       <Route path="/admin/create" component={Create} />
+      <Route path="/admin/category" component={AdminCategorias} />
       <Route path="/admin/tickets" component={AdminTickets} />
       
+      {/* Favoritos */}
+
+      <Route path="/favoritos" component={Favoritos}/>
+
+
     </div>
   );
 }

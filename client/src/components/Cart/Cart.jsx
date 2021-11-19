@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCart, setTotal, deleteCartAll } from "../../redux/actions/actions.js";
 import style from "./Cart.module.css";
 import Card from "./Card.js";
+import Loading from "../Loading/Loading";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -57,8 +58,8 @@ const Cart = () => {
   }
 
   useEffect(() => {
-   return  dispatch(getCart(userId));
-  }, [dispatch, cart.length]);
+  dispatch(getCart(userId));
+  }, []);
 
   return (
     <div className={style.container}>
@@ -67,6 +68,10 @@ const Cart = () => {
         {cart?.length ? (
           cart.map((p) => {
             return (
+              <div>
+              {
+              p.item._id
+              ?
               <Card
                 id={p.item?._id}
                 name={p.item?.nombre}
@@ -75,10 +80,13 @@ const Cart = () => {
                 precio={p.item?.precio ? price(p.item.precio) : null}
                 qty={p?.qtyCart}
               />
+              : null
+              }
+              </div>
             );
           })
         ) : (
-          <p></p>
+          <Loading />
         )
       }
       {cart.length>1 ? <button onClick={()=>borrar()} className={style.borrar}>Limpiar</button> : null}

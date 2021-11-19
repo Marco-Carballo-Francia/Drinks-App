@@ -1,8 +1,9 @@
-import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL, EDIT_DATE_PROFILE } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL, EDIT_DATE_PROFILE,GET_PRODUCTS_FAVORITOS } from "../actions/const.js";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem('profile')),
   tickets: [],
+  favoritos: [],
 };
 
 export function userReducer(state = initialState, action) {
@@ -53,6 +54,12 @@ export function userReducer(state = initialState, action) {
       return {
         ...state,
         user: action.payload,
+      }
+
+    case GET_PRODUCTS_FAVORITOS:
+      return{
+        ...state,
+        favoritos: action.payload
       }
     default:
       return state;

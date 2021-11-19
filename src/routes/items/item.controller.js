@@ -15,7 +15,7 @@ const getItems = async (req, res) => {
     if (name !== "") {
       items = items.filter(i => i.nombre.toLowerCase().includes(name.toLowerCase()));
     } else if (category) {
-      console.log('categorias', items[0].categorias[0].nombre);
+      // console.log('categorias', items[0].categorias[0].nombre);
       items = items.filter(i => i.categorias[0]?.nombre === category); //Plantearlo con un for dentro del filter o ver como hacer
     }
     res.json(items);
@@ -74,18 +74,26 @@ const createItem = async (req, res) => {
     categorias, 
     stock
   } = req.body;
+  console.log('categorias', categorias);
   try {
     let getItemByName = await Item.find({nombre: nombre});
     // console.log('getItemNombre', getItemByName[0].nombre);
     if(getItemByName === null || getItemByName.length === 0){
-      let getCategory = await Category.find({nombre: categorias});
+      let arrCategoryID = [];
+      for (let i = 0; i < categorias.length; i++) {
+        console.log('categorias', categorias[i]);
+        let getCategory = await Category.find({nombre: categorias[i]});
+        console.log('getCategory', getCategory);
+        arrCategoryID.push(getCategory[0]._id);
+      }
+      console.log('arrCategoryID', arrCategoryID);
       // console.log('getCategory', getCategory[0]._id);
       let newItem = new Item({
         nombre,
         descripcion,
         precio,
         imagen,
-        categorias: getCategory[0]._id,
+        categorias: arrCategoryID,
         stock,
         reviews
       });
