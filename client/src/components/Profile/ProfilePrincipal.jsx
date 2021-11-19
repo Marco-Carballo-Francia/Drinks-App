@@ -1,7 +1,6 @@
 import React from 'react';
 import Dates from './Dates';
 import Shopping from './Shopping';
-import Addresses from './Addresses';
 import style from './Styles/ProfilePrincipal.module.css'
 
 function Profile() {
@@ -10,7 +9,6 @@ function Profile() {
     <div>
       <div className={style.ctn}>
         <Dates />
-        <Addresses />
       </div>
       <div>
         <Shopping />

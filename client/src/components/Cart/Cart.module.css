@@ -8,25 +8,49 @@
 
 
 .total{
-  font-family:inherit;
-  margin-bottom: 50px;
-  font-size: 2rem;
+ margin: 0 auto;
+  animation-iteration-count: infinite;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  letter-spacing: 1px;
 }
 
 
-.btn{
-  width: 66%;
-  height: 2rem;
+
+.btn {
+  padding: 0.5em 1.5em;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
   background-color: #000000;
-  color: #FFFFFF;
+  cursor: pointer;
+  width: 300px;
+}
+
+.btn:hover {
+  background-color: rgb(207, 117, 0);
+  color: rgb(255, 255, 255);
 }
 
 
 .borrar{
-  width: 15%;
-  height: 2rem;
-  background-color: red;
-  color: white;
+  padding: 0.5em 1.5em;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #ff00009b;
+  cursor: pointer;
+  width: 300px;
 }
 
+.borrar:hover{
+  background-color: #ff0000;
 
+}

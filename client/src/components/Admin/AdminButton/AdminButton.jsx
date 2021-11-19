@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import style from './AdminButton.module.css'
 
 
 
@@ -13,7 +14,7 @@ const AdminButton = () => {
         <div> 
             { user?.admin ?
             <Link to="/admin"> 
-            <button>Admin</button>
+            <button className={style.btn}>Admin</button>
             </Link>
             :
              null
