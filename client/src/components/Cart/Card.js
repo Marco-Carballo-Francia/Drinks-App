@@ -50,9 +50,12 @@ const Card = ({ id, name, image, rating, precio, qty }) => {
         <p className={style.precio}> $ {precio * qty} </p>
       </div>
       <div className={style.statebuttons}>
-                    <button className={style.increment} onClick={decrement}>-</button>
-                    <button className={style.increment} onClick={increment}>+</button>
+      <button className={style.increment} onClick={increment}>+</button>
+      <button className={style.increment} onClick={decrement}>-</button>
                 </div>
+                
+                    
+                    
 
       <div className={style.containerButton}>
         <button onClick={() => onClose()} className={style.button}>
