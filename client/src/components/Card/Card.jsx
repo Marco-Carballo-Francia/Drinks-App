@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import img from '../../Iconos/image-default-Card.jpeg';
 import Rating from '../Rating/Rating';
 import { addCart } from "../../redux/actions/actions.js";
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
+import { BsCheck2Square } from "react-icons/bs";
 
 const Card = (prod) => {
     const [show1, setShow1] = useState(false);
@@ -30,7 +31,7 @@ const Card = (prod) => {
         if (!user) {
             handleShow1();
             setTimeout(handleClose1, 3000);
-        }else{
+        } else {
             handleShow2();
             setTimeout(handleClose2, 1000);    
             dispatch(addCart(itemCart, id));
@@ -64,17 +65,24 @@ const Card = (prod) => {
                 <button onClick={() => onClick()} className={style.btn}>Agregar al carrito</button>
             </div>
             <Modal show={show1} onHide={handleClose1}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Necesitas estar registrado</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Registrate para poder entrar al carrito!</Modal.Body>
-                </Modal>
-                <Modal show={show2} onHide={handleClose2}>
-                    <Modal.Header closeButton1>
-                        <Modal.Title>Agregaste al carrito correctamente</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>Podes seguir agregando productos!</Modal.Body>
-                </Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Necesitas estar registrado</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Registrate para poder entrar al carrito!</Modal.Body>
+            </Modal>
+            <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header className={style.modalHead} closeButton1>
+                    <h1 className={style.titleModal}>Agregaste al carrito <BsCheck2Square className={style.iconModal} /></h1>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className={style.cntModal}>
+                        <img onError={addDefaultSrc} className={style.imagenModal} src={p.imagen} alt="img no encontrada" />
+                        <div>
+                            <p className={style.nameModal}>{p.nombre}</p>
+                        </div>
+                    </div>
+                </Modal.Body>
+            </Modal>
         </div>
     );
 };
