@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import style from './Create.module.css';
+import { useHistory } from "react-router";
 import { createItem } from '../../../../redux/actions/actions.js';
 import Modal from 'react-bootstrap/Modal';
 import { BsCheck2Square } from "react-icons/bs";
 
 const Create = () => {
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const history = useHistory();
+
     const dispatch = useDispatch();
 
     const [input, setInput] = useState({
@@ -70,9 +75,16 @@ const Create = () => {
 
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        history.push('/admin/stock');
+    }
+
     return (
         <div className={style.Register}>
-            <form className={style.form}>
+
+            <button onClick={handleX}>X</button>
+            <form className={style.form} onSubmit={onSubmit}>
                 <div className={style.nombre}>
                     <label className={style.title}>Nombre</label>
                     <input className={style.input}

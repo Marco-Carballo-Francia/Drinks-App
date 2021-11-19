@@ -95,7 +95,7 @@ const Cart = () => {
       <div className={style.containerTotal}>
         <div className={style.preciFinal}>
           <p className={style.total}>
-            {cart.length >= 1 ? <b>TOTAL: $ </b> : null}  { cart.length > 1 ? totalCart(cart): <p>Aún no hay productos</p>}
+            {cart.length >= 1 ? <b>TOTAL: $ </b> : null}  { cart.length >= 1 ? totalCart(cart): <p>Aún no hay productos</p>}
           </p>
         </div>
         <div>

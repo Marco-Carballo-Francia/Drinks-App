@@ -384,10 +384,11 @@ export const setItem = (id) => async (dispatch) =>{
 export const updateItem = ({id, object}) => async (dispatch) => {
     try {
         const {data} = await axios.put(`/items/update/${id}`, object)
-        return dispatch({
+        dispatch({
             type: UPDATE_ITEM,
             payload: data
-        }) 
+        })
+        return dispatch(getAdminItems({})); 
     } catch (error) {
         console.log(error) 
     }
