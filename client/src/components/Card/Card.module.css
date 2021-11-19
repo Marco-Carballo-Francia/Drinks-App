@@ -101,6 +101,7 @@
 
 .iconModal {
   font-size: 35px;
+  margin-left: 10px;
 }
 
 .imagenModal {
@@ -115,4 +116,23 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   letter-spacing: 1px;
+}
+
+.titleRegister{
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+  color: red;
+
+}
+
+.nameModalRegister {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
