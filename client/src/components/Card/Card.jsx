@@ -64,12 +64,14 @@ const Card = (prod) => {
             <div >
                 <button onClick={() => onClick()} className={style.btn}>Agregar al carrito</button>
             </div>
+            
             <Modal show={show1} onHide={handleClose1}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Necesitas estar registrado</Modal.Title>
+                <h1 className={style.titleRegister}>ACCESO DENEGADO</h1>
                 </Modal.Header>
-                <Modal.Body>Registrate para poder entrar al carrito!</Modal.Body>
+                <p className={style.nameModalRegister}> Debes iniciar sessión o registarte para agregar al carrito !</p>
             </Modal>
+            
             <Modal show={show2} onHide={handleClose2}>
                 <Modal.Header className={style.modalHead} closeButton1>
                     <h1 className={style.titleModal}>Agregaste al carrito <BsCheck2Square className={style.iconModal} /></h1>

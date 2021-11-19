@@ -26,7 +26,7 @@
 }
 
 .textarea {
-  border: 0.5px solid rgba(0, 0, 0, 0.849)0, 0, 0, 0.849;
+  border: 0.5px solid rgba(0, 0, 0, 0.849) 0, 0, 0, 0.849;
   width: 1000px;
   height: 150px;
   margin-top: 15px;
@@ -38,4 +38,31 @@
   font-weight: 400;
   font-size: 25px;
   margin-bottom: 12px;
+}
+
+.titleModal {
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  margin: 0 auto;
+  letter-spacing: 1px;
+  margin-bottom: 0px;
+  color: rgb(255, 255, 255);
+}
+
+.modalHead {
+  background-color: #0c9400;
+}
+
+.iconModal {
+  font-size: 35px;
+}
+
+.textoModal {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 30px;
 }

@@ -6,14 +6,21 @@ import style from './CardDetails.module.css';
 import Rating from '../Rating/Rating';
 import Review from '../Review/Review';
 import Loading from "../Loading/Loading";
+import Modal from 'react-bootstrap/Modal';
+import { BsCheck2Square } from "react-icons/bs";
 
 
 function CardDetails(props) {
-
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const handleClose1 = () => setShow1(false);
+    const handleShow1 = () => setShow1(true);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
     const dispatch = useDispatch();
     const product = useSelector((state) => state.products.product);
     const user = useSelector(state => state.user.user);
-    let userId= user?._id;
+    let userId = user?._id;
 
     const { id } = props.match.params;
 
@@ -31,13 +38,19 @@ function CardDetails(props) {
     })
 
     function onClick(payload) {
-       let item=id;
-        let itemCart={
+        let item = id;
+        let itemCart = {
             item: item,
             qtyCart: 1
         }
-        
-        dispatch(addCart(itemCart, userId));
+        if (!user) {
+            handleShow1();
+            setTimeout(handleClose1, 3000);
+        } else {
+            handleShow2();
+            setTimeout(handleClose2, 1000);
+            dispatch(addCart(itemCart, userId));
+        }
     }
 
     // const handleAddToCart = (product) => {
@@ -67,15 +80,6 @@ function CardDetails(props) {
                                     <h3 className={style.texDescripcion}>{product.descripcion}</h3>
 
                                 </div>
-                                <div className={style.contador}>
-                                    <p className={style.textCantidad}>Cantidad</p>
-                                    <div className={style.ctnBtn} >
-                                        <button disabled={count === 1} className={style.boton} onClick={() => setCount(count - 1)} > - </button>
-                                        <h4 className={style.count}>{count}</h4>
-                                        <button className={style.boton} onClick={() => setCount(count + 1)} > + </button>
-                                        {/* if({count} === 1) disable */}
-                                    </div>
-                                </div>
 
                                 <div>
                                     <button onClick={() => onClick(product)} className={style.comprar}>Agregar al carrito</button>
@@ -85,6 +89,27 @@ function CardDetails(props) {
                                     <button className={style.añadir}>Agregar a favoritos</button>
                                 </div>
                             </div>
+
+                            <Modal show={show1} onHide={handleClose1}>
+                                <Modal.Header closeButton>
+                                    <h1 className={style.titleRegister}>ACCESO DENEGADO</h1>
+                                </Modal.Header>
+                                <p className={style.nameModalRegister}> Debes iniciar sessión o registarte para agregar al carrito !</p>
+                            </Modal>
+
+                            <Modal show={show2} onHide={handleClose2}>
+                                <Modal.Header className={style.modalHead} closeButton1>
+                                    <h1 className={style.titleModal}>Agregaste al carrito <BsCheck2Square className={style.iconModal} /></h1>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <div className={style.cntModal}>
+                                        <img className={style.imagenModal} src={product.imagen} alt="img no encontrada" />
+                                        <div>
+                                            <p className={style.nameModal}>{product.nombre}</p>
+                                        </div>
+                                    </div>
+                                </Modal.Body>
+                            </Modal>
                         </div>
                     )
                     :

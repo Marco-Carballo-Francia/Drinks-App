@@ -7,37 +7,37 @@ import style from './NavBar.module.css';
 import iconHome from '../../Iconos/icon-Home.png';
 import { BsCart2 } from "react-icons/bs";
 import { checkout } from '../../redux/actions/actions';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 import AdminButton from '../Admin/AdminButton/AdminButton';
 
 
 const NavBar = () => {
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const location = useLocation();
+    
     const history = useHistory();
     const dispatch = useDispatch();
     const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem('profile'))) //busco el usuario que guarde en la localstorage EN EL REDUCER
     const { user } = useSelector(state => state.user);
 
-    useEffect( () => {
+    useEffect(() => {
         localStorage.setItem("profile", JSON.stringify(user));
     }, [usuario])
 
-    console.log("usuario nav",user)
+    console.log("usuario nav", user)
     const logout = () => {
         dispatch({ type: "LOGOUT" });
         dispatch(checkout());
         history.push("/");
     }
 
-    const handleClick = () =>{
+    const handleClick = () => {
         if (user) {
             history.push("/carrito")
         } else {
-            handleShow()
+            handleShow();
+            setTimeout(handleClose, 3000);
         }
     }
 
@@ -51,21 +51,14 @@ const NavBar = () => {
                 <Categories />
             </div>
             <div className={style.ctnRegis}>
-                <AdminButton/>
+                <AdminButton />
                 <BsCart2 onClick={handleClick} className={style.linkCart} />
+
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>No estas registrado o logueado</Modal.Title>
+                        <h1 className={style.titleModal} >ACCESO DENEGADO</h1>
                     </Modal.Header>
-                    <Modal.Body>Logueate o registrate para poder entrar al carrito</Modal.Body>
-                    <Modal.Footer>
-                        <button variant="secondary" onClick={handleClose}>
-                            Ok
-                        </button>
-                        <button variant="primary" onClick={handleClose}>
-                            Cancelar
-                        </button>
-                    </Modal.Footer>
+                    <p className={style.textoModal}> Debes iniciar sessión o registarte para ingresar al carrito !</p>
                 </Modal>
 
                 {

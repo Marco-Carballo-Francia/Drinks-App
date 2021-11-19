@@ -15,7 +15,7 @@ const getItems = async (req, res) => {
     if (name !== "") {
       items = items.filter(i => i.nombre.toLowerCase().includes(name.toLowerCase()));
     } else if (category) {
-      console.log('categorias', items[0].categorias[0].nombre);
+      // console.log('categorias', items[0].categorias[0].nombre);
       items = items.filter(i => i.categorias[0]?.nombre === category); //Plantearlo con un for dentro del filter o ver como hacer
     }
     res.json(items);

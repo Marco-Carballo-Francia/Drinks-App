@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaStar } from "react-icons/fa";
 import style from "./Review.module.css";
 import { rateProduct } from "../../redux/actions/actions";
+import Modal from 'react-bootstrap/Modal';
+import { BsCheck2Square } from "react-icons/bs";
 
 const colors = {
   orange: "#FFBA5A",
@@ -10,6 +12,12 @@ const colors = {
 }
 
 export default function Review({ id }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const { user } = useSelector(state => state.user);
+
 
   const dispatch = useDispatch();
 
@@ -17,6 +25,8 @@ export default function Review({ id }) {
 
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
+
+  const [values, setValues] = useState('');
 
   const handleClick = (value) => {
     setCurrentValue(value)
@@ -30,9 +40,15 @@ export default function Review({ id }) {
     setHoverValue(undefined)
   };
 
+  const handleOnChange = e => {
+    setValues(e.target.value)
+  }
+
   const handleSubmit = () => {
-      dispatch(rateProduct({number: currentValue, id }))
-      alert("Review recibida!")
+    dispatch(rateProduct({ number: currentValue, id }))
+    setValues('')
+    handleShow();
+    setTimeout(handleClose, 2000);
   }
 
   return (
@@ -58,9 +74,22 @@ export default function Review({ id }) {
           })
         }
       </div>
-      <textarea className={style.textarea}
-        placeholder="Deja un comentario..."
-      />
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header className={style.modalHead}  >
+          <h1 className={style.titleModal} >Recibimos tu calificacion! <BsCheck2Square className={style.iconModal} /></h1>
+        </Modal.Header>
+        <p className={style.textoModal}>  Gracias {user?.nombre ? user?.nombre : user?.user?.nombre}! Vamos a tener en cuenta tu opinion</p>
+      </Modal>
+
+      <div>
+        <textarea className={style.textarea}
+          onChange={handleOnChange}
+          type="text"
+          value={values}
+          placeholder="Deja un comentario..."
+        />
+      </div>
       <button onClick={() => handleSubmit()} className={style.btnEnviar}>Enviar</button>
     </div>
   )

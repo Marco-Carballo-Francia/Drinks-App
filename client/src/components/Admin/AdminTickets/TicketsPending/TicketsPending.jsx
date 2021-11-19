@@ -4,6 +4,7 @@ import { getTicketsAdmin, changeTicketStatus } from "../../../../redux/actions/a
 import Loading from "../../../Loading/Loading";
 import styles from "./TicketsPending.module.css";
 import TicketProcess from "../TicketProcess/TicketProcess";
+import { BsArrowRightCircle } from "react-icons/bs";
 
 const TicketsPending = () => {
 
@@ -30,10 +31,11 @@ const TicketsPending = () => {
                         ticketsPending.map((t) => {
                             return (
                                 <div className={styles.ticket} key={t._id}>
-                                    <h2>Fecha: {t.fecha}</h2>
-                                    <h2>Usuario: {t.user.nombre}</h2>
-                                    <h3>Estado: {t.estado}</h3>
+                                    <h2 className={styles.user}>Orden de usuario {t.user.nombre.charAt(0).toUpperCase() +  t.user.nombre.slice(1)}</h2>
+                                    <h2 className={styles.fecha}>Fecha: {t.fecha}</h2>
+                                    <h3 className={styles.estado}>Estado: {t.estado}</h3>
                                 </div>
+                                
                             )
                         })
                     }
@@ -45,9 +47,10 @@ const TicketsPending = () => {
             }
             </div>
             <div>
-                <button onClick={handleClick}>▶</button>
+                <button className={styles.btnGo} onClick={handleClick}><BsArrowRightCircle className={styles.iconoGo} /></button>
             </div>
-            <TicketProcess />
+        
+            <TicketProcess  />
         </div>
     )
 }
