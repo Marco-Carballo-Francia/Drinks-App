@@ -1,0 +1,160 @@
+.ctnDetail {
+  display: flex;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  margin: 10px 0px 10px 0px;
+}
+
+.title1 {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  margin-right: 10px;
+}
+
+.ctnText{
+  margin: 0px 15px 0px 15px;
+}
+
+.user {
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.titlePrin {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 1.5px solid black;
+  padding: 5px 0px 5px 0px;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.icon:hover {
+  color: rgb(207, 117, 0);
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0px 50px 0px 50px;
+}
+
+.titleEditar {
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  margin: 10px 0px 10px 0px;
+}
+
+.ctnDocFecha,
+.ctnNameApe {
+  display: flex;
+}
+
+.username,
+.documento,
+.telefono,
+.apellido {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 10px 10px 0px 10px;
+}
+
+.ctnDirPisoDep {
+  display: flex;
+}
+
+.piso,
+.departamento,
+.direccion {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 10px 10px 0px 10px;
+  width: 100%;
+}
+
+.inputDireccion {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 300px;
+  color: #212529;
+  border: 1px solid #ffffff;
+}
+
+.inputPiso,
+.inputDepartamento {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 140px;
+  color: #212529;
+  border: 1px solid #ffffff;
+}
+
+.title {
+  padding-top: calc(0.5rem + 1px);
+  padding-bottom: calc(0.5rem + 1px);
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  width: 300px;
+  color: #212529;
+  border: 1px solid #ffffff;
+}
+
+.btn {
+  margin: 40px 40px 20px 40px;
+  padding: 0.6em;
+  color: white;
+  border: 1px solid rgb(255, 255, 255);
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #00000000;
+  cursor: pointer;
+  width: 150px;
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(207, 117, 0);
+  border: 1px solid rgb(207, 117, 0);
+}
+
+
+
+

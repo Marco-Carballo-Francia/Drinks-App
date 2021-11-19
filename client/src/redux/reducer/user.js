@@ -1,17 +1,21 @@
-import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL } from "../actions/const.js";
+import { AUTH, LOGOUT, REGISTER_LOCAL, GET_TICKETS, LOGIN_GOOGLE, LOGIN_LOCAL, EDIT_DATE_PROFILE,GET_PRODUCTS_FAVORITOS } from "../actions/const.js";
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('profile')),
   tickets: [],
+  favoritos: [],
 };
 
 export function userReducer(state = initialState, action) {
   switch (action.type) {
     case AUTH:
-      localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
-      return {
+      localStorage.setItem("user", JSON.stringify(action.payload));
+/*       localStorage.setItem("profile", JSON.stringify({ ...action?.data }));
+ */      return {
         ...state,
-        user: action?.data,
+
+        user: localStorage.setItem("profile", JSON.stringify({ ...action?.data }))
+
       };
     case LOGOUT:
       localStorage.clear(); //limpia la localstorage, entonces el useEffect del navBar va a comprobar que  user=null
@@ -45,6 +49,18 @@ export function userReducer(state = initialState, action) {
       }
     case "CHECK_USER":
       return state;
+
+    case EDIT_DATE_PROFILE:
+      return {
+        ...state,
+        user: action.payload,
+      }
+
+    case GET_PRODUCTS_FAVORITOS:
+      return{
+        ...state,
+        favoritos: action.payload
+      }
     default:
       return state;
   }

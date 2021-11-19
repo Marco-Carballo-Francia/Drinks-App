@@ -13,16 +13,17 @@
 .imgIcono {
   height: 150px;
   width: 200px;
-
 }
 
-.ctnRegis{
+.ctnRegis {
   display: flex;
+  align-items: center;
 }
 
 .linkCart {
-  height: 30px;
-  width: 30px;
+  margin-right: 10px;
+  height: 35px;
+  width: 35px;
   color: #ffffff;
 }
 
@@ -31,8 +32,46 @@
 }
 
 .btns {
-  margin-left: 20px;
-  padding: 0.4em ;
+  color: white;
+  border: none;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 1px;
+  background-color: #00000000;
+  cursor: pointer;
+}
+
+.btns:hover {
+  background-color: rgba(255, 255, 255, 0);
+  color: rgb(207, 117, 0);
+}
+
+.userImg {
+  margin-top: 50px;
+  margin-bottom: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.nameUser {
+  color: white;
+  margin: 0 auto;
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.nameUser:hover {
+  color: rgb(207, 117, 0);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.logout {
+  padding: 0.4em;
   color: white;
   border: 1px solid rgb(255, 255, 255);
   font-family: inherit;
@@ -41,34 +80,30 @@
   letter-spacing: 1px;
   background-color: #00000000;
   cursor: pointer;
-  width: 100px;
+  width: 80px;
 }
 
-.btns:hover {
+.logout:hover {
   background-color: rgba(255, 255, 255, 0);
   color: rgb(207, 117, 0);
   border: 1px solid rgb(207, 117, 0);
 }
 
+.titleModal {
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+  color: red;
 
-.userImg{
-  margin-top: 50px;
-  
-  margin-bottom: 10px;
-  width: 20px;
-  height: 20px;
 }
 
-.nameUser{
-  color: white;
-  margin-top: 50px;
-  margin-bottom: 10px;
+.textoModal{
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
-
-.logout{
-  margin-top: 50px;
-  margin-bottom: 10px;
-  width: 60px;
-  height: 30px;
-}
-

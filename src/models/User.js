@@ -7,6 +7,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+        trim: true
     },
     contraseña: {
         type: String,
@@ -14,35 +15,66 @@ const UserSchema = new Schema({
     },
     nombre: {
         type: String,
-        //required: true,
         trim: true
     },
-    // apellido: {
-    //     type: String,
-    //     trim: true
-    // },
-    // direccion: {
-    //     type: String
-    // },
-    // telefono:{
-    //     type:String,
-    // },
-    // admin:{
-    //     type: Boolean,
-    //     default: false
-    // },
-    // itemList:[{
-    //     item:{
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Item',
-    //     }
-    // }],
-    // ticketHistory:[{
-    //     ticket:{
-    //         type: Schema.Types.ObjectId,
-    //         ref: 'Ticket',
-    //     }
-    // }],
+    apellido: {
+        type: String,
+        trim: true
+    },
+    documento: {
+        type: String,
+    },
+    imagen: {
+        type: String,
+    },
+    direccion: {
+        type: String,
+    },
+    piso: {
+        type: Number,
+    },
+    departamento: {
+        type: String,
+    },
+    estadoProvincia: {
+        type: String,
+    },
+    ciudad: {
+        type: String,
+    },
+    codigoPostal: {
+        type: Number,
+    },
+    fechadenacimiento: {
+        type: String
+    },
+    admin: {
+        type: Boolean,
+        default: false
+    },
+    favoritos: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Item'
+    }],
+    telefono: {
+        type: Number
+    },
+    itemList: [{
+        item: {
+            type: Schema.Types.ObjectId,
+            ref: 'Item'
+        },
+        qtyCart: {
+            type: Number,
+            default: 1
+        },
+    }],
+    ticketHistory: [{
+        ticket: {
+            type: Schema.Types.ObjectId,
+            ref: 'Ticket'
+        }
+    }],
 });
 
 UserSchema.pre('save', async function (next) {

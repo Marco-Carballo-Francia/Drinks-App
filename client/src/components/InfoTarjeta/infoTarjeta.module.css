@@ -1,0 +1,104 @@
+.cnt {
+  height: 200px;
+  display: grid;
+  align-items: start;
+}
+
+.form {
+  width: 600px;
+}
+
+.title {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  border-bottom: 1.5px solid black;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.total {
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ctnBtn {
+  margin-top: 20px;
+}
+
+.btn {
+  width: 200px;
+  padding: 0.5em 1.5em;
+  border: 0;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(207, 117, 0);
+  color: rgb(255, 255, 255);
+}
+
+
+.ctnModalTexto {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: #0c9400;
+  font-size: 50px;
+}
+
+.titleModal {
+  color: #0c9400;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+  margin: 0 auto;
+}
+
+.texto{
+  text-align: center;
+  margin: 20px 0px 20px 0px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.ctnBtnsModal {
+  display: flex;
+  justify-content: center;
+}
+
+.btnModal {
+  margin: 10px;
+  width: 200px;
+  padding: 0.5em 1.5em;
+  border: 2px solid #0c9400;
+  color: rgb(255, 255, 255);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color:  #0c9400;
+  cursor: pointer;
+}
+.btnModal:hover {
+background-color: #ffffff;
+border: 2px solid #0c9400;
+color: #0c9400;
+font-weight: 600;
+}

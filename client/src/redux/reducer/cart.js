@@ -1,44 +1,45 @@
-import { ADD_CART, GET_CART, DELETE_CART_ITEM, SET_TOTAL } from "../actions/const";
+import { ADD_CART, GET_CART, DELETE_CART_ITEM, SET_TOTAL, DELETE_CART_ONE,  DELETE_CART_ALL } from "../actions/const";
 const initialstate = {
   cart: [],
-  total: 0
+  total: 0,
+  ticket: {}
 };
 
 export function cartReducer(state = initialstate, action) {
   switch (action.type) {
-    case ADD_CART:
-      let product = action.payload;
-      let cartProducts = [...state.cart];
-      let productFiltered = cartProducts.filter((x) => x._id === product._id);
-      if (productFiltered?.length) {
-        productFiltered[0].qty
-        ? (product = {
-          ...productFiltered[0],
-          qty: productFiltered[0].qty + 1,
-        })
-        : (product = { ...productFiltered[0], qty: 1 });
-        cartProducts = cartProducts.filter((x) => x._id !== product._id);
+     case ADD_CART:
+    //   let product = action.payload;
+    //   let cartProducts = [...state.cart];
+    //   let productFiltered = cartProducts.filter((x) => x._id === product._id);
+    //   if (productFiltered?.length) {
+    //     productFiltered[0].qty
+    //     ? (product = {
+    //       ...productFiltered[0],
+    //       qty: productFiltered[0].qty + 1,
+    //     })
+    //     : (product = { ...productFiltered[0], qty: 1 });
+    //     cartProducts = cartProducts.filter((x) => x._id !== product._id);
 
-        let cartLocalS = [...cartProducts, product]
-        localStorage.setItem("cartLocal", JSON.stringify(cartLocalS));
-        return {
-          ...state,
-          cart: [...cartProducts, product]
-        };
-      }
-      product = { ...product, qty: 1 };
-      let cartLocalS = [...cartProducts, product]
-      localStorage.setItem("cartLocal", JSON.stringify(cartLocalS));
-      return {
-        ...state,
-        cart: state.cart.concat(product),
-      };
+    //     let cartLocalS = [...cartProducts, product]
+    //     localStorage.setItem("cartLocal", JSON.stringify(cartLocalS));
+    //     return {
+    //       ...state,
+    //       cart: [...cartProducts, product]
+    //     };
+    //   }
+    //   product = { ...product, qty: 1 };
+    //   let cartLocalS = [...cartProducts, product]
+    //   localStorage.setItem("cartLocal", JSON.stringify(cartLocalS));
+       return {
+         ...state,
+        cart: state.cart.concat(action.payload)
+       };
 
     case GET_CART:
-      var stored = JSON.parse(localStorage.getItem("cartLocal"));
+      
       return {
         ...state,
-        cart: stored
+        cart: action.payload
       };
 
     case DELETE_CART_ITEM:
@@ -62,6 +63,20 @@ export function cartReducer(state = initialstate, action) {
         cart: [],
         total: 0
       }
+
+    case  DELETE_CART_ONE:
+
+    return {
+      ...state,
+      cart: action.payload
+    } 
+
+    case  DELETE_CART_ALL:
+
+    return {
+      ...state,
+      cart: action.payload
+    }
 
     default:
       return state;

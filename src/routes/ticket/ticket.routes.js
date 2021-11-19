@@ -1,10 +1,13 @@
 const { Router } = require("express");
-const { makePayment, getTickets, createTicket } = require("./ticket.controller.js")
+const { makePayment, getTicketsInPendAndPro, createTicket, getUserTickets, updateTickets } = require("./ticket.controller.js")
 
 const router = Router();
 
+//  /ticket
+router.get("/user/:id", getUserTickets);
+router.get("/state", getTicketsInPendAndPro);
+router.put("/state/update/:id", updateTickets);
 router.post("/checkout", makePayment);
-router.get("/history/:id", getTickets);
 router.post("/create", createTicket);
 
 module.exports =  router;

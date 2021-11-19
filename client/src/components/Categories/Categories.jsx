@@ -29,9 +29,10 @@ const Categories = () => {
 			</Link>
 			{
 				categories && categories.map(x => {
+					let categoria = x.nombre
 					return (
-						<Link to={`/category/${x}`}>
-							<button className={style.btn} value={x} onClick={handleClick}>{x.toUpperCase()}</button>
+						<Link to={`/category/${categoria}`}>
+							<button className={style.btn} value={categoria} onClick={handleClick}>{categoria.toUpperCase()}</button>
 						</Link>
 					)
 				})

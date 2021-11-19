@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import style from "./Login.module.css";
 import { Link, useHistory } from "react-router-dom";
 import Google from "../Google/Google";
+import Forgot from "../Forgot/Forgot";
 import { loginLocal } from "../../redux/actions/actions";
 
 
@@ -57,9 +58,7 @@ const Login = () => {
   return (
     <div className={style.Login}>
       <form className={style.form} onSubmit={handleSubmit}>
-        <p className={style.titleLogin}>
-          <b>INGRESAR </b>{" "}
-        </p>
+        <p className={style.titleLogin}>INGRESAR</p>
         <div className={style.username}>
           <label className={style.title}>Email</label>
           <input
@@ -84,14 +83,17 @@ const Login = () => {
           />
           <p className={style.error}>{error.contraseña}</p>
         </div>
-        <div>
+        <div className={style.ctnGoogle}>
           <button type="submit" className={style.btn}>
             INGRESÁ
           </button>
-          <Google />
+          <Google className={style.google} />
         </div>
         <div className={style.link}>
           No tenes cuenta? <Link to="/register">Registrate</Link>
+        </div>
+        <div>
+          Olvidaste tu contraseña? <Link to="/forgot">Cambiala ahora</Link>
         </div>
       </form>
     </div>

@@ -78,3 +78,61 @@
   width: 100px;
   object-fit: scale-down;
 }
+
+.cntModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+.modalHead{
+  background-color: #0c9400;
+}
+
+.titleModal {
+  font-size: 25px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-left: 80px;
+  margin-bottom: 0px;
+  color: rgb(255, 255, 255);
+}
+
+.iconModal {
+  font-size: 35px;
+  margin-left: 10px;
+}
+
+.imagenModal {
+  height: 150px;
+  width: 50px;
+  object-fit: scale-down;
+  margin-right: 10px;
+}
+
+.nameModal {
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.titleRegister{
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+  color: red;
+
+}
+
+.nameModalRegister {
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
