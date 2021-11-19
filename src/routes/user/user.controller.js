@@ -193,7 +193,7 @@ const editUser = async (req, res) => {
             }*/
        if(itemCart){
        for (let i = 0; i < user.itemList.length; i++) {
-        if(user.itemList.length>1){
+        if(user.itemList.length>=1){
           if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
          }
          if (bool) {

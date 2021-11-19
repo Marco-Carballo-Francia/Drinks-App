@@ -70,7 +70,7 @@ const Cart = () => {
             return (
               <div>
               {
-              p.item._id
+              p.item?._id
               ?
               <Card
                 id={p.item?._id}
@@ -80,25 +80,29 @@ const Cart = () => {
                 precio={p.item?.precio ? price(p.item.precio) : null}
                 qty={p?.qtyCart}
               />
-              : null
-              }
+              : 
+          (<Loading />)
+        
+      }
+              
               </div>
             );
           })
-        ) : (
-          <Loading />
-        )
+        ) : null
       }
       {cart.length>1 ? <button onClick={()=>borrar()} className={style.borrar}>Limpiar</button> : null}
       </div>
       <div className={style.containerTotal}>
         <div className={style.preciFinal}>
           <p className={style.total}>
-            <b>TOTAL: </b> $ { cart ? totalCart(cart): null}
+            {cart.length >= 1 ? <b>TOTAL: $ </b> : null}  { cart.length > 1 ? totalCart(cart): <p>Aún no hay productos</p>}
           </p>
         </div>
         <div>
-          <button onClick={handleClick} className={style.btn}>PAGAR</button>
+        {cart.length >=1 ?
+          <button onClick={handleClick} disabled={cart.length<1} className={style.btn}>PAGAR</button>
+          : <Link to="/"><button className={style.btn}>Agregá</button></Link>
+        }
           
         </div>
       </div>

@@ -52,9 +52,7 @@ const Card = (prod) => {
 
     return (
         <div className={style.Card}>
-            <div>
-                <button onclick={handleClick}>Icono</button>
-            </div>
+            
             <Link className={style.link} to={`/detail/${p._id}`}>
                 <div >
                     <img onError={addDefaultSrc} className={style.image} src={p.imagen} alt="img no encontrada" />
