@@ -82,8 +82,12 @@ function CardDetails(props) {
                                 </div>
 
                                 <div>
-                                    <button onClick={() => onClick(product)} className={style.comprar}>Agregar al carrito</button>
-
+                                    {   
+                                        !product.stock 
+                                            ? <p>Sin stock</p>
+                                            : <button onClick={() => onClick(product)} className={style.comprar}>Agregar al carrito</button>
+                                       
+                                    }
                                 </div>
                                 <div>
                                     <button className={style.añadir}>Agregar a favoritos</button>

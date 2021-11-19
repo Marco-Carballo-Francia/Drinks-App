@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeUserRole } from "../../../../redux/actions/actions"
 import style from "./UserDetail.module.css";
 
-const UserDetail = () => {
+const UserDetail = ({ closeModal }) => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.admin)
-    const { id } = user;
+    const id = user._id;
 
     const handleClick = () => {
         dispatch(changeUserRole({ id, changeRol: true }));
+        closeModal();
     }
 
 
@@ -29,8 +30,6 @@ const UserDetail = () => {
                 }
             </div>
             <button className={style.btn} onClick={handleClick}>Aceptar</button>
-            
-
         </div>
     )
 

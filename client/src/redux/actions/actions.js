@@ -29,6 +29,7 @@ import {
     DELETE_CART_ALL,
     DELETE_CART_ONE,
     UPDATE_ITEM,
+    GET_PRODUCTS_FAVORITOS
 } from './const';
 
 
@@ -104,10 +105,11 @@ export const addCart = (itemCart, id) => async (dispatch)=> {
 
         let res= await axios.patch(`/users/user/edit/${id}`, {itemCart} )
         console.log(res.data);
-        return dispatch({
+        dispatch({
             type: ADD_CART,
             payload: res.data
         })
+        return dispatch(getCart(id))
 
     }
     catch(error){
@@ -145,10 +147,11 @@ export const deleteCartOne = (itemsId, userId) => async (dispatch) =>{
     try{
         console.log("find", itemsId)
         let res = await axios.put(`/users/user/deleteX/${userId}`, {itemsId} )
-        return dispatch({
+        dispatch({
             type: DELETE_CART_ONE,
             payload: res.data
         })
+        return dispatch(getCart(userId))
     }
     catch(error){
         console.log(error);
@@ -289,11 +292,8 @@ export const checkout = () => {
 export const changeUserRole = ({ id, changeRol }) => async (dispatch) => {
 
     try {
-        const user = await axios.put(`/users/admin/update/${id}`, { changeRol })
-        return dispatch({
-            type: CHANGE_USER_ROLE,
-            payload: user.data
-        })
+        await axios.put(`/users/admin/update/${id}`, { changeRol })
+        return dispatch(getUsers({}))
     }
     catch (error) {
         console.log(error)
@@ -329,10 +329,10 @@ export const editDateProfile = (id, values) => async (dispatch) => {
 
 export const createItem = (item) => async (dispatch) => {
     try {
-        const item = (await axios.post(`/admin/create`, item)).data
+        const {data} = (await axios.post(`/items/create`, item))
         return dispatch({
             type: CREATE_ITEM,
-            payload: item
+            payload: data
 
         })
     }
@@ -343,7 +343,7 @@ export const createItem = (item) => async (dispatch) => {
 
 export const deleteItem = (id) => async (dispatch) => {
     try{
-        const deleteItem = (await axios.delete(`/admin/delete/${id}`)).data
+        const deleteItem = (await axios.delete(`/items/delete/${id}`)).data
         return dispatch({
             type: DELETE_ITEM,
             payload: deleteItem
@@ -391,5 +391,54 @@ export const updateItem = ({id, object}) => async (dispatch) => {
     } catch (error) {
         console.log(error) 
     }
+}   
+
+
+export const createCategory = (nombre) => async (dispatch) => {
+    try {
+        await axios.post("/categoria/create", {nombre})
+        return dispatch(getCategories())
+    } catch (error) {
+        console.log(error)       
+    }
 }
- 
+
+export const updateCategory = ({ id, nombre }) => async () => {
+    try {
+        await axios.put(`/categoria/update/${id}`, {nombre})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getFavoritos = (id) => async (dispatch) => {
+    try {
+        // console.log('id de favoritos', id);
+        const res = await axios.get(`/users/user/favoritos/${id}`);
+        console.log('res.data', res.data);
+        return dispatch({
+            type: GET_PRODUCTS_FAVORITOS,
+            payload: res.data 
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const addFavoritos = ({id, itemsId}) => async () => {
+    console.log('id user', id);
+    console.log('id item', id);
+    try {
+        await axios.put(`/users/user/add/favoritos/${id}`, {itemsId})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteFavoritos = ({id, itemsId}) => async () => {
+    try {
+        await axios.put(`/users/user/delete/favoritos/${id}`, {itemsId})
+    } catch (error) {
+        console.log(error);
+    }
+}

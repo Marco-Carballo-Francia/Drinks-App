@@ -2,6 +2,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const User = require("../../models/User");
+const Item = require('../../models/Item');
 const config = require("../../config.js");
 
 const client = new OAuth2Client(config.GOOGLE_CLIENT_ID);
@@ -126,21 +127,14 @@ const newAdmin = async (req, res) => {
   try {
     let user = await User.findById(id);
 
-    if (user.admin === false && changeRol === false) {
-      return res.json(user);
-    }
-    if (
-      (user.admin === false && changeRol === true) ||
-      (user.admin === true && changeRol === false)
-    ) {
-      const update = await User.findOneAndUpdate(
-        { _id: id },
-        { $set: { admin: changeRol } },
-        { new: true }
-      );
+    if(changeRol) {
+      const update = await User.findByIdAndUpdate(id, { 
+        admin: !user.admin 
+      },{ new: true });
       let newAdmin = await update.save();
       return res.json(newAdmin);
     }
+    res.json(user);
   } catch (error) {
     console.log(error);
   }
@@ -199,7 +193,7 @@ const editUser = async (req, res) => {
             }*/
        if(itemCart){
        for (let i = 0; i < user.itemList.length; i++) {
-        if(user.itemList.length>1){
+        if(user.itemList.length>=1){
           if (splitt(JSON.stringify(user?.itemList[i]?.item?._id)) === obj.item.toString()) bool = true;
          }
          if (bool) {
@@ -310,10 +304,10 @@ const getUserByID = async (req, res) => {
 }
 
 const getFavoritos = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
+  console.log('UserId', id)
   try {
-    let user = await User.findById(userId)
-      .populate('itemList.item')
+    let user = await User.findById(id)
       .populate('favoritos');
 
     if (user !== null) return res.json(user.favoritos);
@@ -324,12 +318,16 @@ const getFavoritos = async (req, res) => {
 }
 
 const addFavorite = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { itemId } = req.body;
+  console.log("userId", id);
+  console.log("itemId", itemId);
   try {
-    if (userId && itemId) {
-      let addFavorite = await User.findByIdAndUpdate(user._id, {
-        favoritos: item._id
+    let getItem = await Item.findById(itemId);
+
+    if (id && itemId) {
+      let addFavorite = await User.findByIdAndUpdate(id, {
+        favoritos: getItem._id
       }, { new: true });
 
       let save = await addFavorite.save();
@@ -345,20 +343,22 @@ const addFavorite = async (req, res) => {
 }
 
 const deleteFavoritos = async (req, res) => {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { itemId } = req.body;
   try {
-    let user = await User.findById(userId);
+    let user = await User.findById(id)
+    .populate('favoritos');
 
+    console.log('user', user);
     function splitt(string) {
       let id = string?.split('"');
       let dividido = id[1];
       return dividido;
     }
 
-    let delet = user.favoritos.filter(i => splitt(JSON.stringify(i.item)) !== itemId.toString());
+    let delet = user.favoritos.filter(i => splitt(JSON.stringify(i._id)) !== itemId.toString());
 
-    let put = await User.findByIdAndUpdate(userId, {
+    let put = await User.findByIdAndUpdate(id, {
       itemList: delet
     }, { new: true });
 
@@ -366,7 +366,7 @@ const deleteFavoritos = async (req, res) => {
     let update = await User.findById(save._id)
     .populate('favoritos');
     // console.log(update);
-    res.json(update);
+    res.json(update.favoritos);
   } catch (error) {
     console.log(error);
   }

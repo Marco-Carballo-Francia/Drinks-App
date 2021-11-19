@@ -1,9 +1,17 @@
+
 // import React, { useState } from "react";
 // import style from './DatosCompra.module.css';
 // import { useDispatch, useSelector } from "react-redux";
 // import {datosDeCompra} from "../../redux/actions/actions.js";
 // import { Link } from "react-router-dom";
-// import Modal from 'react-modal';
+
+/* import React, { useState } from "react";
+import style from './DatosCompra.module.css';
+import { useDispatch, useSelector } from "react-redux";
+import {datosDeCompra} from "../../redux/actions/actions.js";
+import { Link } from "react-router-dom";
+import Modal from 'react-modal';
+
 
 
 // const DatosCompra = () => {
@@ -18,7 +26,7 @@
 //        telefono: "",
 //        telefono2: "" 
 //    }) 
-// //-------------------------------------.-----------------------------
+// 
 //    const [errorName, setErrorName] = useState("");
 // 	function validateName(value) {
 // 		setInput({
@@ -32,7 +40,7 @@
 // 			setErrorName("");
 // 		}
 // 	}
-// //-------------------------------------.-----------------------------
+// 
 //     const [errorApellido, setErrorApellido] = useState("");
 // 	function validateApellido(value) {
 // 		setInput({
@@ -137,6 +145,7 @@
 //      setIsOpen(true)
 //    }
 
+
 //     return(
 //     <div className={style.Register}>
 //         <form className={style.form} onSubmit={handleSubmit}>
@@ -197,3 +206,66 @@
 // }
 
 // export default DatosCompra;
+
+    return(
+    <div className={style.Register}>
+        <form className={style.form} onSubmit={handleSubmit}>
+            <h1>Llena tus Datos!</h1>
+            <div className={style.nombre}>
+                <input className={style.input}
+                  type="text"
+                  value={input.nombre} 
+                  placeholder="Su Nombre"
+                  name="nombre" 
+                  required={true}
+                 onChange={e => validateName(e.target.value)}/>
+               {!errorName ? null : (<p className={style.error}>{errorName}</p>)}
+            </div>
+            <div className={style.apellido}> 
+                <input  className={style.input}
+                 type="text"
+                 value={input.apellido}
+                 placeholder="Su Apellido" 
+                 name="apellido" 
+                 required={true}
+                 onChange={e => validateApellido(e.target.value)}/>
+                {!errorApellido ? null : (<p className={style.error}>{errorApellido}</p>)}
+            </div>
+            <div className={style.direccion}>
+                <input  className={style.input}
+                type="text" 
+                value={input.direccion} 
+                placeholder="Su calle" 
+                name="calle" 
+                required={true}
+                onChange={e => validateCalle(e.target.value)}/>
+                {!errorCalle ? null : (<p className={style.error}>{errorCalle}</p>)}
+            </div> 
+            <div className={style.codigo}>
+                <input  className={style.input} 
+                type="text" 
+                value={input.codigoPostal} 
+                placeholder="Su Codigo Postal" 
+                name="codigoPostal" 
+                maxLength="4"
+                onChange={e => validateCodigoPostal(e.target.value)}/>
+                {!errorCodigoPostal ? null : (<p className={style.error}>{errorCodigoPostal}</p>)} 
+            </div>
+            <div className={style.telefono}> 
+                <input  className={style.input} 
+                type="text" 
+                value={input.telefono} 
+                placeholder="Su numero de telefono"
+                name="telefono" onChange={e => validateTelefono(e.target.value)}/>
+               {!errorTelefono ? null : (<p className={style.error}>{errorTelefono}</p>)} 
+            </div>
+            <div>
+                <Link to="/home"/>
+            </div>
+        </form>
+    </div>
+    )
+}
+
+export default DatosCompra; */
+

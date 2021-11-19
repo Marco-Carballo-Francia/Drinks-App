@@ -50,9 +50,12 @@ const Card = ({ id, name, image, rating, precio, qty }) => {
         <p className={style.precio}> $ {precio * qty} </p>
       </div>
       <div className={style.statebuttons}>
-                    <button className={style.increment} onClick={increment}>+</button>
-                    <button className={style.increment} onClick={decrement}>-</button>
+      <button className={style.increment} onClick={increment}>+</button>
+      <button className={style.increment} onClick={decrement}>-</button>
                 </div>
+                
+                    
+                    
 
       <div className={style.containerButton}>
         <button onClick={() => onClose()} className={style.button}>
@@ -65,7 +68,7 @@ const Card = ({ id, name, image, rating, precio, qty }) => {
 
 export default Card;
 
-{
+// {
   /*<div className={style.containerButton}>
                  <button className={style.button}>X</button>
              </div>
@@ -81,4 +84,4 @@ export default Card;
                     <p className={style.precio}>{precio}</p>
                 </div>
 */
-}
+// }

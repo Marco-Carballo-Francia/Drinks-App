@@ -74,18 +74,26 @@ const createItem = async (req, res) => {
     categorias, 
     stock
   } = req.body;
+  console.log('categorias', categorias);
   try {
     let getItemByName = await Item.find({nombre: nombre});
     // console.log('getItemNombre', getItemByName[0].nombre);
     if(getItemByName === null || getItemByName.length === 0){
-      let getCategory = await Category.find({nombre: categorias});
+      let arrCategoryID = [];
+      for (let i = 0; i < categorias.length; i++) {
+        console.log('categorias', categorias[i]);
+        let getCategory = await Category.find({nombre: categorias[i]});
+        console.log('getCategory', getCategory);
+        arrCategoryID.push(getCategory[0]._id);
+      }
+      console.log('arrCategoryID', arrCategoryID);
       // console.log('getCategory', getCategory[0]._id);
       let newItem = new Item({
         nombre,
         descripcion,
         precio,
         imagen,
-        categorias: getCategory[0]._id,
+        categorias: arrCategoryID,
         stock,
         reviews
       });
