@@ -18,7 +18,7 @@ const makePayment = async (req, res) => {
       confirm: true,
     });
     const body = { payment, cart, userId };
-    let ticket = await axios.post("https://pf-drinks.herokuapp.com/ticket/create", body);
+    let ticket = await axios.post("http://pf-drinks.herokuapp.com/ticket/create", body);
     res.json(ticket.data);
   } catch (error) {
     console.log(error);
@@ -122,7 +122,7 @@ const updateTickets = async (req, res) => {
           }, { new: true });
         let save = await ticketUp.save();
 
-        const { data } = await axios.get('https://pf-drinks.herokuapp.com/ticket/state');
+        const { data } = await axios.get('http://pf-drinks.herokuapp.com/ticket/state');
         return data 
       }
       if(changeState && getTicket.estado === 'Processing') {
@@ -133,10 +133,10 @@ const updateTickets = async (req, res) => {
           }, { new: true });
         let save = await ticketUp.save();
 
-        const { data } = await axios.get('https://pf-drinks.herokuapp.com/ticket/state');
+        const { data } = await axios.get('http://pf-drinks.herokuapp.com/ticket/state');
         return res.json(data);
       }
-      const { data } = await axios.get('https://pf-drinks.herokuapp.com/ticket/state')
+      const { data } = await axios.get('http://pf-drinks.herokuapp.com/ticket/state')
       res.json(data)
       /* return res.json(getTicket); */
     }
